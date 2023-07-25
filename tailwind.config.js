@@ -9,7 +9,7 @@ module.exports = {
             'poppins': ['Poppins', 'sans-serif'],
         },
         backgroundImage: {
-            'tudor': "url('/images/tudor_halatiu.jpg')",
+            'tudor': "url('/template/images/tudor_halatiu.jpg')",
         },
     },
   },
