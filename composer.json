@@ -1,0 +1,17 @@
+{
+    "name": "neluttu/oop-php",
+    "authors": [
+        {
+            "name": "Neluttu"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
+    }
+}
