@@ -8,7 +8,7 @@
                 <li class="min-w-[240px] text-lg shadow-md bg-white pb-2">
                     <a href="<?= \Core\Session::getLang(); ?>/product/<?=slug($product['name']) . '/' . $product['id']; ?>">
                         <img src="/public/images/products/<?=$product['id']?>.jpg" class="max-w-[320px]">
-                        <p class="px-2 text-xl font-semibold"><?=$product['name'] . '</p><p class="px-2 text-base font-semibold"> '. Core\Lang::text('product.price') . ': ' . $product['price'] . '$' ?></p>
+                        <p class="px-2 text-xl font-semibold"><?=$product['name'] . '</p><p class="px-2 text-base font-semibold"> '. Core\Lang::text('product.price') . ': ' . $product['price'] . ' lei' ?></p>
                     </a>
                 </li>
             <? endforeach; ?>

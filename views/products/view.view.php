@@ -14,20 +14,24 @@
             <?= Lang::text('product.price') . ' ' . $product['price'] . '$' ?>
         </h1>
         <img src="/public/images/products/<?=$product['id']?>.jpg" class="max-w-[460px]">
-                    <form method="post">
-                    <? if($product['sizes']) { ?>
-                        <select name="size" class="p-2 mr-2 bg-white border">
-                            <? foreach(explode(',', $product['sizes']) as $Size) echo '<option value="'.$Size.'">'.$Size.'</option>'; ?>
-                        </select>              
-                    <? } ?>          
-                        <input type="hidden" name="id" value="<?=$product['id'] ?>">
-                        <input type="hidden" name="name" value="<?=$product['name'] ?>">
-                        <input type="hidden" name="price" value="<?=$product['price'] ?>">
+        <form method="post">
+        <? if($product['sizes']) { ?>
+            <select name="size" class="p-2 mr-2 bg-white border">
+                <? foreach(explode(',', $product['sizes']) as $Size) echo '<option value="'.$Size.'">'.$Size.'</option>'; ?>
+            </select>              
+        <? } ?>          
+            <input type="hidden" name="id" value="<?=$product['id'] ?>">
+            <input type="hidden" name="name" value="<?=$product['name'] ?>">
+            <input type="hidden" name="price" value="<?=$product['price'] ?>">
 
-                        <button type="submit" class="px-3 py-2 mt-4 bg-white border">
-                            <?= Lang::text('product.add_to_cart'); ?>
-                        </button>
-                    </form>
+            <button type="submit" class="px-3 py-2 mt-4 bg-white border">
+                <?= Lang::text('product.add_to_cart'); ?>
+            </button>
+        </form>
+        <br><br>
+        <?=$product['excerpt'];?>
+        <br><br>
+        <?=nl2br($product['description']);?>
     </div>
 </main>
 

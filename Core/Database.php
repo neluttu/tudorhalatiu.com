@@ -54,4 +54,14 @@ class Database
 
         return $result;
     }
+
+    public function findAllOrFail()
+    {
+        $result = $this->get();
+
+        if (!$result) abort();
+        
+
+        return $result;
+    }
 }

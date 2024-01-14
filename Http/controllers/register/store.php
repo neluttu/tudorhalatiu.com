@@ -30,18 +30,27 @@ if(!$form->validate($email, $password, $firstname, $lastname, $phone) or $user) 
     die();
 }
 
-$db->query("INSERT INTO users (email, password, firstname, lastname, phone) VALUES (:email, :password, :firstname, :lastname, :phone)",[
+$db->query("
+    INSERT INTO users (email, password, status, remote_addr)
+    VALUES (:email, :password, 'Pending', INET_ATON(:ipAddress));
+    
+    INSERT INTO users_data (user_id, firstname, lastname, phone)
+    SELECT LAST_INSERT_ID(), :firstname, :lastname, :phone;
+", [
     'email' => $email,
     'password' => password_hash($password, PASSWORD_BCRYPT),
+    'ipAddress' => $_SERVER['REMOTE_ADDR'],
     'firstname' => $firstname,
     'lastname' => $lastname,
-    'phone' => $phone
+    'phone' => $phone,
 ]);
+
+$id = $db->getLastID();
 
 $_SESSION['user'] = [
     'email' => $email,
     'name' => $firstname,
-    'id' => $db->getLastID()
+    'id' => $id
 ];
 
 session_regenerate_id(true);

@@ -10,7 +10,7 @@ return [
         'reset_success' => 'Ți-am trimis un email cu un link pentru a reseta parola contului tău.'
     ],
     'product' => [
-        'price' => 'Preț:',
+        'price' => 'Preț',
         'quantity' => 'Cantitate',
         'add_to_cart' => 'Adaugă în coș',
         'added_to_cart' => 'Produsul a fost adăugat în <a href="'.\Core\Session::getLang().'/cart" class="underline">coșul de cumăpărături!</a>',
