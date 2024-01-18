@@ -20,7 +20,6 @@ function getLangParam($uri) {
     
 }
 
-
 function getLangLinks() {
     $config = require base_path('config.php');
     $siteLangs = $config['siteLangs'];
@@ -43,6 +42,9 @@ function getLangLinks() {
 }
 
 function urlIs($value) {
+    // $value = array;
+    //dd(rtrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/'));
+    
     return $_SERVER['REQUEST_URI'] === \Core\Session::getLang() . $value;
 }
 

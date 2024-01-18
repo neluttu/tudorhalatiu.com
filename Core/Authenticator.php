@@ -8,16 +8,16 @@ class Authenticator {
 
     public function attempt($email, $password) {
 
-        $userData = App::resolve(Database::class)->query("SELECT * FROM users WHERE email = :email",[
-            'email' => $email])->find();
+        ;
 
-
-        if($userData) {
+        if($userData = App::resolve(Database::class)->query("SELECT * FROM users LEFT JOIN users_data ON users_data.user_id = users.id WHERE email = :email", [
+            'email' => $email])->find()) {
 
             if(password_verify($password, $userData['password'])) {
                 $this->login([
                     'email' => $email,
                     'name' => $userData['firstname'],
+                    'role' => $userData['role'],
                     'id' => $userData['id'],
                 ]);
                 return true;
@@ -32,6 +32,7 @@ class Authenticator {
         $_SESSION['user'] = [
             'email' => $userData['email'],
             'name' => $userData['name'],
+            'role' => $userData['role'],
             'id' => $userData['id']
         ];
     

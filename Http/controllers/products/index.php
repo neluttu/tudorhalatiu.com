@@ -13,7 +13,7 @@ $categories = $db->query('
                     ')->get();
 
 view('products/index', [
-    'heading' => Core\Lang::text('heading.categories'),
+    'heading' => Core\Lang::text('heading.categories.0'),
+    'heading_info' => Core\Lang::text('heading.categories.1'),
     'categories' => $categories,
-    'title' => $categories[0]['name']
 ]);

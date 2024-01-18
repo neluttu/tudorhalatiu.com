@@ -9,7 +9,7 @@ $products = $db->query('SELECT products.*, categories.name AS category_name FROM
 
 view('products/products', [
     'heading' => $products[0]['category_name'],
+    'heading_info' => $db->totlaRows() . ' produse în total',
     'products' => $products,
     'title' => $products[0]['category_name']
 ]);
-?>

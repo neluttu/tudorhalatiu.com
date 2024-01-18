@@ -7,6 +7,7 @@ module.exports = {
             'nunito': ['Nunito', 'sans-serif'],
             'rubik': ['Rubik', 'sans-serif'],
             'poppins': ['Poppins', 'sans-serif'],
+            'merriweather': ['Merriweather', 'sans-serif'],
         },
         backgroundImage: {
             'tudor': "url('/template/images/tudor_halatiu.jpg')",

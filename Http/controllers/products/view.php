@@ -10,7 +10,7 @@ $product = $db->query('SELECT * FROM products WHERE id = :id AND status = "Onlin
                     
 view('products/view', [
     'heading' => $product['name'],
+    'heading_info' => 'Produs din categoria ' .$product['category'],
     'product' => $product,
     'title' => $product['name']
 ]);
-?>

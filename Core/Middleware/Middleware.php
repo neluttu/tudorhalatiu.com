@@ -5,7 +5,8 @@ class Middleware {
 
     const MAP = [
         'guest' => Guest::class,
-        'auth' => Auth::class
+        'auth' => Auth::class,
+        'admin' => Admin::class
     ];
 
     public static function resolve($key, $redirect) {
@@ -21,5 +22,4 @@ class Middleware {
         // altfel, continua scriptul.
         (new $middleware)->handle($redirect);
     }
-
 }

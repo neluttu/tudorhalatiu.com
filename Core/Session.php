@@ -21,6 +21,10 @@ class Session {
         return $uriLang;
     }
 
+    public static function isAdmin() {
+        return (isset($_SESSION['user']['role']) and $_SESSION['user']['role'] === 'admin') ? true : false;
+    }
+
     public static function flash($key, $value) {
         $_SESSION['_flashed'][$key] = $value;
     }
@@ -30,7 +34,7 @@ class Session {
     }
 
     public static function flush() {
-        $_SESSION = [];
+        $_SESSION['user'] = [];
     }
 
     public static function destroy() {

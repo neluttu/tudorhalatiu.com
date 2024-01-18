@@ -10,7 +10,6 @@ require BASE_PATH . 'Core/functions.php';
 Core\Lang::loadLanguage();
 require base_path('bootstrap.php');
 
-
 // Setup router.
 $router = new \Core\Router;
 require base_path('routes.php');
@@ -19,5 +18,3 @@ $router->route();
 
 
 Core\Session::unflash();
-
-

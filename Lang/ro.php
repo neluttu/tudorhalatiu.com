@@ -21,20 +21,24 @@ return [
         'quantity_updated' => 'Cantitate modificată pentru <b>:product</b>.',
         'cart_empty' => 'Nu există produse în coșul de cumpărături.',
         'product_not_found' => 'Produsul ales nu există.',
-        'product_removed' => 'Produsul <b>:product</b> a fost șters din coș.'
+        'product_removed' => 'Produsul <b>:product</b> a fost șters din coș.',
+        
     ],
     'nav' => [
         'home' => 'Acasă',
         'about' => 'Despre',
         'contact' => 'Contact',
         'notes' => 'Notițe',
-        'products' => 'Produse'
+        'products' => 'Produse',
+        'admin' => 'Site Admin'
     ],
     'heading' => [
-        'categories' => 'Categorii produse',
-        'contact' => 'Pagină de contact',
-        'about' => 'Despre noi',
-        'notes' => 'Notițele tale',
+        'categories' => ['Cumpără online', 'Text categorii produse'],
+        'contact' => ['Informații contact', 'Cum poți lua legătura cu mine'],
+        'about' => ['Tudor Halațiu', 'Text pagina despre'],
+        'cart' => ['coș de cumpărături', 'Verifică și finalizează cumpărăturile'],
+        'register' => ['Crează un cont în magazin', 'Ține evidența comenzilor și a produselor favorite'],
+        'login' => ['Autentifică-te în magazin', 'Accesează contul tău de client']
     ],
     'header' => [
         'title' => 'Tudor Halatiu - ',
