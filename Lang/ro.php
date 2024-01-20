@@ -28,12 +28,11 @@ return [
         'home' => 'Acasă',
         'about' => 'Despre',
         'contact' => 'Contact',
-        'notes' => 'Notițe',
         'products' => 'Produse',
         'admin' => 'Site Admin'
     ],
     'heading' => [
-        'categories' => ['Cumpără online', 'Text categorii produse'],
+        'categories' => ['Îmbrăcăminte T.H.', 'Text categorii produse'],
         'contact' => ['Informații contact', 'Cum poți lua legătura cu mine'],
         'about' => ['Tudor Halațiu', 'Text pagina despre'],
         'cart' => ['coș de cumpărături', 'Verifică și finalizează cumpărăturile'],

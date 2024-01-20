@@ -10,7 +10,7 @@ $form = new Http\Forms\ResetForm();
 $email = $_POST['email'];
 
 // Dev unset token request.
-//unset($_SESSION['token'],$_SESSION['token_expires']);
+unset($_SESSION['token'],$_SESSION['token_expires']);
 $form->validate($email);
 
 if(Session::has('token') and Session::has('token_expires') > time() and empty($form->errors())) {
@@ -23,7 +23,7 @@ if(Session::has('token') and Session::has('token_expires') > time() and empty($f
 
 
 if (!($user = App::resolve(Database::class)
-    ->query("SELECT id, email, token, expires_at, used FROM users LEFT JOIN password_reset_requests ON password_reset_requests.user_id = users.id WHERE email = :email ORDER BY request_id DESC", ['email' => $email])
+    ->query("SELECT id, email, firstname, lastname, token, expires_at, used FROM users LEFT JOIN password_reset_requests ON password_reset_requests.user_id = users.id LEFT JOIN users_data ON users_data.user_id = users.id WHERE email = :email ORDER BY request_id DESC", ['email' => $email])
     ->find()) and empty($form->errors()))
         $form->appendError('null_user', Lang::text('userForms.null_user'));
 
@@ -43,9 +43,13 @@ if(empty($form->errors())) {
         
         $emailSender->sendEmail(
             $user['email'],
-            'Password reset',
-            '../views/emails/ResetPasswordLink.html',
-            ['name' => 'Neluttu',  'key' => $token->getToken()]
+            'Resetează parola contului',
+            'views/emails/ResetPasswordLink.html',
+            [
+                'firstname' => $user['firstname'],  
+                'key' => $token->getToken(), 
+                'host' => $_SERVER['HTTP_HOST']
+            ]
         );
                 
         // flash message and redirect to success page.

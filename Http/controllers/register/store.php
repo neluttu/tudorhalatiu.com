@@ -45,6 +45,18 @@ $db->query("
     'phone' => $phone,
 ]);
 
+$emailSender = new Core\EmailSender();
+        
+$emailSender->sendEmail(
+    $email,
+    'Contul tău',
+    'views/emails/NewAccount.html',
+    [
+        'firstname' => $firstname,
+        'host' => $_SERVER['HTTP_HOST']
+    ]
+);
+
 $id = $db->getLastID();
 
 $_SESSION['user'] = [

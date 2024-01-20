@@ -19,13 +19,14 @@ class EmailSender
     {
         // Configurare PHPMailer
         $this->mailer->isSMTP();
-        $this->mailer->Host = 'mail.consultinov.ro';
+        $this->mailer->Host = 'mail.tudorhalatiu.com';
         $this->mailer->SMTPAuth = true;
-        $this->mailer->Username = 'office@consultinov.ro';
-        $this->mailer->Password = '^P,wx-p79T6k';
-        $this->mailer->SMTPSecure = 'tls';
-        $this->mailer->Port = 587;
-        $this->mailer->setFrom('office@consultinov.ro', 'Consultinov');
+        $this->mailer->Username = 'contact@tudorhalatiu.com';
+        $this->mailer->Password = '88#2l&mN+}uo';
+        $this->mailer->SMTPSecure = 'ssl';
+        $this->mailer->Port = 465;
+        $this->mailer->setFrom('contact@tudorhalatiu.com', 'Tudor Halatiu');
+        $this->mailer->CharSet = "UTF-8";
     }
 
     public function sendEmail($to, $subject, $template, $variables = [])

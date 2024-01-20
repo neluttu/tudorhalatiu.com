@@ -11,7 +11,7 @@
         <? endif ?>
 
         <h1 class="mb-4 text-2xl font-semibold">
-            <?= Lang::text('product.price') . ' ' . $product['price'] . '$' ?>
+            <?= Lang::text('product.price') . ' ' . number_format($product['price'], 2) . ' lei' ?>
         </h1>
         <img src="/public/images/products/<?=$product['id']?>.jpg" class="max-w-[460px]">
         <form method="post">

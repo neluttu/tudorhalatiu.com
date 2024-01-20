@@ -1,18 +1,20 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
+
 <main>
-    <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <ul class="flex flex-wrap items-center justify-start gap-6 [&>li]:shadow-[0px_13px_15px_-8px_rgba(31,36,59,0.2)] [&>li:hover]:bg-[#bac1df] mt-10 [&>li]:transition-all [&>li]:duration-150 [&>li]:ease-in  [&>li]:cursor-pointer">
+    <div class="py-6 mx-auto max-w-7xl">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 ">
         <? foreach($categories as $category) : ?>
-            <li class="w-full sm:w-[48%] lg:w-[30%] p-6 min-h-[100px] rounded-md relative flex items-center justify-center flex-col self-stretch">
-                <a href="<?= \Core\Session::getLang(); ?>/products/<?=slug($category['name']);?>" class="text-lg font-semibold">
-                    <img src="/public/images/categories/<?=$category['category_id'];?>.png" class="w-full mb-3">
-                    <?=$category['name']; ?> (<?=$category['count']?> items)
-                </a>
-            </li>
+        <a href="<?= \Core\Session::getLang(); ?>/products/<?=$category['slug'];?>" class="group">
+            <h3 class="py-4 text-lg text-gray-700"><?=$category['name']; ?></h3>
+            <div class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="/public/images/categories/<?=$category['category_id'];?>.png" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="object-cover object-center w-full h-full group-hover:opacity-75">
+            </div>
+          </a>
         <? endforeach ?>
-        </ul>
+        </div>
     </div>
 </main>
+
 <? require base_path('views/partials/footer.php'); ?>

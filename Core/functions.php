@@ -1,6 +1,7 @@
 <?
 
 use Core\Response;
+
 function dd($value) {
     echo '<pre class="text-slate-600">';
     var_dump($value);
