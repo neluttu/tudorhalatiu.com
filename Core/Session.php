@@ -37,6 +37,12 @@ class Session {
         $_SESSION['user'] = [];
     }
 
+    public static function getMessage() {
+        // Get cart action message.
+        if(isset($_SESSION['_flashed']['cart_message']['result'])) 
+            return require base_path('views/partials/result-message.php');
+    }
+
     public static function destroy() {
 
         self::flush();

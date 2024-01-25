@@ -1,5 +1,5 @@
 <?
 view('admin/index', [
-    'heading' => 'Administrator page'
+    'heading' => 'Secțiune administrator ',
+    'heading_info' => 'Comenzi, clienti, produse, facturi.'
 ]);
-?>

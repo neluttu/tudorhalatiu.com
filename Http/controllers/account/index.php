@@ -1,5 +1,5 @@
 <?
 view('account/index', [
-    'heading' => 'Your account',
+    'heading' => 'Bună '. $_SESSION['user']['name'] ,
+    'heading_info' => 'Administrați contul de client'
 ]);
-?>

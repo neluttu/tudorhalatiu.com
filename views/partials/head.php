@@ -39,4 +39,5 @@
     </style>
     <!-- nunito, rubik, poppins, merriweather, lato, montserrat, noto, roboto, oswald, aleo, mulish, asap, open-sans, barlow -->
 </head>
-<body class="font-merriweather">
+<body class="flex flex-col items-center justify-start min-h-screen font-merriweather">
+    

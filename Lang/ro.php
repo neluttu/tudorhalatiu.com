@@ -29,15 +29,16 @@ return [
         'about' => 'Despre',
         'contact' => 'Contact',
         'products' => 'Produse',
-        'admin' => 'Site Admin'
+        'admin' => 'Admin'
     ],
     'heading' => [
         'categories' => ['Îmbrăcăminte T.H.', 'Text categorii produse'],
         'contact' => ['Informații contact', 'Cum poți lua legătura cu mine'],
         'about' => ['Tudor Halațiu', 'Text pagina despre'],
         'cart' => ['coș de cumpărături', 'Verifică și finalizează cumpărăturile'],
-        'register' => ['Crează un cont în magazin', 'Ține evidența comenzilor și a produselor favorite'],
-        'login' => ['Autentifică-te în magazin', 'Accesează contul tău de client']
+        'register' => ['Deveniți clientul nostru', 'Țineți evidența comenzilor și a produselor favorite'],
+        'login' => ['Autentifică-te în magazin', 'Folosiți credențialele dvs. pentru autentificare în contul de client'],
+        'account' => ['Cont client', 'Administrați contul de client']
     ],
     'header' => [
         'title' => 'Tudor Halatiu - ',
