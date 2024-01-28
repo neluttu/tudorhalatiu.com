@@ -7,7 +7,8 @@
         <? require base_path('views/account/menu.view.php') ?>
     </div>
     <div class="w-full md:-mt-10 md:grow">
-        <h1 class="text-lg">Detalii cont</h1>
+        <h2 class="text-lg">Adresa dvs. de livrare este:</h2>
+        <h2 class="text-lg">Adresa dvs. de facturare este:</h2>
     </div>
 </main>
 

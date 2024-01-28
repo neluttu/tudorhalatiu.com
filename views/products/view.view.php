@@ -14,6 +14,9 @@ use Core\Lang;
 
 <main class="w-full px-2 mx-auto max-w-7xl lg:px-0">
     <? Core\Session::getMessage(); ?>
+    <?
+    if($_SESSION['user']['role'] == 'admin') echo '<a href="/admin/produs/'.$product['id'].'" class="text-[#ed0078] hover:underline">Editeaza produsul</a>';
+    ?>
     <div class="flex items-start justify-start gap-10 py-6">
         <div class="flex-1">
             <img src="/public/images/products/<?=$product['id']?>.jpg" class="w-full rounded-md">
@@ -22,6 +25,7 @@ use Core\Lang;
             <h1 class="text-4xl font-semibold text-right text-[#ed0078]">
                 <?= number_format($product['price'], 2) . ' lei' ?>
             </h1>
+            <hr class="w-[100px] border-b-2 border-slate-700 mt-4 float-end">
 
             <br>
             <?=$product['excerpt'];?>
@@ -34,7 +38,7 @@ use Core\Lang;
                     foreach(explode(',', $product['sizes']) as $Size) {
                 ?>
                     <div class="font-sans font-semibold text-center w-[48px] aspect-square cursor-pointer">
-                        <input type="radio" name="size" id="size_<?= $Size ?>" value="size_<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> />
+                        <input type="radio" name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> />
                         <label for="size_<?= $Size ?>" class="peer-checked:bg-[#ed0078] block p-2  hover:bg-[#ed0078] transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-md"><?= $Size ?></label>
                     </div>
 

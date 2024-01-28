@@ -50,8 +50,11 @@
         <p class="flex items-center justify-end mt-3 text-lg font-semibold">
             Total: <?= number_format($Total, 2, ',', '.');?> lei
         </p>
-        <div class="flex items-center justify-end">
-            <button class="px-3 py-2 mt-3 text-white bg-orange-500 border border-orange-600 rounded-md"><?= \Core\Lang::text('product.checkout_button') ?></button>
+        
+        <div class="flex flex-col items-center justify-start gap-4 p-3 mt-10 border rounded-md sm:flex-row">
+            <p class="grow">Pentru a putea finaliza cumpărăturile este necesar să vă autentificați în contul dvs.</p>
+            <a href="/login" class="block w-full px-3 py-2 text-center text-white bg-orange-500 border border-orange-600 rounded-md sm:w-auto">Autentificare</a>
+            <a href="/register" class="block w-full px-3 py-2 text-center text-white bg-orange-500 border border-orange-600 rounded-md sm:w-auto">Înregistrare</a>
         </div>
     </section>
 </main>

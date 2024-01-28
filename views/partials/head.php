@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 <head>
+    <meta name="view-transition" content="same-origin" />
     <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=yes">
