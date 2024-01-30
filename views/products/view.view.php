@@ -15,7 +15,7 @@ use Core\Lang;
 <main class="w-full px-2 mx-auto max-w-7xl lg:px-0">
     <? Core\Session::getMessage(); ?>
     <?
-    if($_SESSION['user']['role'] == 'admin') echo '<a href="/admin/produs/'.$product['id'].'" class="text-[#ed0078] hover:underline">Editeaza produsul</a>';
+    if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') echo '<a href="/admin/produs/'.$product['id'].'" class="text-[#ed0078] hover:underline">Editeaza produsul</a>';
     ?>
     <div class="flex items-start justify-start gap-10 py-6">
         <div class="flex-1">
