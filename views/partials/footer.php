@@ -6,7 +6,7 @@
             <a href="/contact" class="hover:text-[#ed0078]" title="">Contact</a>
     </div>
     <hr class="h-px my-6 bg-gray-200 border-0 grow">
-    <div class="font-sans text-sm font-light leading-loose tracking-tight text-left text-slate-500">
+    <div class="font-sans text-sm font-light leading-loose tracking-tight text-left text-slate-600">
         © TUDOR HALATIU EMPIRE SRL 2024 - Toate drepturile rezervate<br>
         Str. Dedradului nr. 16, Reghin, Județul Mureș<br>
         CIF: 44940912, RC: J26/1550/2021<br>
@@ -30,9 +30,9 @@
             </svg>
         </a>
 
-        <a href="/termeni-si-conditii" class="font-sans font-light text-slate-500" title="">Termeni și condiții</a>
+        <a href="/termeni-si-conditii" class="font-sans font-light text-slate-600" title="">Termeni și condiții</a>
 
-        <a href="/politica-confidentialitate" class="font-sans font-light text-slate-500" title="">Politică confidențialitate</a>
+        <a href="/politica-confidentialitate" class="font-sans font-light text-slate-600" title="">Politică confidențialitate</a>
         
     </div>
 </footer>

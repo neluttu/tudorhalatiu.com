@@ -22,7 +22,7 @@ class Validator {
     {
         if(!self::string($password, 1, 100)) return false;
 
-        if (!(strlen($password) >= 10 && strlen($password) <= 11)) 
+        if (!(strlen($password) >= 8 && strlen($password) <= 11)) 
             return false;
 
         if (!preg_match('/[A-Z]/', $password))
