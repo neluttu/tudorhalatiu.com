@@ -31,19 +31,29 @@ if(!$form->validate($email, $password, $firstname, $lastname, $phone) or $user) 
 }
 
 $db->query("
-    INSERT INTO users (email, password, status, remote_addr)
-    VALUES (:email, :password, 'Pending', INET_ATON(:ipAddress));
-    
-    INSERT INTO users_data (user_id, firstname, lastname, phone)
-    SELECT LAST_INSERT_ID(), :firstname, :lastname, :phone;
-", [
-    'email' => $email,
-    'password' => password_hash($password, PASSWORD_BCRYPT),
-    'ipAddress' => $_SERVER['REMOTE_ADDR'],
-    'firstname' => $firstname,
-    'lastname' => $lastname,
-    'phone' => $phone,
-]);
+        INSERT INTO users (email, password, status, remote_addr)
+        VALUES (:email, :password, 'Active', INET_ATON(:ipAddress))
+        ", 
+        [
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_BCRYPT),
+            'ipAddress' => $_SERVER['REMOTE_ADDR'],
+        ]
+    );
+
+$user_id = $db->getLastID();
+
+$db->query("
+        INSERT INTO users_data (user_id, firstname, lastname, phone)
+        VALUES (:user_id, :firstname, :lastname, :phone)
+        ", 
+        [
+            'user_id' => $user_id,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'phone' => $phone,
+        ]
+    );
 
 $emailSender = new Core\EmailSender();
         
@@ -57,12 +67,10 @@ $emailSender->sendEmail(
     ]
 );
 
-$id = $db->getLastID();
-
 $_SESSION['user'] = [
     'email' => $email,
     'name' => $firstname,
-    'id' => $id
+    'id' => $user_id
 ];
 
 session_regenerate_id(true);

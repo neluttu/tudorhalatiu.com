@@ -5,16 +5,7 @@ use Core\Database;
 use Core\Session;
 use Core\App;
 
-$form_counties = '';
-$form_delivery_counties = '';
-
 $counties = array('Alba','Arad','Argeș','Bacău','Bihor','Bistrița-Năsăud','Botoșani','Brăila','Brașov','București','Buzău','Călărași','Caraș-Severin','Cluj','Constanța','Covasna','Dâmbovița','Dolj','Galați','Giurgiu','Gorj','Harghita','Hunedoara','Ialomița','Iași','Ilfov','Maramureș','Mehedinți','Mureș','Neamț','Olt','Prahova','Sălaj','Satu Mare','Sibiu','Suceava','Teleorman','Timiș','Tulcea','Vâlcea','Vaslui','Vrancea');
-
-foreach($counties as $county) {
-    $form_counties .= '<option value="'.$county.'" '. (old('county') == $county ? 'selected' : '') .'>'.$county.'</option>';
-    $form_delivery_counties .= '<option value="'.$county.'" '. ((old('delivery_county') == $county and old('delivery')) ? 'selected' : '') .'>'.$county.'</option>';
-}
-
 
 $db = App::resolve(Database::class);
 
@@ -37,6 +28,7 @@ view('cart/' . $Page, [
     'billing' => $getBilling ?? '',
     'shipping' => $getShipping ?? '',
     'errors' => Session::get('errors'),
-    'form_counties' => $form_counties,
-    'form_delivery_counties' => $form_delivery_counties
+    'title' => 'Coș de cumpărături - Tudor Halațiu',
+    'description' => 'Descriere cos de cumparaturi',
+    'counties' => $counties
 ]);

@@ -3,6 +3,8 @@
 namespace Http\Forms;
 
 use Core\Validator;
+use Core\Database;
+use Core\App;
 
 class CheckoutForm {
     
@@ -33,12 +35,18 @@ class CheckoutForm {
                 $this->errors['delivery_address'] = 'invalid_address';
         }
 
-        if(!Validator::email($email))
-            $this->errors['email'] = true;
+        if(!Validator::email($email)) 
+            $this->errors['email'] = 'Adresa de email este invalidă.';
+
+        $db = App::resolve(Database::class);
+        if($create_account and $db->query('SELECT email FROM users WHERE email = :email',  ['email' => $email])->find())
+            $this->errors['email'] = 'Utilizator existent. <a href="/login" title="Autentificare Client TudorHalatiu.com">Autentificare</a>';
+
         
-        if($create_account) 
+        if($create_account) {
             if(!Validator::password($password))
-                $this->errors['password'] = 'Parola trebuie să conțină minim 8 caractere, măcar o literă mare, un număr și un simbol.';
+                    $this->errors['password'] = true;
+        }
 
         if(!Validator::name($firstname))
             $this->errors['firstname'] = 'invalid_username';

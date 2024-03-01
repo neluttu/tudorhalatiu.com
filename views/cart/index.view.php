@@ -1,9 +1,9 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
+
 <main class="w-full mt-10 max-w-7xl">
     <? Core\Session::getMessage(); ?>
-
     <section class="flex flex-col items-start justify-start w-full gap-4 px-2 md:gap-10 lg:px-0 md:flex-row">
         <div class="w-full grow">
             <ul class="flex flex-col flex-wrap items-start justify-center gap-4 pb-4 border-b-[3px] border-black">
@@ -16,7 +16,7 @@
                             <input type="hidden" name="id" value="<?= $product['id'] ?>">
                             <input type="hidden" name="name" value="<?= $product['name'] ?>">
                             <input type="hidden" name="quantity" value="0">
-                            <a href="product/<?=slug($product['name'])?>/<?=$product['id']?>" title="<?=$product['name']?>"><img src="/public/images/products/<?=$product['id']?>.jpg" alt="<?=$product['name']?>" class="w-[80px] aspect-square inline mr-5 rounded-md"></a>
+                            <a href="product/<?=slug($product['name'])?>/<?=$product['id']?>" title="<?=$product['name']?>"><img src="/public/images/products/<?=$product['id']?>.jpg" alt="<?=$product['name']?>" class="w-[45px] inline  rounded-md"></a>
                             <p class="flex flex-col items-start justify-start flex-1">
                                 <? 
                                 echo '<a href="product/'. slug($product['name']) . '/' . $product['id'] .'" class="block text-base hover:underline">' . $product['name'] . '</a>';
@@ -78,7 +78,7 @@
                             <input onchange="togglePasswordSection()" type="checkbox" id="account-create" name="account-create" <?= old('account-create') ? 'checked' : '' ?>> Doresc să fac un cont de client
                     </label>
                     <div class="relative <?= old('account-create') ? 'inline-block' : 'hidden' ?> w-full sm:flex-1 mt-6 sm:mt-0" id="passwd">
-                        <input type="text" name="password" id="password" value="" placeholder="Alege o parolă" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['password']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="password" name="password" id="password" value="" placeholder="Alege o parolă" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['password']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="password" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Alege o parolă</label>
                     </div>
                     <small id="passwordTip" class="<?= old('account-create') ? 'inline-block' : 'hidden' ?> mt-2 text-xs w-full <?= !isset($errors['password']) ? 'text-slate-500' : 'text-rose-700' ?>">Parola trebuie să conțină minim 8 caractere, măcar o literă mare, un număr și un simbol.</small>
@@ -111,14 +111,16 @@
                     </div>
                 </div>
                 <div>
-                    <select class="w-full h-full font-light bg-white border-b-2 border-gray-200">
+                    <select class="w-full h-full font-light bg-white border-b-2 border-gray-200" name="country">
                         <option>Romania</option>
                     </select>
                 </div>
                 <div>
                     <select class="w-full h-full font-light bg-white border-b-2 border-gray-200" name="county" required>
-                        <option value="">Alege județul</option>
-                        <?= $form_counties; ?>
+                    <?
+                        foreach($counties as $county)
+                            echo '<option value="'.$county.'" '. ((old('county') == $county || (isset($billing['county']) && $billing['county'] == $county)) ? 'selected' : '') .'>'.$county.'</option>';
+                    ?>
                     </select>
                 </div>
                 <div>
@@ -140,11 +142,11 @@
                     </div>
                 </div>
                 <label for="delivery" class="flex items-center justify-start mt-4 text-sm cursor-pointer sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-2">
-                    <input type="checkbox" name="delivery" id="delivery" onchange="toggleDeliveryInfo()" class="form-checkbox" <?= old('delivery') ? 'checked' : '' ?>> <span class="ml-2">Doresc livrarea produselor la altă adresă</span>
+                    <input type="checkbox" name="delivery" id="delivery" onchange="toggleDeliveryInfo()" class="form-checkbox accent-[#ed0078]" <?= old('delivery') ? 'checked' : '' ?>> <span class="ml-0">Doresc livrarea produselor la altă adresă</span>
                 </label>
 
                 <div class="grid overflow-hidden duration-500 ease-in <?= old('delivery') ? '' : 'max-h-0' ?> sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-6 gap-y-10 transition-max-height" id="delivery-info">
-                    <p class="sm:col-span-2 md:col-span-2 lg:col-span-3  mb-4 font-normal text-lg text-[#ed0078]">Informații livrare</p>
+                    <p class="sm:col-span-2 md:col-span-2 lg:col-span-3 font-normal -mb-8 text-lg text-[#ed0078]">Informații livrare</p>
                     <div class="relative">
                         <input type="text" name="delivery_lastname" id="delivery_lastname" value="<?= (old('delivery_lastname') !== '') ? old('delivery_lastname') : ($shipping['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_lastname']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="delivery_lastname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Nume</label>
@@ -166,7 +168,10 @@
                     </div>
                     <div>
                         <select class="w-full h-full font-light bg-white border-b-2 border-gray-200" name="delivery_county">
-                            <?= $form_delivery_counties; ?>
+                        <?
+                        foreach($counties as $county)
+                            echo '<option value="'.$county.'" '. ((old('delivery_county') == $county || (isset($shipping['county']) && $shipping['county'] == $county)) ? 'selected' : '') .'>'.$county.'</option>';
+                        ?>
                         </select>
                     </div>
                     <div>

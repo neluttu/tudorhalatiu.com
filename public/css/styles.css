@@ -896,6 +896,18 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.-mb-10 {
+  margin-bottom: -2.5rem;
+}
+
+.-mb-3 {
+  margin-bottom: -0.75rem;
+}
+
+.-mb-8 {
+  margin-bottom: -2rem;
+}
+
 .-mt-10 {
   margin-top: -2.5rem;
 }
@@ -934,6 +946,10 @@ video {
 
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+
+.ml-0 {
+  margin-left: 0px;
 }
 
 .ml-10 {
@@ -1249,12 +1265,12 @@ video {
   width: 48px;
 }
 
-.w-\[70px\] {
-  width: 70px;
+.w-\[60px\] {
+  width: 60px;
 }
 
-.w-\[80px\] {
-  width: 80px;
+.w-\[70px\] {
+  width: 70px;
 }
 
 .w-auto {
@@ -1263,6 +1279,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[45px\] {
+  width: 45px;
 }
 
 .max-w-2xl {
@@ -2432,6 +2452,11 @@ video {
   color: rgb(225 29 72 / var(--tw-text-opacity));
 }
 
+.text-rose-700 {
+  --tw-text-opacity: 1;
+  color: rgb(190 18 60 / var(--tw-text-opacity));
+}
+
 .text-slate-400 {
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity));
@@ -2457,11 +2482,6 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-rose-700 {
-  --tw-text-opacity: 1;
-  color: rgb(190 18 60 / var(--tw-text-opacity));
-}
-
 .underline {
   text-decoration-line: underline;
 }
@@ -2469,6 +2489,10 @@ video {
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.accent-\[\#ed0078\] {
+  accent-color: #ed0078;
 }
 
 .opacity-40 {
@@ -2685,11 +2709,6 @@ video {
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
-.focus\:border-gray-800:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(31 41 55 / var(--tw-border-opacity));
-}
-
 .focus\:bg-gray-600:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
@@ -2771,16 +2790,6 @@ video {
 .peer:placeholder-shown ~ .peer-placeholder-shown\:text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
-.peer:-moz-placeholder-shown ~ .peer-placeholder-shown\:text-gray-800 {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
-}
-
-.peer:placeholder-shown ~ .peer-placeholder-shown\:text-gray-800 {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .peer:focus ~ .peer-focus\:top-0 {

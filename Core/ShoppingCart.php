@@ -101,4 +101,8 @@ class ShoppingCart
         }
         else return 0;
     }
+
+    public static function emptyCart() {
+        unset($_SESSION["cart"]);
+    }
 }
