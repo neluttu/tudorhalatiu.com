@@ -3,8 +3,8 @@
 <?php require base_path('views/partials/banner.php'); ?>
 <main class="w-full px-2 max-w-7xl">
     <? if(!empty($message)) : ?>
-        <div class="w-full px-2 py-3 mb-4 bg-white border rounded-md text-rose-600 border-slate-300">
-        <?= $message['success'] ?? '' ?>
+        <div class="p-3 mb-4 text-sm border rounded-md border-rose-400 bg-rose-100 text-rose-600">
+            <?= $message['success'] ?? '' ?>
         </div>
     <? endif ?>
     <section class="flex flex-wrap items-center justify-center px-2 lg:justify-between lg:px-0">

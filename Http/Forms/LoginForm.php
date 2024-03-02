@@ -10,7 +10,7 @@ class LoginForm {
     public function validate($email, $password) {
 
         if(!Validator::email($email))
-            $this->errors['email'] = 'invalid_email';
+            $this->errors['email'] = 'Adresă de email invalidă.';
         
         if(!Validator::string($password, 7, 255))
             $this->errors['password'] = 'password_verify';

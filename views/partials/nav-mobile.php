@@ -5,27 +5,27 @@ use Core\Session;
     <div class="w-full px-10 py-4 mx-auto text-white md:w-full [&>a]:text-lg flex items-start justify-start gap-3 flex-col relative">
         <a href="/" title="Tudor Halațiu" class="block mx-auto mb-4"><img src="/public/images/logo-inverted.png" width="140" alt="" class="w-[100px]"></a>
 
-        <a href="<?= Session::getLang(); ?>/" title="" class="<?= urlIs('/') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?>">Acasă</a>
-        <a href="<?= Session::getLang(); ?>/shop" title="" class="<?= urlIs('/shop') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?>" title="">Shop</a>
+        <a href="<?= Session::getLang(); ?>/" title="" class="<?= urlIs('/') ? 'border-b border-main-color text-main-color' : '' ?>">Acasă</a>
+        <a href="<?= Session::getLang(); ?>/shop" title="" class="<?= urlIs('/shop') ? 'border-b border-main-color text-main-color' : '' ?>" title="">Shop</a>
         
-        <a href="<?= Session::getLang(); ?>/contact" title="" class="<?= urlIs('/contact') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?>" title="">Contact</a>
+        <a href="<?= Session::getLang(); ?>/contact" title="" class="<?= urlIs('/contact') ? 'border-b border-main-color text-main-color' : '' ?>" title="">Contact</a>
         
         <? if($_SESSION['user'] ?? false) : ?>
-            <a href="<?= Session::getLang(); ?>/account" class="<?= urlIs('/account') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?>">Contul meu</a>
+            <a href="<?= Session::getLang(); ?>/account" class="<?= urlIs('/account') ? 'border-b border-main-color text-main-color' : '' ?>">Contul meu</a>
         <? else : ?>
-            <a href="<?= Session::getLang(); ?>/register" class="<?= urlIs('/register') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?>">Înregistrare</a>
-            <a href="<?= Session::getLang(); ?>/login" class="<?= urlIs('/login') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?>">Contul meu</a>
+            <a href="<?= Session::getLang(); ?>/register" class="<?= urlIs('/register') ? 'border-b border-main-color text-main-color' : '' ?>">Înregistrare</a>
+            <a href="<?= Session::getLang(); ?>/login" class="<?= urlIs('/login') ? 'border-b border-main-color text-main-color' : '' ?>">Contul meu</a>
         <? endif; ?>  
-        <a href="/cart" class="<?= urlIs('/cart') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> " title="<?php echo Core\ShoppingCart::getCartPrice(); ?>">
+        <a href="/cart" class="<?= urlIs('/cart') ? 'border-b border-main-color text-main-color' : '' ?> " title="<?php echo Core\ShoppingCart::getCartPrice(); ?>">
             Coș cumpărături (<? echo Core\ShoppingCart::getTotalItemsInCart(); ?>)
         </a>
         <? if(Session::isAdmin()) : ?>
-            <a href="<?= Session::getLang(); ?>/admin" class="<?= urlIs('/admin') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?>"><?= \Core\Lang::text('nav.admin') ?></a>
+            <a href="<?= Session::getLang(); ?>/admin" class="<?= urlIs('/admin') ? 'border-b border-main-color text-main-color' : '' ?>"><?= \Core\Lang::text('nav.admin') ?></a>
         <? endif ?>
         <? if($_SESSION['user'] ?? false) : ?>
             <form method="post" action="<?= Session::getLang(); ?>/logout" class="hidden lg:inline-block">
                 <input type="hidden" name="_method" value="DELETE">
-                <button type="submit" class="hover:text-[#ed0078] hover:border-b hover:border-[#ed0078]">
+                <button type="submit" class="hover:text-main-color hover:border-b hover:border-main-color">
                     Logout
                 </button>
             </form>

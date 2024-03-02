@@ -36,7 +36,7 @@ class CheckoutForm {
         }
 
         if(!Validator::email($email)) 
-            $this->errors['email'] = 'Adresa de email este invalidă.';
+            $this->errors['cart_email'] = 'Adresa de email este invalidă.';
 
         $db = App::resolve(Database::class);
         if($create_account and $db->query('SELECT email FROM users WHERE email = :email',  ['email' => $email])->find())

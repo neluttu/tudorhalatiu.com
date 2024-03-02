@@ -24,7 +24,7 @@
                                 ?>
                             </p>
                             <p class="pr-4"><?= number_format($product['price'], 2, ',', '.'); ?> lei</p>
-                            <button type="submit" class="p-1 text-white hover:bg-[#ed0078] rounded-md bg-black">
+                            <button type="submit" class="p-1 text-white bg-black rounded-md hover:bg-main-color">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                         </button>
                     </form>
@@ -36,49 +36,54 @@
                 ?>
             </ul>
             <? if(!isset($_SESSION['user']['email'])) : ?>
-            <a href="/login" class="block mt-10 mb-4 font-normal text-base underline hover:no-underline text-[#ed0078]">Am cont de client, doresc să mă autentific pentru a finaliza comanda.</a>
-            <!-- <p class="inline-block mt-0 mb-4 font-normal text-lg text-[#ed0078]">Accesează contul de client</p>
-            <form action="<?= \Core\Session::getLang(); ?>/session" method="post" class="flex flex-wrap items-center justify-start w-full gap-2 mb-10">
-                <div class="relative flex-1 w-full mt-6">
-                    <input type="text" required name="email" id="email" value="<?= old('email') ?? '' ?>" placeholder="Adresa de email" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['email']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+            
+            <p class="inline-flex items-center justify-center gap-2 mt-10 mb-4 text-base font-normal text-main-color">
+                Dețin cont de client, mă autentific.
+            </p>
+            <form id="cart_login" action="<?= \Core\Session::getLang(); ?>/cart-login" method="post" class="grid grid-cols-1 pb-6 mb-2 border-b-[3px] border-black gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="relative ">
+                    <input type="text" required name="email" id="email" value="<?= old('email') ?? '' ?>" placeholder="Adresa de email" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['email']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                     <label for="email" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Adresa de email</label>
                 </div>
 
-                <div class="relative flex-1 w-full mt-6">
-                    <input type="password" required name="password" id="password" placeholder="Parola contului" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['email']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                <div class="relative ">
+                    <input type="password" required name="password" id="password" placeholder="Parola contului" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['email']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
                     <label for="password" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Parola contului</label>
                 </div>
-                <span class="text-sm text-red-500"><?= isset($errors['email']) ?? '' ?></span>
-                <button type="submit" class="flex-1 w-full px-3 py-3 text-white bg-black rounded-md focus:bg-gray-600 focus:outline-none">Accesează contul de client</button>
+
+                <button type="submit" class="flex-1 w-full px-3 py-3 text-white rounded-md bg-main-color focus:bg-gray-600 focus:outline-none">Accesează contul de client</button>
                 <div class="w-full"></div>
 
-                <p class="text-xs text-gray-500">
+                <!-- <p class="text-xs text-gray-500">
                     <a href="<?= \Core\Session::getLang(); ?>/register" class="underline hover:no-underline focus:text-gray-800 focus:outline-none">Deschid cont nou</a> sau <a href="<?= \Core\Session::getLang(); ?>/reset-password" class="underline hover:no-underline focus:text-gray-800 focus:outline-none">resetez parola contului meu.</a>
-                </p>
-            </form> -->
+                </p> -->
+                <? if(isset($errors['email'])) :?>
+                    <p class="block w-full text-sm text-main-color"><?=$errors['email'] ?></p>
+                <? endif; ?>
+            </form>
             <? endif; ?>
-            <p class="inline-block mt-10 mb-4 font-normal text-lg text-[#ed0078]">Informații facturare</p>
+            <p class="inline-block mt-10 mb-6 text-base font-normal text-main-color">Informații client</p>
             <form id="checkout" class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" method="post" action="/cart">
                 <div class="relative">
-                    <input type="text" name="lastname" id="lastname" value="<?= (old('lastname') !== '') ? old('lastname') : ($billing['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['lastname']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                    <input type="text" name="lastname" id="lastname" value="<?= (old('lastname') !== '') ? old('lastname') : ($billing['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['lastname']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                     <label for="lastname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Nume</label>
                 </div>
                 <div class="relative">
-                    <input type="text" name="firstname" id="firstname" value="<?= (old('firstname') !== '') ? old('firstname') : ($billing['firstname'] ?? '') ?>" placeholder="Prenume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['firstname']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                    <input type="text" name="firstname" id="firstname" value="<?= (old('firstname') !== '') ? old('firstname') : ($billing['firstname'] ?? '') ?>" placeholder="Prenume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['firstname']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                     <label for="firstname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Prenume</label>
                 </div>
                 <div class="relative">
-                    <input type="text" name="email" id="email" value="<?= (old('email') !== '') ? old('email') : ($billing['email'] ?? '') ?>" placeholder="Adresa de email" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['email']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                    <input type="text" name="email" id="email" value="<?= (old('cart_email') !== '') ? old('cart_email') : ($billing['email'] ?? '') ?>" placeholder="Adresa de email" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['cart_email']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                     <label for="email" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Adresa de email</label>
                 </div>
                 
                 <? if(!isset($_SESSION['user']['email'])) : ?>
                 <div class="flex flex-wrap items-center justify-start sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-6">
                     <label for="account-create" class="inline-flex items-center justify-start text-sm font-light cursor-pointer gap-x-2">
-                            <input onchange="togglePasswordSection()" type="checkbox" id="account-create" name="account-create" <?= old('account-create') ? 'checked' : '' ?>> Doresc să fac un cont de client
+                            <input onchange="togglePasswordSection()" type="checkbox" class="accent-main-color" id="account-create" name="account-create" <?= old('account-create') ? 'checked' : '' ?>> Doresc să fac un cont de client
                     </label>
                     <div class="relative <?= old('account-create') ? 'inline-block' : 'hidden' ?> w-full sm:flex-1 mt-6 sm:mt-0" id="passwd">
-                        <input type="password" name="password" id="password" value="" placeholder="Alege o parolă" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['password']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="password" name="password" id="password" value="" placeholder="Alege o parolă" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['password']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="password" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Alege o parolă</label>
                     </div>
                     <small id="passwordTip" class="<?= old('account-create') ? 'inline-block' : 'hidden' ?> mt-2 text-xs w-full <?= !isset($errors['password']) ? 'text-slate-500' : 'text-rose-700' ?>">Parola trebuie să conțină minim 8 caractere, măcar o literă mare, un număr și un simbol.</small>
@@ -106,7 +111,7 @@
                 <? endif ?>
                 <div>
                     <div class="relative">
-                        <input type="text" name="phone" id="phone" value="<?= (old('phone') !== '') ? old('phone') : ($billing['phone'] ?? '') ?>" placeholder="Număr de telefon" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['phone']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="text" name="phone" id="phone" value="<?= (old('phone') !== '') ? old('phone') : ($billing['phone'] ?? '') ?>" placeholder="Număr de telefon" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['phone']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="phone" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Număr de telefon</label>
                     </div>
                 </div>
@@ -125,39 +130,47 @@
                 </div>
                 <div>
                     <div class="relative">
-                        <input type="text" name="city" id="city" value="<?= (old('city') !== '') ? old('city') : ($billing['city'] ?? '') ?>" placeholder="Oras" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['city']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="text" name="city" id="city" value="<?= (old('city') !== '') ? old('city') : ($billing['city'] ?? '') ?>" placeholder="Oras" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['city']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="city" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Oras</label>
                     </div>
                 </div>
                 <div>
                     <div class="relative">
-                        <input type="text" name="address" id="address" value="<?= (old('address') !== '') ? old('address') : ($billing['address'] ?? '') ?>" placeholder="Adresa" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['address']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="text" name="address" id="address" value="<?= (old('address') !== '') ? old('address') : ($billing['address'] ?? '') ?>" placeholder="Adresa" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['address']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="address" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Adresa</label>
                     </div>
                 </div>
                 <div>
                     <div class="relative">
-                        <input type="text" name="zip" id="zip" value="<?= (old('zip') !== '') ? old('zip') : ($billing['zip'] ?? '') ?>" placeholder="Cod postal" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['zip']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="text" name="zip" id="zip" value="<?= (old('zip') !== '') ? old('zip') : ($billing['zip'] ?? '') ?>" placeholder="Cod postal" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['zip']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="zip" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Cod postal</label>
                     </div>
                 </div>
-                <label for="delivery" class="flex items-center justify-start mt-4 text-sm cursor-pointer sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-2">
-                    <input type="checkbox" name="delivery" id="delivery" onchange="toggleDeliveryInfo()" class="form-checkbox accent-[#ed0078]" <?= old('delivery') ? 'checked' : '' ?>> <span class="ml-0">Doresc livrarea produselor la altă adresă</span>
+                <label for="delivery" class="flex items-center justify-start mt-0 text-sm cursor-pointer sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-2 hover:text-main-color">
+                    <input type="checkbox" name="delivery" id="delivery" onchange="toggleDeliveryInfo()" class=" form-checkbox accent-main-color" <?= old('delivery') ? 'checked' : '' ?>> 
+                    <svg xmlns="http://www.w3.org/2000/svg" class="" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#ed0078" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                        <path d="M3 9l4 0" />
+                    </svg>
+                    <span class="ml-0">Doresc livrarea produselor la altă adresă</span>
                 </label>
 
                 <div class="grid overflow-hidden duration-500 ease-in <?= old('delivery') ? '' : 'max-h-0' ?> sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-6 gap-y-10 transition-max-height" id="delivery-info">
-                    <p class="sm:col-span-2 md:col-span-2 lg:col-span-3 font-normal -mb-8 text-lg text-[#ed0078]">Informații livrare</p>
+                    <p class="-mb-8 text-base font-normal sm:col-span-2 md:col-span-2 lg:col-span-3 text-main-color">Informații livrare</p>
                     <div class="relative">
-                        <input type="text" name="delivery_lastname" id="delivery_lastname" value="<?= (old('delivery_lastname') !== '') ? old('delivery_lastname') : ($shipping['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_lastname']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="text" name="delivery_lastname" id="delivery_lastname" value="<?= (old('delivery_lastname') !== '') ? old('delivery_lastname') : ($shipping['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_lastname']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="delivery_lastname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Nume</label>
                     </div>
                     <div class="relative">
-                        <input type="text" name="delivery_firstname" id="delivery_firstname" value="<?= (old('delivery_firstname') !== '') ? old('delivery_firstname') : ($shipping['firstname'] ?? '') ?>" placeholder="Prenume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_firstname']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                        <input type="text" name="delivery_firstname" id="delivery_firstname" value="<?= (old('delivery_firstname') !== '') ? old('delivery_firstname') : ($shipping['firstname'] ?? '') ?>" placeholder="Prenume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_firstname']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="delivery_firstname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Prenume</label>
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" name="delivery_phone" id="delivery_phone" value="<?= (old('delivery_phone') !== '') ? old('delivery_phone') : ($shipping['phone'] ?? '') ?>" placeholder="Număr de telefon" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_phone']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                            <input type="text" name="delivery_phone" id="delivery_phone" value="<?= (old('delivery_phone') !== '') ? old('delivery_phone') : ($shipping['phone'] ?? '') ?>" placeholder="Număr de telefon" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_phone']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                             <label for="delivery_phone" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Număr de telefon</label>
                         </div>
                     </div>
@@ -176,19 +189,19 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" name="delivery_city" id="delivery_city" value="<?= (old('delivery_city') !== '') ? old('delivery_city') : ($shipping['city'] ?? '') ?>" placeholder="Oras" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_city']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                            <input type="text" name="delivery_city" id="delivery_city" value="<?= (old('delivery_city') !== '') ? old('delivery_city') : ($shipping['city'] ?? '') ?>" placeholder="Oras" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_city']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                             <label for="delivery_city" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Oras</label>
                         </div>
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" name="delivery_address" id="delivery_address" value="<?= (old('delivery_address') !== '') ? old('delivery_address') : ($shipping['address'] ?? '') ?>" placeholder="Adresa" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_address']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                            <input type="text" name="delivery_address" id="delivery_address" value="<?= (old('delivery_address') !== '') ? old('delivery_address') : ($shipping['address'] ?? '') ?>" placeholder="Adresa" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_address']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                             <label for="delivery_address" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Adresa</label>
                         </div>
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" name="delivery_zip" id="delivery_zip" value="<?= (old('delivery_zip') !== '') ? old('delivery_zip') : ($shipping['zip'] ?? '') ?>" placeholder="Cod postal" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_zip']) ? 'border-[#ed0078] shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                            <input type="text" name="delivery_zip" id="delivery_zip" value="<?= (old('delivery_zip') !== '') ? old('delivery_zip') : ($shipping['zip'] ?? '') ?>" placeholder="Cod postal" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['delivery_zip']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                             <label for="delivery_zip" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Cod postal</label>
                         </div>
                     </div>
@@ -212,7 +225,7 @@
         
 
         <div class="p-1 md:p-6 text-sm font-light md:border rounded-md text-slate-700 w-full md:w-[380px] shrink-0">
-            <p class="inline-block mb-4 font-normal text-base text-[#ed0078]">Sumar comandă: 1 articol.</p>
+            <p class="inline-block mb-4 text-base font-normal text-main-color">Sumar comandă: <?= \Core\ShoppingCart::getTotalItemsInCart(); ?> articol(e).</p>
             <p class="flex items-center justify-start py-3 border-b">
                 <span class="grow">Subtotal</span>
                 <span class="text-right"><?= number_format($Total, 2, ',', '.');?> lei</span>
@@ -226,23 +239,23 @@
                 <span><?= number_format($Total + 16, 2, ',', '.');?> lei</span>
             </p>
 
-            <p class="inline-block mt-10 font-normal text-base text-[#ed0078]">Metodă de plată</p>
+            <p class="inline-block mt-10 text-base font-normal text-main-color">Metodă de plată</p>
 
             <label for="mobilpay" class="flex items-center justify-start gap-2 mt-4 cursor-pointer">
-                <input type="radio" name="payment" id="mobilpay" value="netopia" checked> <span>Card Online prin </span> <img src="/public/images/mobilpay.gif">
+                <input type="radio" name="payment" id="mobilpay" value="netopia" class="accent-main-color" checked> <span>Card Online prin </span> <img src="/public/images/mobilpay.gif">
             </label>
             
             <label for="terms" class="flex items-start justify-start gap-3 mt-5 cursor-pointer">
-                <input type="checkbox" name="terms" id="terms" class="mt-1">
-                <span>Am citit și sunt de acord cu <a href="#" class="text-[#ed0078] hover:underline">termenii și condițiile de utilizare</a> a magazinului online.</span>
+                <input type="checkbox" name="terms" id="terms" class="mt-1 accent-main-color">
+                <span>Am citit și sunt de acord cu <a href="#" class="text-main-color hover:underline">termenii și condițiile de utilizare</a> a magazinului online.</span>
             </label>
 
             <label for="privacy" class="flex items-start justify-start gap-3 mt-3 cursor-pointer">
-                <input type="checkbox" name="privacy" id="privacy" class="mt-1">
-                <span>Am citit și sunt de acord cu <a href="#" class="text-[#ed0078] hover:underline">politica de confidențialitate</a>.</span>
+                <input type="checkbox" name="privacy" id="privacy" class="mt-1 accent-main-color">
+                <span>Am citit și sunt de acord cu <a href="#" class="text-main-color hover:underline">politica de confidențialitate</a>.</span>
             </label>
 
-            <button id="submitBtn" disabled  form="checkout" class="flex disabled:bg-gray-200 disabled:text-stone-600 items-center justify-center bg-[#ed0078] w-full py-4 mt-6 text-white rounded-md font-semibold">
+            <button id="submitBtn" disabled  form="checkout" class="flex items-center justify-center w-full py-4 mt-6 font-semibold text-white rounded-md disabled:bg-gray-200 disabled:text-stone-600 bg-main-color">
             Acceptă condițiile de mai sus  mai întâi
             </button>
             <script>

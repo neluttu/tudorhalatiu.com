@@ -19,6 +19,9 @@ module.exports = {
             'open-sans': ['Open Sans', 'sans-serif'],
             'barlow': ['Open Sans', 'sans-serif']
         },
+        colors: {
+            "main-color": "var(--main-color)",
+        }
     },
   },
   plugins: [],

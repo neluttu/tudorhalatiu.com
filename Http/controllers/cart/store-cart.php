@@ -22,4 +22,5 @@ Session::flash('cart_message', [
                     'result' => $result
             ]);
 
-return redirect('/product/' . slug($_POST['name']) . '/' . $_POST['id']);
+//return redirect('/product/' . slug($_POST['name']) . '/' . $_POST['id']);
+return redirect('/cart');

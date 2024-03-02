@@ -1,9 +1,9 @@
 <footer class="w-full px-2 pb-10 mx-auto mt-20 mb-2 max-w-7xl">
     <div class="flex items-center w-full gap-10 px-2 text-sm justify-evenly sm:justify-end md:px-0 text-slate-600">
-            <a href="/" class="hover:text-[#ed0078]" title="">Acasă</a>
-            <a href="/shop" class="hover:text-[#ed0078]" title="">Shop</a>
-            <a href="/despre" class="hover:text-[#ed0078]" title="">Despre</a>
-            <a href="/contact" class="hover:text-[#ed0078]" title="">Contact</a>
+            <a href="/" class="hover:text-main-color" title="">Acasă</a>
+            <a href="/shop" class="hover:text-main-color" title="">Shop</a>
+            <a href="/despre" class="hover:text-main-color" title="">Despre</a>
+            <a href="/contact" class="hover:text-main-color" title="">Contact</a>
     </div>
     <hr class="h-px my-6 bg-gray-200 border-0 grow">
     <div class="font-sans text-sm font-light leading-loose tracking-tight text-left text-slate-600">
@@ -13,7 +13,7 @@
     </div>
     <div class="flex items-center justify-start gap-4 mt-8">
         <a href="tel:+40745576131" target="_blank" title="Contact telefon Tudor Halatiu" class="group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:stroke-[#ed0078]" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#65676d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:stroke-main-color" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#65676d" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
                 <line x1="15" y1="9" x2="20" y2="4"></line>
@@ -22,7 +22,7 @@
         </a>
 
         <a href="https://www.instagram.com/tudor.halatiu/" title="Tudor Halațiu Instagram" target="_blank" class="group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:stroke-[#ed0078]" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#65676d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:stroke-main-color" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#65676d" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <rect x="4" y="4" width="16" height="16" rx="4"></rect>
                 <circle cx="12" cy="12" r="3"></circle>

@@ -134,7 +134,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                     'ipAddress' => $_SERVER['REMOTE_ADDR']
                 ]
             );
-            
+
     $order_id = $db->getLastID();
 
     if(!empty($_SESSION['cart']))
@@ -188,7 +188,7 @@ Session::flash('errors', $form->errors());
 Session::flash('old', [ 
     'firstname' => $_POST['firstname'],
     'lastname' => $_POST['lastname'],
-    'email' => $_POST['email'],
+    'cart_email' => $_POST['email'],
     'phone' => $_POST['phone'],
     'city' => $_POST['city'],
     'county' => $_POST['county'],
