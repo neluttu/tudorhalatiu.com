@@ -55,6 +55,23 @@ $db->query("
         ]
     );
 
+    // Add default fields for billing / shipping information.
+    $db->query("
+                INSERT INTO users_address (user_id, type, firstname, lastname, phone, email)
+                VALUES (:user_id, 'billing', :firstname, :lastname, :phone, :email);
+
+                INSERT INTO users_address (user_id, type, firstname, lastname, phone)
+                VALUES (:user_id, 'shipping', :firstname, :lastname, :phone);
+                ", 
+                [
+                    'user_id' => $user_id,
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'phone' => $phone,
+                    'email' => $email
+                ]
+        );
+
 $emailSender = new Core\EmailSender();
         
 $emailSender->sendEmail(

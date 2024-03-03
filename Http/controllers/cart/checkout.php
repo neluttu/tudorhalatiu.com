@@ -81,19 +81,18 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
         // Insert user account delivery addresse into db.
         if($delivery) 
             $db->query("
-                    INSERT INTO users_address (user_id, type, firstname, lastname, country, address, city, county, zip, phone, email)
-                    VALUES (:user_id, 'billing', :firstname, :lastname, :country, :address, :city, :county, :zip, :phone, :email)
+                    INSERT INTO users_address (user_id, type, firstname, lastname, country, address, city, county, zip, phone)
+                    VALUES (:user_id, 'shipping', :firstname, :lastname, :country, :address, :city, :county, :zip, :phone)
                 ", [
                     'user_id' => $user_id,
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'country' => $country,
-                    'address' => $address,
-                    'city' => $city,
-                    'county' => $county,
-                    'zip' => $zip,
-                    'phone' => $phone,
-                    'email' => $email
+                    'firstname' => $delivery_firstname,
+                    'lastname' => $delivery_lastname,
+                    'country' => $delivery_country,
+                    'address' => $delivery_address,
+                    'city' => $delivery_city,
+                    'county' => $delivery_county,
+                    'zip' => $delivery_zip,
+                    'phone' => $delivery_phone
                 ]
             );
 
