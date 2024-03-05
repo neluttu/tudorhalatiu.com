@@ -39,7 +39,7 @@ class CheckoutForm {
             $this->errors['cart_email'] = 'Adresa de email este invalidă.';
 
         $db = App::resolve(Database::class);
-        if(/* $create_account and */ $db->query('SELECT email FROM users WHERE email = :email',  ['email' => $email])->find())
+        if(/* $create_account and */ $db->query('SELECT email FROM users WHERE email = :email',  ['email' => $email])->find() and !$_SESSION['user']['email'])
             $this->errors['cart_email'] = 'Acest email este deja înregistrat. <a href="/login" title="Autentificare Client TudorHalatiu.com">Autentificare în cont.</a>';
 
         

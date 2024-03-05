@@ -1,7 +1,7 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
-
+<? d($errors); ?>
 <main class="w-full mt-10 max-w-7xl">
     <? Core\Session::getMessage(); ?>
     <section class="flex flex-col items-start justify-start w-full gap-4 px-2 md:gap-10 lg:px-0 md:flex-row">
@@ -77,7 +77,7 @@
                     <label for="firstname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Prenume</label>
                 </div>
                 <div class="relative">
-                    <input required type="text" name="email" id="email" value="<?= (old('cart_email') !== '') ? old('cart_email') : ($billing['email'] ?? '') ?>" placeholder="Adresa de email" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['cart_email']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                    <input required type="text" name="email" id="email" value="<?= (old('cart_email') !== '') ? old('cart_email') : ($billing['email'] ?? '') ?>" <?= $_SESSION['user']['email'] ? 'readonly' : '' ?> placeholder="Adresa de email" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['cart_email']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                     <label for="email" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Adresa de email</label>
                 </div>
                 
@@ -213,21 +213,15 @@
                     function toggleDeliveryInfo() {
                         var deliveryCheckbox = document.getElementById("delivery");
                         var deliveryInfo = document.getElementById("delivery-info");
-
-                        if (deliveryCheckbox.checked) {
-                            // Checkbox bifat, afișează cu animație
-                            deliveryInfo.style.maxHeight = deliveryInfo.scrollHeight + "px";
-                        } else {
-                            // Checkbox debifat, ascunde cu animație
-                            deliveryInfo.style.maxHeight = 0;
-                        }
+                        if (deliveryCheckbox.checked) deliveryInfo.style.maxHeight = deliveryInfo.scrollHeight + "px";
+                        else deliveryInfo.style.maxHeight = 0;
                     }
                 </script>
             </form>
         </div>
         
 
-        <div class="p-1 md:p-6 text-sm font-light md:border rounded-md text-slate-700 w-full md:w-[380px] shrink-0">
+        <div class="p-1 md:p-6 text-sm font-light  text-slate-700 w-full md:w-[380px] shrink-0">
             <p class="inline-block mb-4 text-base font-normal text-main-color">Sumar comandă: <?= \Core\ShoppingCart::getTotalItemsInCart() ?> <?= \Core\ShoppingCart::getTotalItemsInCart() === 1 ? 'articol' : 'articole'; ?>.</p>
             <p class="flex items-center justify-start py-3 border-b">
                 <span class="grow">Subtotal</span>
@@ -242,18 +236,18 @@
                 <span><?= number_format($Total + 16, 2, ',', '.');?> lei</span>
             </p>
 
-            <p class="inline-block mt-10 text-base font-normal text-main-color">Metodă de plată</p>
+            <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>
 
-            <label for="mobilpay" class="flex items-center justify-start gap-2 mt-4 cursor-pointer">
+            <label for="mobilpay" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
                 <input type="radio" name="payment" id="mobilpay" value="netopia" class="accent-main-color" checked> <span>Card Online prin </span> <img src="/public/images/mobilpay.gif">
             </label>
             
-            <label for="terms" class="flex items-start justify-start gap-3 mt-5 cursor-pointer">
+            <label for="terms" class="flex items-start justify-start gap-3 mt-8 cursor-pointer">
                 <input type="checkbox" name="terms" id="terms" class="mt-1 accent-main-color">
                 <span>Am citit și sunt de acord cu <a href="#" class="text-main-color hover:underline">termenii și condițiile de utilizare</a> a magazinului online.</span>
             </label>
 
-            <label for="privacy" class="flex items-start justify-start gap-3 mt-3 cursor-pointer">
+            <label for="privacy" class="flex items-start justify-start gap-3 mt-8 cursor-pointer">
                 <input type="checkbox" name="privacy" id="privacy" class="mt-1 accent-main-color">
                 <span>Am citit și sunt de acord cu <a href="#" class="text-main-color hover:underline">politica de confidențialitate</a>.</span>
             </label>
