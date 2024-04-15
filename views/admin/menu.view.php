@@ -1,8 +1,8 @@
 <a href="/admin" class="<?= urlIs('/admin') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Comenzi</a>
-<a href="/admin/produse" class="<?= urlIs('/admin/produse') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Produse</a>
+<a href="/admin/products" class="<?= urlIs('/admin/products') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Produse</a>
 <a href="/admin/clienti" class="<?= urlIs('/admin/clienti') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Clienti</a>
-<!-- <a href="/admin/facturi" class="<?= urlIs('/admin/facturi') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Facturi emise</a> -->
-<!-- <a href="/admin/newsletter" class="<?= urlIs('/admin/newsletter') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Newsletter</a> -->
+<a href="/admin/facturi" class="<?= urlIs('/admin/facturi') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Facturi emise</a>
+<a href="/admin/newsletter" class="<?= urlIs('/admin/newsletter') ? 'border-b border-[#ed0078] text-[#ed0078]' : '' ?> ">Newsletter</a>
 <hr class="w-full my-4 border-b-2 border-slate-700">
 <a href="#">Caută comanda cu ID:</a>
 <label for="order_id" class="flex justify-center w-full gap-2 items-bottom">

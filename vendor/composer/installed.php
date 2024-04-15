@@ -10,6 +10,15 @@
         'dev' => true,
     ),
     'versions' => array(
+        'grinderspro/directory-manipulator' => array(
+            'pretty_version' => '1.0.31',
+            'version' => '1.0.31.0',
+            'reference' => 'f3f7733cfaefcaac8d43996c7378b47fbcc2b16c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../grinderspro/directory-manipulator',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'neluttu/oop-php' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',

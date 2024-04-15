@@ -15,6 +15,10 @@ class ComposerStaticInit83a915b6266d4e76bf1d5bbda643a6a3
         array (
             'Http\\' => 5,
         ),
+        'G' => 
+        array (
+            'Grinderspro\\DirectoryManipulator\\' => 33,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -29,6 +33,10 @@ class ComposerStaticInit83a915b6266d4e76bf1d5bbda643a6a3
         'Http\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Http',
+        ),
+        'Grinderspro\\DirectoryManipulator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/grinderspro/directory-manipulator/src',
         ),
         'Core\\' => 
         array (

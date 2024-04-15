@@ -24,6 +24,5 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
     </style>
-    <!-- nunito, rubik, poppins, merriweather, lato, montserrat, noto, roboto, oswald, aleo, mulish, asap, open-sans, barlow -->
 </head>
 <body class="flex flex-col items-center justify-start min-h-screen font-merriweather">

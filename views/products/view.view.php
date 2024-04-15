@@ -19,7 +19,7 @@ use Core\Lang;
     ?>
     <div class="flex items-start justify-start gap-10 py-6">
         <div class="flex-1">
-            <img src="/public/images/products/<?=$product['id']?>.jpg" class="w-full rounded-md" alt="<?=$product['name']?> - Tudor Halațiu">
+            <img src="/public/images/products/<?=$product['id']?>/poster.jpg" class="w-full rounded-md" alt="<?=$product['name']?> - Tudor Halațiu">
         </div>
         <div class="flex-1 text-sm font-light leading-loose text-slate-700">
             <h1 class="text-4xl font-semibold text-right text-[#ed0078]">
@@ -31,9 +31,9 @@ use Core\Lang;
                     $i = 0;
                     foreach(explode(',', $product['sizes']) as $Size) {
                 ?>
-                <div class="font-sans font-semibold text-center w-[48px] aspect-square cursor-pointer">
+                <div class="font-sans font-semibold text-center min-w-[46px] cursor-pointer">
                     <input type="radio" name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> />
-                    <label for="size_<?= $Size ?>" class="peer-checked:bg-[#ed0078] block p-2  hover:bg-[#ed0078] transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-md"><?= $Size ?></label>
+                    <label for="size_<?= $Size ?>" class="peer-checked:bg-[#ed0078] block p-[9px]  hover:bg-[#ed0078] transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-md"><?= $Size ?></label>
                 </div>
                 <? $i = 1; } } ?>
 

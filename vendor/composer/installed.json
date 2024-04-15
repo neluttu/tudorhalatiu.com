@@ -1,6 +1,61 @@
 {
     "packages": [
         {
+            "name": "grinderspro/directory-manipulator",
+            "version": "1.0.31",
+            "version_normalized": "1.0.31.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/grinderspro/directory-manipulator.git",
+                "reference": "f3f7733cfaefcaac8d43996c7378b47fbcc2b16c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/grinderspro/directory-manipulator/zipball/f3f7733cfaefcaac8d43996c7378b47fbcc2b16c",
+                "reference": "f3f7733cfaefcaac8d43996c7378b47fbcc2b16c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "time": "2018-06-17T17:47:31+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Grinderspro\\DirectoryManipulator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "grinderspro",
+                    "email": "grinderspro@gmai.com"
+                }
+            ],
+            "description": "Simple folder manipulation. Create, delete, rename folder",
+            "keywords": [
+                "create folder",
+                "delete folder",
+                "directory manipulator",
+                "empty folder",
+                "folder manipulation",
+                "grinderspro",
+                "rename folder",
+                "очистить директорию",
+                "создание директории",
+                "удаление директории"
+            ],
+            "support": {
+                "issues": "https://github.com/grinderspro/directory-manipulator/issues",
+                "source": "https://github.com/grinderspro/directory-manipulator/tree/master"
+            },
+            "install-path": "../grinderspro/directory-manipulator"
+        },
+        {
             "name": "phpmailer/phpmailer",
             "version": "v6.9.1",
             "version_normalized": "6.9.1.0",

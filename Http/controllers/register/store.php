@@ -91,4 +91,4 @@ $_SESSION['user'] = [
 ];
 
 session_regenerate_id(true);
-header('Location: /account');
+redirect('/account');
