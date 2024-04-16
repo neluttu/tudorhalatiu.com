@@ -34,7 +34,7 @@ return [
     'heading' => [
         'categories' => ['Magazin online', 'Alegeți una din categoriile magazinului'],
         'contact' => ['Informații contact', 'Cum poți lua legătura cu mine'],
-        'about' => ['Tudor Halațiu', 'Text pagina despre'],
+        'about' => ['Tudor Halațiu', 'Despre mine și brandul meu'],
         'cart' => ['coș de cumpărături', 'Verifică și finalizează cumpărăturile'],
         'register' => ['Deveniți clientul nostru', 'Țineți evidența comenzilor și a produselor favorite'],
         'login' => ['Autentificare magazin', 'Folosiți credențialele dvs. pentru autentificare în contul de client'],

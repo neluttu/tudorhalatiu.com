@@ -1,6 +1,5 @@
 <div class="w-full px-2 mx-auto mb-6 max-w-7xl">
-    <h1 class="relative inline-block font-sans text-2xl font-bold uppercase md:text-6xl text-main-color slide-in-left">
-        <!-- <div class="absolute -right-4 h-14 rounded-tr-md rounded-br-md border w-[1800px] top-0 -z-20"></div> -->
+    <h1 class="relative inline-block font-sans font-bold uppercase text-main-color slide-in-left text-clamp">
         <?= $heading ?>
     </h1>
     <p class="py-2 pl-10 mt-2 text-xl italic text-slate-600"><?= $heading_info ?></p>

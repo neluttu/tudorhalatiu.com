@@ -4,7 +4,7 @@
 
 <main>
     <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        Comanda a fost plasată și achitată cu succes!
+        Comanda a fost plasată cu succes!
     </div>
 </main>
 

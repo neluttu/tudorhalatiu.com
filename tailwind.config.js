@@ -21,7 +21,10 @@ module.exports = {
         },
         colors: {
             "main-color": "var(--main-color)",
-        }
+        },
+        fontSize: {
+            clamp: "clamp(1.5rem, 0.0577rem + 4.6154vw, 3.75rem)"
+        },
     },
   },
   plugins: [],

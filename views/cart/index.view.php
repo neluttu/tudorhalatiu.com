@@ -68,6 +68,7 @@
             <? endif ?>
             
             <form id="checkout" class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" method="post" action="/cart">
+                <input type="hidden" name="payment" value="Cash on delivery" id="payment">
                 <div class="relative">
                     <input required type="text" name="lastname" id="lastname" value="<?= (old('lastname') !== '') ? old('lastname') : ($billing['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['lastname']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                     <label for="lastname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Nume</label>
@@ -239,11 +240,11 @@
             <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>
 
             <label for="mobilpay" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
-                <input type="radio" name="payment" id="mobilpay" value="netopia" class="accent-main-color" disabled> <span>Card Online prin </span> <img src="/public/images/mobilpay.gif">
+                <input type="radio" name="payment" id="mobilpay" value="Credit Card" class="accent-main-color" disabled> <span>Card Online prin </span> <img src="/public/images/mobilpay.gif">
             </label>
 
             <label for="ramburs" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
-                <input type="radio" name="payment" id="ramburs" value="ramburs" class="accent-main-color" checked> <span>Ramburs curier </span>
+                <input type="radio" name="payment" id="ramburs" value="Cash on delivery" class="accent-main-color" checked> <span>Ramburs curier </span>
             </label>
             
             <label for="terms" class="flex items-start justify-start gap-3 mt-8 cursor-pointer">
@@ -255,7 +256,11 @@
                 <input type="checkbox" name="privacy" id="privacy" class="mt-1 accent-main-color">
                 <span>Am citit și sunt de acord cu <a href="#" class="text-main-color hover:underline">politica de confidențialitate</a>.</span>
             </label>
-
+            <script>
+                const hiddenInput = document.getElementById('payment');
+                const paymentRadios = document.querySelectorAll('input[name="payment"]');
+                paymentRadios.forEach(radio => { radio.addEventListener('change', () => { if (radio.checked) hiddenInput.value = radio.value; }); });
+            </script>
             <button id="submitBtn" disabled  form="checkout" class="flex items-center justify-center w-full py-4 mt-6 font-semibold text-white rounded-md disabled:bg-gray-200 disabled:text-stone-600 bg-main-color">
             Acceptă condițiile de mai sus  mai întâi
             </button>

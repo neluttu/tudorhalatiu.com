@@ -16,6 +16,8 @@ $city = $_POST['city'];
 $zip = $_POST['zip'];
 $address = $_POST['address'];
 
+$payment = $_POST['payment'];
+
 $create_account = isset($_POST['account-create']) ? true : false;
 $delivery = isset($_POST['delivery']) ? true : false;
 
@@ -129,7 +131,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                     'user_id' => $user_id,
                     'status' => 'Pending',
                     'payed' => 'No',
-                    'payment_type' => 'Credit Card',
+                    'payment_type' => $payment,
                     'ipAddress' => $_SERVER['REMOTE_ADDR']
                 ]
             );

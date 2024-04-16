@@ -7,9 +7,13 @@ $products = $db->query('SELECT products.*, categories.name AS category_name FROM
                         'slug' => $params['category']
                     ])->findAllOrFail();
 
+$categories = $db->query('SELECT category_id, name, slug FROM categories')->get();
+
 view('products/products', [
     'heading' => $products[0]['category_name'],
     'heading_info' => $db->totlaRows() . ' produse în total',
     'products' => $products,
-    'title' => $products[0]['category_name']
+    'title' => $products[0]['category_name'],
+    'categories' => $categories,
+    'current_category' => $params['category']
 ]);

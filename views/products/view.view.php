@@ -1,11 +1,7 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 
-<div class="flex flex-wrap justify-start md:justify-center w-full gap-2 md:gap-4 px-2 mx-auto mb-10 max-w-7xl lg:px-0 text-slate-600 [&>a:hover]:bg-[#ed0078] [&>a:hover]:border-[#ed0078] [&>a:hover]:text-white [&>a]:transition-all [&>a]:duration-150 [&>a]:ease-in">
-    <? foreach($categories as $category) : ?>
-        <a href="/shop/<?=$category['slug']?>" class="px-2 md:px-4 py-1 md:py-2 border <?= $category['category_id'] === $product['category'] ? 'bg-[#ed0078] border-[#ed0078] text-white' : 'text-slate-500' ?> hover:bg-[#ed0078]  "><?=$category['name']?></a>
-    <? endforeach ?>
-</div>
+<?php require base_path('views/partials/categories.php'); ?>
 
 <?php
 require base_path('views/partials/banner.php');
@@ -14,15 +10,13 @@ use Core\Lang;
 
 <main class="w-full px-2 mx-auto max-w-7xl lg:px-0">
     <? Core\Session::getMessage(); ?>
-    <?
-    if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') echo '<a href="/admin/produs/'.$product['id'].'" class="text-[#ed0078] hover:underline">Editeaza produsul</a> | '.$views.' vizualizări';
-    ?>
-    <div class="flex items-start justify-start gap-10 py-6">
-        <div class="flex-1">
+    <? if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') echo '<a href="/admin/produs/'.$product['id'].'" class="text-main-color hover:underline">Editeaza produsul</a> | '.$views.' vizualizări';  ?>
+    <div class="flex flex-col items-start justify-start gap-10 py-6 md:flex-row">
+        <div class="w-full md:flex-1">
             <img src="/public/images/products/<?=$product['id']?>/poster.jpg" class="w-full rounded-md" alt="<?=$product['name']?> - Tudor Halațiu">
         </div>
-        <div class="flex-1 text-sm font-light leading-loose text-slate-700">
-            <h1 class="text-4xl font-semibold text-right text-[#ed0078]">
+        <div class="w-full text-sm font-light leading-loose md:flex-1 text-slate-700">
+            <h1 class="text-4xl font-semibold text-right text-main-color">
                 <?= number_format($product['price'], 2) . ' lei' ?>
             </h1>
             <hr class="w-[100px] border-b-2 border-slate-700 mt-4 float-end">
@@ -33,7 +27,7 @@ use Core\Lang;
                 ?>
                 <div class="font-sans font-semibold text-center min-w-[46px] cursor-pointer">
                     <input type="radio" name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> />
-                    <label for="size_<?= $Size ?>" class="peer-checked:bg-[#ed0078] block p-[9px]  hover:bg-[#ed0078] transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-md"><?= $Size ?></label>
+                    <label for="size_<?= $Size ?>" class="peer-checked:bg-main-color block p-[9px]  hover:bg-main-color transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-md"><?= $Size ?></label>
                 </div>
                 <? $i = 1; } } ?>
 
@@ -41,7 +35,7 @@ use Core\Lang;
                 <input type="hidden" name="name" value="<?=$product['name'] ?>">
                 <input type="hidden" name="price" value="<?=$product['price'] ?>">
                 
-                <button type="submit" class="px-6 py-2 ml-10 bg-[#ed0078] text-white rounded-md grow">
+                <button type="submit" class="px-6 py-2 ml-10 text-white rounded-md bg-main-color grow">
                     <?= Lang::text('product.add_to_cart'); ?>
                 </button>
             </form>
