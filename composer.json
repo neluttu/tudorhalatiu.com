@@ -7,7 +7,8 @@
     ],
     "require": {
         "phpmailer/phpmailer": "^6.9",
-        "grinderspro/directory-manipulator": "^1.0"
+        "grinderspro/directory-manipulator": "^1.0",
+        "mobiledetect/mobiledetectlib": "^4.8"
     },
     "autoload": {
         "psr-4": {

@@ -7,11 +7,14 @@
         <? require base_path('views/account/menu.view.php') ?>
     </div>
     <div class="w-full md:grow">
-        <h1 class="mb-10 text-lg">Comenzi în magazin</h1>
-
-        
+        <p class="mb-2 text-xl font-semibold text-main-color">Salut <?= $_SESSION['user']['name']?>!</p>
+        <? if (count($orders) > 0) : ?>
+        <p>Până în prezent ai făcut <?= count($orders) ?> comenzi în magazinul virtual. <span class="text-main-color">Îți mulțumim!</span></p>
+        <? else : ?>
+        <p>Nu ai nici o comandă făcută în magazinul virtual. Vizitează <a href="/shop">pagina cu produse</a> pentru a vedea oferta.</p>
+        <? endif ?>
         <? foreach($orders as $order) : ?>
-            <div class="mb-10">
+            <div class="my-10">
                 <span class="block mb-4 text-main-color">Comanda numarul: <?=$order['order_id']?></span>
                 <?
                 $products = explode(';',$order['products']);

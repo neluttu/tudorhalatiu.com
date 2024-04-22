@@ -30,9 +30,13 @@ class ProductViewCounter {
 
     private function incrementDatabaseCounter($productID) {
         $db = App::resolve(Database::class);
-        $db->query("UPDATE product_views SET views = views + 1 WHERE product_id = :productID", 
+        if(!$db->query("SELECT product_id FROM product_views WHERE product_id = :productID AND date = :date", ["productID" => $productID, "date" => date("Y-m-d")])->get())
+            $db->query("INSERT INTO product_views (product_id, date) VALUES (:productID, :date)", ["productID" => $productID, "date" => date('Y-m-d')]);
+        else            
+            $db->query("UPDATE product_views SET views = views + 1 WHERE product_id = :productID AND date = :date", 
                     [
-                        "productID" => $productID
+                        "productID" => $productID,
+                        "date" => date('Y-m-d')
                     ]);
     }
 }

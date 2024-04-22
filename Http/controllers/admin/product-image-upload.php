@@ -1,5 +1,10 @@
 <?
 use Core\Session;
+use Core\App;
+use Core\Database;
+
+$db = App::resolve(Database::class);
+$product = $db->query("SELECT name FROM products WHERE id = :id", [":id" => $_POST['id']])->find();
 
 if(isset($_FILES['image'])) {
     $fisier = $_FILES['image'];
@@ -16,18 +21,17 @@ if(isset($_FILES['image'])) {
 
     // Verifică extensia fișierului
     $extensie = pathinfo($fisier['name'], PATHINFO_EXTENSION);
-    if ($extensie !== 'jpg') {
-        Session::flash('upload_error', 'Extensia trebuie să fie jpg');
+    if ($extensie !== 'jpg' || $extensie !== 'avif' || $extensie !== 'jpeg') {
+        Session::flash('upload_error', 'Extensia trebuie să fie jpg, avif sau jpeg');
     }
 
     // Verifică dimensiunea fișierului (maxim 500KB)
     if ($fisier['size'] > 500 * 1024) { // 500KB exprimat în bytes
         Session::flash('upload_error', 'Fișierul încărcat este prea mare, maxim 500kb');
     }
-
-    if(!is_file(base_path('public/images/products/' . $_POST['id'] .'/poster.jpg')))
-        $fileName = 'poster.jpg';
-    else $fileName = uniqid('img_') . '.jpg';
+    if(!is_file(base_path('public/images/products/' . $_POST['id'] .'/poster.avif')))
+        $fileName = 'poster.avif';
+    else $fileName = uniqid('tudor-halatiu-' . strtolower(str_replace(' ','-',$product['name'])) . '-') . '.avif';
 
     // Salvează imaginea pe server
     $path = base_path('public/images/products/'.$_POST['id'].'/' . $fileName);

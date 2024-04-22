@@ -6,8 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Http\\' => array($baseDir . '/Http'),
     'Grinderspro\\DirectoryManipulator\\' => array($vendorDir . '/grinderspro/directory-manipulator/src'),
+    'Detection\\' => array($vendorDir . '/mobiledetect/mobiledetectlib/src'),
     'Core\\' => array($baseDir . '/Core'),
 );

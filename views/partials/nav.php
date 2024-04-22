@@ -10,7 +10,7 @@
         </div>
 
         <a href="/" title="" class="order-1 px-0 lg:px-16 lg:order-2 shrink-0">
-            <img src="/public/images/logo2.png" width="140" alt="" class="w-[70px] md:w-[100px]">
+            <img src="/public/images/tudor-halatiu2.svg" width="140" alt="" class="w-[70px] md:w-[100px] pt-2">
         </a>
 
         <div class="flex items-center self-stretch order-3 justify-end gap-3 sm:gap-6 lg:gap-0 lg:justify-between flex-1 [&>a:hover]:text-main-color [&>a:hover]:border-b [&>a:hover]:border-main-color [&>a]:py-1 pt-2 md:pt-5">
@@ -45,13 +45,12 @@
         </div>
     </div>
 </header>
-<div class="flex items-center justify-end w-full gap-3 px-2 mb-2 font-sans text-sm sm:mb-10 max-w-7xl text-slate-400">
-    <a href="#" target="_blank" title="">
+<div class="items-center justify-end hidden w-full gap-3 px-2 mb-2 font-sans text-sm md:flex sm:mb-10 max-w-7xl text-slate-400">
+    <a href="tel:+40754784303" target="_blank" title="Telefon Tudor Halațiu">
         <svg xmlns="http://www.w3.org/2000/svg" class="transition-all duration-150 ease-in cursor-pointer hover:stroke-main-color" width="26" height="26" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /><path d="M15 7a2 2 0 0 1 2 2" /><path d="M15 3a6 6 0 0 1 6 6" /></svg>
     </a>
-  
     
-    <a href="#" target="_blank" title="">
+    <a href="mailto:office@tudorhalatiu.com" target="_blank" title="Email Tudor Halațiu">
         <svg xmlns="http://www.w3.org/2000/svg" class="transition-all duration-150 ease-in cursor-pointer hover:stroke-main-color" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
     </a>
     

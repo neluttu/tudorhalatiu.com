@@ -12,14 +12,22 @@ $product = $db->query('SELECT id, products.name, category, sizes, price, excerpt
                         'id' => $params['id']
                     ])->findOrFail();
 
-
 $categories = $db->query('SELECT category_id, name, slug FROM categories')->get();
 
+$imagesFiles = glob(base_path('public/images/products/'.$product['id'].'/*.{jpg,png,avif,jpeg}'), GLOB_BRACE);
+if($imagesFiles !== false and count($imagesFiles) > 0)
+    foreach($imagesFiles as $key => $file) 
+        if (strpos($file, 'poster') === false) 
+            $imagesFiles[$key] = str_replace(base_path(), '', $file);
+        else 
+            unset($imagesFiles[$key]);
+    
 view('products/view', [
     'heading' => $product['name'],
     'heading_info' => 'Produs din categoria ' .$product['category_name'],
     'product' => $product,
     'title' => $product['name'],
     'categories' => $categories,
-    'views' => $product['views']
+    'views' => $product['views'],
+    'photos' => $imagesFiles
 ]);

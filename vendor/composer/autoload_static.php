@@ -9,6 +9,7 @@ class ComposerStaticInit83a915b6266d4e76bf1d5bbda643a6a3
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'H' => 
@@ -19,6 +20,10 @@ class ComposerStaticInit83a915b6266d4e76bf1d5bbda643a6a3
         array (
             'Grinderspro\\DirectoryManipulator\\' => 33,
         ),
+        'D' => 
+        array (
+            'Detection\\' => 10,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -26,6 +31,10 @@ class ComposerStaticInit83a915b6266d4e76bf1d5bbda643a6a3
     );
 
     public static $prefixDirsPsr4 = array (
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
@@ -37,6 +46,10 @@ class ComposerStaticInit83a915b6266d4e76bf1d5bbda643a6a3
         'Grinderspro\\DirectoryManipulator\\' => 
         array (
             0 => __DIR__ . '/..' . '/grinderspro/directory-manipulator/src',
+        ),
+        'Detection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/src',
         ),
         'Core\\' => 
         array (
