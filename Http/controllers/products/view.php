@@ -26,7 +26,8 @@ view('products/view', [
     'heading' => $product['name'],
     'heading_info' => 'Produs din categoria ' .$product['category_name'],
     'product' => $product,
-    'title' => $product['name'],
+    'title' => $product['name'] . ' - Tudor Halațiu',
+    'description' => $product['excerpt'] . ' - Tudor Halațiu',
     'categories' => $categories,
     'views' => $product['views'],
     'photos' => $imagesFiles

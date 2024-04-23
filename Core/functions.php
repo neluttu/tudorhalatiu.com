@@ -94,10 +94,3 @@ function generateToken($length = 32) {
 function getPartial($partial) {
     require base_path('views/partials/'.$partial.'.php'); 
 }
-
-function printDescription($description) {
-    $description = str_replace('[a href','<a href',$description);
-    $description = str_replace('[/a]','</a>',$description);
-    return nl2br($description);
-
-}

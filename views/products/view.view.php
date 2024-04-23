@@ -12,8 +12,8 @@ use Core\Lang;
     <? Core\Session::getMessage(); ?>
     <? if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') echo '<a href="/admin/produs/'.$product['id'].'" class="text-main-color hover:underline">Editeaza produsul</a> | '.$views.' vizualizări';  ?>
     <div class="flex flex-col items-start justify-start gap-4 py-6 sm:gap-10 md:flex-row">
-        <div class="w-full overflow-hidden bg-gray-200 rounded-md md:flex-1">
-            <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="w-full transition-all duration-300 ease-in rounded-md" alt="<?=$product['name']?> - Tudor Halațiu" id="poster">
+        <div class="w-full overflow-hidden bg-gray-200 rounded-lg md:flex-1">
+            <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="w-full transition-all duration-300 ease-in rounded-lg" alt="<?=$product['name']?> - Tudor Halațiu" id="poster">
         </div>
         <div class="relative w-full text-sm font-light leading-loose md:flex-1 text-slate-700">
             <span class="fixed bottom-0 left-0 w-full px-3 pt-1 pb-2 sm:p-0 sm:static bg-white/50 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
@@ -29,14 +29,14 @@ use Core\Lang;
                     ?>
                     <div class="font-sans font-semibold text-center min-w-[34px] md:min-w-[46px] cursor-pointer">
                         <input type="radio" name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> />
-                        <label for="size_<?= $Size ?>" class="peer-checked:bg-main-color block p-[3px] md:p-[9px]  hover:bg-main-color transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-md"><?= $Size ?></label>
+                        <label for="size_<?= $Size ?>" class="peer-checked:bg-main-color block p-[3px] md:p-[9px]  hover:bg-main-color transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-lg"><?= $Size ?></label>
                     </div>
                     <? $i = 1; } } ?>
                     <input type="hidden" name="id" value="<?=$product['id'] ?>">
                     <input type="hidden" name="name" value="<?=$product['name'] ?>">
                     <input type="hidden" name="price" value="<?=$product['price'] ?>">
                     
-                    <button type="submit" class="px-2 py-1 ml-10 text-white rounded-md md:py-2 bg-main-color grow">
+                    <button type="submit" class="px-2 py-1 ml-10 text-white rounded-lg md:py-2 bg-main-color grow">
                         <?= Lang::text('product.add_to_cart'); ?>
                     </button>
                 </form>
@@ -68,9 +68,9 @@ use Core\Lang;
                 </script>
             </div>
             <hr class="w-[100px] border-b-2 border-slate-700 mt-8 mb-4">
-            <p class="mb-10 font-semibold"><?=$product['excerpt'];?></p>
+            <h2 class="mb-10 text-base font-semibold"><?=$product['excerpt'];?></h2>
             <p class="[&>a]:text-main-color [&>a]:underline">
-            <?= printDescription($product['description']) ?>
+            <?= nl2br($product['description']) ?>
             </p>
         </div>
     </div>

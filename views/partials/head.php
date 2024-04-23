@@ -15,6 +15,8 @@
     <meta name="COPYRIGHT" content="S.C. Bluesky Studios S.R.L.">
     <meta name="robots" content="index,follow,noodp">
     <meta name="googlebot" content="index,follow">
+    <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
     <meta content="<?= $description ?? Core\Lang::text('header.description') ?>" name="description">
     <meta content="<?= $keywords ?? Core\Lang::text('header.keywords') ?>" name="keywords">
     <title><?= $title ?? Core\Lang::text('header.title') ?></title>

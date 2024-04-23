@@ -2,28 +2,28 @@
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
 
-<main class="w-full mt-10 max-w-7xl">
+<main class="w-full md:mt-5 max-w-7xl">
     <? Core\Session::getMessage(); ?>
     <section class="flex flex-col items-start justify-start w-full gap-4 px-2 md:gap-10 lg:px-0 md:flex-row">
         <div class="w-full grow">
             <ul class="flex flex-col flex-wrap items-start justify-center gap-4 pb-4 border-b-[3px] border-black">
                 <? $Total = 0; ?>
                 <? if(!empty($_SESSION['cart'])) foreach($_SESSION['cart'] as $key => $product) : ?>
-                    <li class="w-full p-3 transition-all duration-200 ease-in bg-white rounded-md hover:bg-slate-100 border-slate-300">
+                    <li class="w-full p-1 transition-all duration-200 ease-in bg-white rounded-md hover:bg-slate-100 border-slate-300">
                         <form name="updateCart" method="post" class="flex items-center justify-start gap-4">
                             <input type="hidden" name="_method" value="patch">
                             <input type="hidden" name="cartID" value="<?= $key ?>">
                             <input type="hidden" name="id" value="<?= $product['id'] ?>">
                             <input type="hidden" name="name" value="<?= $product['name'] ?>">
                             <input type="hidden" name="quantity" value="0">
-                            <a href="product/<?=slug($product['name'])?>/<?=$product['id']?>" title="<?=$product['name']?>"><img src="/public/images/products/<?=$product['id']?>/poster.jpg" alt="<?=$product['name']?>" class="w-[45px] inline  rounded-md"></a>
+                            <a href="product/<?=slug($product['name'])?>/<?=$product['id']?>" title="<?=$product['name']?>"><img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?=$product['name']?>" class="w-[45px] inline  rounded-md"></a>
                             <p class="flex flex-col items-start justify-start flex-1">
                                 <? 
-                                echo '<a href="product/'. slug($product['name']) . '/' . $product['id'] .'" class="block text-base hover:underline">' . $product['name'] . '</a>';
-                                echo '<span class="block mt-2 text-sm text-slate-600">Mărime ' . implode(', ', $product['features']). '</span>';
+                                echo '<a href="product/'. slug($product['name']) . '/' . $product['id'] .'" class="block text-sm md:text-base hover:underline">' . $product['name'] . '</a>';
+                                echo '<span class="block mt-2 text-xs md:text-sm text-slate-600">Mărime ' . implode(', ', $product['features']). '</span>';
                                 ?>
                             </p>
-                            <p class="pr-4"><?= number_format($product['price'], 2, ',', '.'); ?> lei</p>
+                            <p class="pr-4 text-sm"><?= number_format($product['price'], 2, ',', '.'); ?> lei</p>
                             <button type="submit" class="p-1 text-white bg-black rounded-md hover:bg-main-color">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                         </button>

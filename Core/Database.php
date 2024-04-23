@@ -50,9 +50,7 @@ class Database
         $result = $this->find();
 
         if (!$result) abort();
-        
-
-        return $result;
+            return $result;
     }
 
     public function findAllOrFail()

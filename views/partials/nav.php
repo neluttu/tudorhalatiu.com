@@ -10,7 +10,7 @@
         </div>
 
         <a href="/" title="" class="order-1 px-0 lg:px-16 lg:order-2 shrink-0">
-            <img src="/public/images/tudor-halatiu2.svg" width="140" alt="" class="w-[70px] md:w-[100px] pt-2">
+            <img src="/public/images/tudor-halatiu-logo.svg" width="140" alt="" class="w-[70px] md:w-[100px] pt-2">
         </a>
 
         <div class="flex items-center self-stretch order-3 justify-end gap-3 sm:gap-6 lg:gap-0 lg:justify-between flex-1 [&>a:hover]:text-main-color [&>a:hover]:border-b [&>a:hover]:border-main-color [&>a]:py-1 pt-2 md:pt-5">

@@ -35,7 +35,7 @@
                     ?>
                     <div class="flex items-center justify-start w-full gap-3 p-2 mb-2 text-sm text-gray-700 border rounded-lg">
                         <a href="/product/<?= strtolower(str_replace(' ','-',$product['name'])) ?>/<?= $product['product_id']?>">
-                            <img src="/public/images/products/<?=$product['product_id']?>/poster.jpg" width="40" class="rounded-md">
+                            <img src="/public/images/products/<?=$product['product_id']?>/poster.avif" width="40" class="rounded-md">
                         </a>
                         <span>
                             <?= $product['name'] ?><br>
