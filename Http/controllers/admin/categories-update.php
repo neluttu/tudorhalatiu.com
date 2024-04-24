@@ -18,7 +18,5 @@ if($_POST['name'] and $_POST['text'] and $_POST['id'])
                             ':id' => $category_id
                             ]
                     );
-
-    redirect('/admin/categories');
 }
 redirect('/admin/categories');

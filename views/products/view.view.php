@@ -41,6 +41,7 @@ use Core\Lang;
                     </button>
                 </form>
             </span>
+            <? if(count($photos) > 0) : ?>
             <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-4">
                 <span class="[&>img]:transition-all [&>img]:duration-300 [&>img]:ease-in sm:[&>img:hover]:scale-105 [&>img]:rounded-lg [&>img]:cursor-pointer [&>img]:w-full group overflow-hidden rounded-lg">
                     <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="hidden transition-all duration-300 ease-in rounded-lg cursor-pointer md:block group-hover:scale-105" alt="<?=$product['name']?> - Tudor Halațiu"  onclick="changePoster(this.src)">
@@ -67,6 +68,7 @@ use Core\Lang;
                     }
                 </script>
             </div>
+            <? endif ?>
             <hr class="w-[100px] border-b-2 border-slate-700 mt-8 mb-4">
             <h2 class="mb-10 text-base font-semibold"><?=$product['excerpt'];?></h2>
             <p class="[&>a]:text-main-color [&>a]:underline">

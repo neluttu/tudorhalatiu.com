@@ -20,3 +20,15 @@
 </main>
 
 <? require base_path('views/partials/footer.php'); ?>
+<style>
+    .char {
+  filter: blur(calc(1rem * var(--blur, 1)));
+  transition: filter var(--speed, 5s);
+}
+
+.char:hover {
+  --blur: 0;
+  --speed: 1s;
+}
+</style>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <span class="char">Reiciendis, beatae.</span></p>
