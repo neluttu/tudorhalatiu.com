@@ -66,8 +66,10 @@ function base_path($path = '') {
 
 function view($view, $attributes = []) {
     extract($attributes);
-    // fail require needs fallback.
-    require base_path('views/' . $view . '.view.php');
+    // Check if view exists
+    if(is_file(base_path('views/' . $view . '.view.php')))
+        require base_path('views/' . $view . '.view.php');
+    else abort();
 }
 
 function redirect ($path = '/') {

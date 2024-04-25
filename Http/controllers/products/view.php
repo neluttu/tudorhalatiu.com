@@ -13,6 +13,7 @@ $product = $db->query('SELECT id, products.name, category, sizes, price, excerpt
                     ])->findOrFail();
 
 $categories = $db->query('SELECT category_id, name, slug FROM categories')->get();
+
 $getViews = $db->query('SELECT count(views) AS views FROM product_views WHERE product_id = :id', [':id' => $params['id']])->get();
 
 $imagesFiles = glob(base_path('public/images/products/'.$product['id'].'/*.{jpg,png,avif,jpeg}'), GLOB_BRACE);

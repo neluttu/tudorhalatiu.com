@@ -63,6 +63,7 @@ class Router {
         
         $uri = rtrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
         $method = strtoupper($_POST['_method'] ?? $_SERVER['REQUEST_METHOD']);
+        
 
         // Check if language is set
         $checkURI = explode('/', $uri);
@@ -78,6 +79,9 @@ class Router {
         foreach($this->routes as $route) {
             $routeSegments = explode('/', trim($route['uri'], '/'));
             $uriSegments = explode('/', trim($uri, '/'));
+            
+            // Debug router
+            //d(implode(',', $uriSegments) . ' -- ' . implode(',', $routeSegments));
             $match = true;
 
             if(count($uriSegments) === count($routeSegments) and $route['method'] === $method) {

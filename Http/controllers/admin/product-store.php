@@ -31,7 +31,7 @@ if(!$form->validate($name, $price, $excerpt, $description)) {
         'description' => $description,
         ]);    
         
-    redirect ('/admin/product/add');
+    redirect ('/admin/product/create/new');
     die();
 }
 
@@ -51,7 +51,7 @@ $db->query("
         ]
     );
 $product_id = $db->getLastID();
-$addView = $db->query("INSERT INTO product_views (id) VALUES (:id)", [':id' => $product_id]);
+$addView = $db->query("INSERT INTO product_views (product_id, date) VALUES (:id, :date)", [':id' => $product_id, ':date' => date('Y-m-d')]);
 
 // Make folder for current product.
 (new DirectoryManipulator())->location(base_path() . '/public/images/products')->name($product_id)->create();

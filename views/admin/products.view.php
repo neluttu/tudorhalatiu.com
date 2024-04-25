@@ -6,23 +6,22 @@
         <? require base_path('views/admin/menu.view.php') ?>        
     </div>
     <div class="w-full md:-mt-10 md:grow">
-        <a href="/admin/product/add">Adauga produs nou</a>
         <?
-        
         foreach($products as $product) {
             if ($product['category_name'] != $currentCategory) {
                 if ($currentCategory !== null) echo "</div>";
-                echo '<div class="w-full p-2 my-4 border rounded-md text-slate-600 bg-slate-50">' . $product['category_name'] . '</div>';
-                echo '<div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">';
+                echo '<div class="w-full p-2 my-4 text-white rounded-md bg-main-color">' . $product['category_name'] . '</div>';
+                echo '<div class="grid grid-cols-3 gap-x-6 gap-y-10 sm:grid-cols-4 lg:grid-cols-7">';
                 $currentCategory = $product['category_name'];
             }
         ?>
-            <a href="<?= \Core\Session::getLang(); ?>/admin/product/<?= $product['id']; ?>" class="group">
+            <a href="<?= \Core\Session::getLang(); ?>/admin/product/<?= $product['id']; ?>" class="group" title="<?= $product['name'] ?>">
                 <div class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full group-hover:opacity-75">
+                <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-150 ease-in group-hover:opacity-75">
                 </div>
-                <h3 class="mt-4 text-sm text-gray-700"><?=$product['name'] ?></h3>
-                <p class="mt-1 text-lg font-medium text-main-color"><?= number_format($product['price'], 2, ',','.') ?> lei</p>
+                <h3 class="mt-4 text-xs text-gray-700 line-clamp-1"><?=$product['name'] ?></h3>
+                <p class="mt-1 text-sm font-medium text-main-color"><?= number_format($product['price'], 2, ',','.') ?> lei</p>
+                <small class="text-xs text-gray-600"><?= $product['views'] ?> vizualizări</small>
             </a>            
         <?
             }
