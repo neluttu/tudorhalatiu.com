@@ -1,5 +1,4 @@
 <?
-
 namespace Core;
 
 use Core\Session;
@@ -10,7 +9,7 @@ class Authenticator {
 
         ;
 
-        if($userData = App::resolve(Database::class)->query("SELECT * FROM users LEFT JOIN users_data ON users_data.user_id = users.id WHERE email = :email", [
+        if($userData = App::resolve(Database::class)->query("SELECT * FROM users LEFT JOIN users_data ON users_data.user_id = users.id WHERE email = :email AND status = 'Active'", [
             'email' => $email])->find()) {
 
             if(password_verify($password, $userData['password'])) {
@@ -37,7 +36,6 @@ class Authenticator {
         ];
     
         session_regenerate_id(true);
-    
     }
 
     // public function logout() {

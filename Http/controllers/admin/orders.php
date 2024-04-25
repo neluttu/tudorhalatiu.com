@@ -9,6 +9,7 @@ $orders = App::resolve(Database::class)->query("
                                                 orders.ordered_at,
                                                 orders.status,
                                                 orders.payed,
+                                                orders.shipping_tax,
                                                 orders.payment_type,
                                                 orders.awb,
                                                 users_data.firstname,
@@ -25,8 +26,16 @@ $orders = App::resolve(Database::class)->query("
                                                 orders.ordered_at DESC;
                                                 ")->get();
 
+$status = [
+    'Pending' => 'slate',
+    'Completed' => 'green',
+    'Canceled' => 'red',
+    'Processing' => 'orange'
+];
+
 view('admin/orders', [
     'heading' => 'Secțiune administrator ',
     'heading_info' => 'Comenzi, clienti, produse, facturi.',
-    'orders' => $orders
+    'orders' => $orders,
+    'status' => $status
 ]);
