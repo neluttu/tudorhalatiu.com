@@ -35,6 +35,14 @@
                     <span class="px-2">lei</span>
                 </label>
                 <span class="w-full"></span>
+                <span class="w-full py-2 text-sm font-normal md:flex-1">Discount</span>
+                <select name="discount" class="flex items-center justify-center w-full p-2 mb-2 text-sm text-right border rounded-md bg-slate-50 md:flex-1">
+                    <option value="0" <?= $product['discount'] == '0' ? 'selected' : '' ?>>0%</option>
+                    <option value="25" <?= $product['discount'] == '25' ? 'selected' : '' ?>>25%</option>
+                    <option value="50" <?= $product['discount'] == '50' ? 'selected' : '' ?>>50%</option>
+                    <option value="75" <?= $product['discount'] == '75' ? 'selected' : '' ?>>75%</option>
+                </select>
+                <span class="w-full"></span>
                 <span class="w-full py-2 text-sm font-normal md:flex-1">Mărimi produs:</span>
                 <span class="flex items-center justify-end w-full gap-4 p-2 mb-2 text-right border rounded-md bg-slate-50 md:flex-1">
                     <? $productSizes = explode(',', $product['sizes']); foreach($sizes as $size) : ?>

@@ -6,6 +6,8 @@ use Grinderspro\DirectoryManipulator\DirectoryManipulator;
 
 $name = $_POST['name'];
 $price = $_POST['price'];
+$slug = $_POST['slug'];
+$discount = $_POST['discount'];
 $sizes = $_POST['sizes'];
 $category = $_POST['category'];
 $stock = $_POST['stock'];
@@ -24,6 +26,7 @@ if(!$form->validate($name, $price, $excerpt, $description)) {
         'name' => $name,
         'slug' => $slug,
         'price' => $price,
+        'discount' => $discount,
         'sizes' => $sizes,
         'category2' => $category,
         'stock' => $stock,
@@ -37,8 +40,8 @@ if(!$form->validate($name, $price, $excerpt, $description)) {
 }
 
 $db->query("
-        INSERT INTO products (category, name, slug, sizes, price, excerpt, description, stock, status)
-        VALUES (:category, :name, :slug, :sizes, :price, :excerpt, :description, :stock, :status)
+        INSERT INTO products (category, name, slug, sizes, price, discount, excerpt, description, stock, status)
+        VALUES (:category, :name, :slug, :sizes, :price, :discount, :excerpt, :description, :stock, :status)
         ", 
         [
             'category' => $category,
@@ -46,6 +49,7 @@ $db->query("
             'slug' => $slug,
             'sizes' => implode(',', $sizes),
             'price' => $price,
+            'discount' => $discount,
             'excerpt' => $excerpt,
             'description' => $description,
             'stock' => $stock,

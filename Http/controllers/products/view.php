@@ -42,8 +42,8 @@ elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a
         'heading' => $product['name'],
         'heading_info' => 'Produs din categoria ' .$product['category_name'],
         'product' => $product,
-        'title' => $product['name'] . ' - Tudor Halațiu',
-        'description' => $product['excerpt'] . ' - Tudor Halațiu',
+        'title' => ucwords(strtolower($product['name'])) . ' by Tudor Halațiu - creator de modă',
+        'description' => $product['excerpt'] . ' by Tudor Halațiu creator de modă, haine și vestimentație',
         'categories' => $categories,
         'views' => $getViews[0]['views'],
         'photos' => $imagesFiles

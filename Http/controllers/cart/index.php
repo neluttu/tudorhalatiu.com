@@ -28,7 +28,7 @@ view('cart/' . $Page, [
     'billing' => $getBilling ?? '',
     'shipping' => $getShipping ?? '',
     'errors' => Session::get('errors'),
-    'title' => 'Coș de cumpărături - Tudor Halațiu',
-    'description' => 'Descriere cos de cumparaturi',
+    'title' => 'Coș de cumpărături',
+    'description' => 'Coșul de cumpărături, haine by Tudor Halațiu',
     'counties' => $counties
 ]);

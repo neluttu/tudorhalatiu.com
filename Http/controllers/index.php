@@ -6,6 +6,6 @@ $products = $db->query('SELECT products.*, categories.name AS category_name, cat
 
 view('index', [
     'products' => $products,
-    'title' => 'Tudor Halațiu - creator de modă - magazin online',
-    'description' => 'Descoperă colecția exclusivă Tudor Halațiu: top-uri elegante, rochii de seară, rochii de zi, jachete și paltoane deosebite, plus ediții limitate pentru un stil unic.'
+    'title' => 'Tudor Halațiu - creator de modă - magazin online haine',
+    'description' => 'Stralucirea ta este la un click distanta. Descopera creatiile de lux semnate Tudor Halatiu, dar si reducerile sezoniere'
 ]);

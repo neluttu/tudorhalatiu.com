@@ -26,11 +26,21 @@
                     <span class="px-2">lei</span>
                 </label>
                 <span class="w-full"></span>
+                <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1">Discount produs:</span>
+                
+                <select name="discount" class="flex items-center justify-center w-full p-2 mb-2 text-sm text-right border rounded-md bg-slate-50 md:w-auto md:flex-1">
+                    <option value="0" <?= old('discount') == '0' ? 'selected' : '' ?>>0%</option>
+                    <option value="25" <?= old('discount') == '25' ? 'selected' : '' ?>>25%</option>
+                    <option value="50" <?= old('discount') == '50' ? 'selected' : '' ?>>50%</option>
+                    <option value="75" <?= old('discount') == '75' ? 'selected' : '' ?>>75%</option>
+                </select>
+                
+                <span class="w-full"></span>
                 <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1">Mărimi produs:</span>
                 <span class="flex items-center justify-end w-full gap-4 p-2 mb-2 text-right border rounded-md bg-slate-50 md:w-auto md:flex-1">
                     <? foreach($sizes as $size) : ?>
                     <label for="size_<?=$size?>" class="flex items-center justify-end gap-1 cursor-pointer">
-                        <input type="checkbox" name="sizes[]" value="<?= $size ?>" id="size_<?=$size?>"> <span class="text-xs"> <?=$size?></span>
+                        <input type="checkbox" name="sizes[]" value="<?= $size ?>" id="size_<?=$size?>" <?= old('sizes') ? (in_array($size,old('sizes')) ? 'checked' : '') : '' ?>> <span class="text-xs"> <?=$size?></span>
                     </label>
                     <? endforeach ?>
                 </span>

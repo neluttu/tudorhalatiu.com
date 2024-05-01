@@ -17,7 +17,7 @@
         ?>
             <a href="<?= \Core\Session::getLang(); ?>/admin/product/<?= $product['id']; ?>" class="group" title="<?= $product['name'] ?>">
                 <div class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-150 ease-in group-hover:opacity-75">
+                <img src="/public/images/products/<?=$product['id']?>/<?= is_file(base_path() . '/public/images/products/' . $product['id'] . '/poster.avif') ? 'poster.avif' : '../../no-poster.avif' ?>" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-150 ease-in group-hover:opacity-75">
                 </div>
                 <h3 class="mt-4 text-xs text-gray-700 line-clamp-1"><?=$product['name'] ?></h3>
                 <p class="mt-1 text-sm font-medium text-main-color"><?= number_format($product['price'], 2, ',','.') ?> lei</p>

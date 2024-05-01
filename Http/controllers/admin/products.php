@@ -9,5 +9,5 @@ view('admin/products', [
     'heading_info' => $db->totlaRows() . ' produse în total',
     'products' => $products,
     'title' => 'Admin: Produse magazin online',
-    'currentCategory' => null,
+    'currentCategory' => null
 ]);

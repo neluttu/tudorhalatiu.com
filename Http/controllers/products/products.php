@@ -13,7 +13,7 @@ view('products/products', [
     'heading' => $products[0]['category_name'],
     'heading_info' => $db->totlaRows() . ' produse în total',
     'products' => $products,
-    'title' => 'Shop - ' . $products[0]['category_name'] . ' - Tudor Halațiu',
+    'title' => $products[0]['category_name'] . ' by Tudor Halațiu - creator de modă',
     'description' => limitText($products[0]['text']),
     'categories' => $categories,
     'current_category' => $params['category']
