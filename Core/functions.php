@@ -65,6 +65,7 @@ function base_path($path = '') {
 }
 
 function view($view, $attributes = []) {
+    $attributes['nonce'] = bin2hex(random_bytes(16));
     extract($attributes);
     // Check if view exists
     if(is_file(base_path('views/' . $view . '.view.php')))
@@ -95,4 +96,14 @@ function generateToken($length = 32) {
 
 function getPartial($partial) {
     require base_path('views/partials/'.$partial.'.php'); 
+}
+
+function limitText($text, $limit = 155) {
+    $text = strip_tags($text);
+    if (strlen($text) <= $limit) 
+        return $text;
+    else {
+        $last_space = strrpos(substr($text, 0, $limit), ' ');
+        return substr($text, 0, $last_space) . '...';
+    }
 }

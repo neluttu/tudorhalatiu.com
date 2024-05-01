@@ -85,32 +85,13 @@
                 <? if(!isset($_SESSION['user']['email'])) : ?>
                 <div class="flex flex-wrap items-center justify-start sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-6">
                     <label for="account-create" class="inline-flex items-center justify-start text-sm font-light cursor-pointer gap-x-2">
-                            <input onchange="togglePasswordSection()" type="checkbox" class="accent-main-color" id="account-create" name="account-create" <?= old('account-create') ? 'checked' : '' ?>> Doresc să fac un cont de client
+                            <input type="checkbox" class="accent-main-color" id="account-create" name="account-create" <?= old('account-create') ? 'checked' : '' ?>> Doresc să fac un cont de client
                     </label>
                     <div class="relative <?= old('account-create') ? 'inline-block' : 'hidden' ?> w-full sm:flex-1 mt-6 sm:mt-0" id="passwd">
                         <input type="password" name="password" id="password" value="" placeholder="Alege o parolă" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['password']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                         <label for="password" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Alege o parolă</label>
                     </div>
                     <small id="passwordTip" class="<?= old('account-create') ? 'inline-block' : 'hidden' ?> mt-2 text-xs w-full <?= !isset($errors['password']) ? 'text-slate-500' : 'text-rose-700' ?>">Parola trebuie să conțină minim 8 caractere, măcar o literă mare, un număr și un simbol.</small>
-                    <script>
-                        function togglePasswordSection() {
-                            let accountCreateCheckbox = document.getElementById("account-create");
-                            let passwdSection = document.getElementById("passwd");
-                            let passwdTip = document.getElementById("passwordTip");
-
-                            if (accountCreateCheckbox.checked) {
-                                passwdSection.classList.add("inline-block");
-                                passwdSection.classList.remove("hidden");
-                                passwdTip.classList.add("inline-block");
-                                passwdTip.classList.remove("hidden");
-                            } else {
-                                passwdSection.classList.remove("inline-block");
-                                passwdSection.classList.add("hidden");
-                                passwdTip.classList.remove("inline-block");
-                                passwdTip.classList.add("hidden");
-                            }
-                        }
-                    </script>
                 </div>
                 <? endif ?>
                 <div>
@@ -151,7 +132,7 @@
                     </div>
                 </div>
                 <label for="delivery" class="flex items-center justify-start mt-0 text-sm cursor-pointer sm:col-span-2 md:col-span-2 lg:col-span-3 gap-x-2 hover:text-main-color">
-                    <input type="checkbox" name="delivery" id="delivery" onchange="toggleDeliveryInfo()" class=" form-checkbox accent-main-color" <?= old('delivery') ? 'checked' : '' ?>> 
+                    <input type="checkbox" name="delivery" id="delivery" class=" form-checkbox accent-main-color" <?= old('delivery') ? 'checked' : '' ?>> 
                     <svg xmlns="http://www.w3.org/2000/svg" class="" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#ed0078" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -210,18 +191,9 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    function toggleDeliveryInfo() {
-                        var deliveryCheckbox = document.getElementById("delivery");
-                        var deliveryInfo = document.getElementById("delivery-info");
-                        if (deliveryCheckbox.checked) deliveryInfo.style.maxHeight = deliveryInfo.scrollHeight + "px";
-                        else deliveryInfo.style.maxHeight = 0;
-                    }
-                </script>
             </form>
         </div>
         
-
         <div class="p-1 md:p-6 text-sm font-light  text-slate-700 w-full md:w-[380px] shrink-0">
             <p class="inline-block mb-4 text-base font-normal text-main-color">Sumar comandă: <?= \Core\ShoppingCart::getTotalItemsInCart() ?> <?= \Core\ShoppingCart::getTotalItemsInCart() === 1 ? 'articol' : 'articole'; ?>.</p>
             <p class="flex items-center justify-start py-3 border-b">
@@ -256,33 +228,12 @@
                 <input type="checkbox" name="privacy" id="privacy" class="mt-1 accent-main-color">
                 <span>Am citit și sunt de acord cu <a href="#" class="text-main-color hover:underline">politica de confidențialitate</a>.</span>
             </label>
-            <script>
-                const hiddenInput = document.getElementById('payment');
-                const paymentRadios = document.querySelectorAll('input[name="payment"]');
-                paymentRadios.forEach(radio => { radio.addEventListener('change', () => { if (radio.checked) hiddenInput.value = radio.value; }); });
-            </script>
+            
             <button id="submitBtn" disabled  form="checkout" class="flex items-center justify-center w-full py-4 mt-6 font-semibold text-white rounded-md disabled:bg-gray-200 disabled:text-stone-600 bg-main-color">
             Acceptă condițiile de mai sus  mai întâi
             </button>
-            <script>
-                const terms = document.getElementById('terms');
-                const privacy = document.getElementById('privacy');
-                const submitBtn = document.getElementById('submitBtn');
-
-                terms.addEventListener('change', updateSubmitButtonState);
-                privacy.addEventListener('change', updateSubmitButtonState);
-
-                function updateSubmitButtonState() {
-                    if (terms.checked && privacy.checked) {
-                        submitBtn.removeAttribute('disabled');
-                        submitBtn.innerText = 'Înregistrează și plătește comanda';
-                    } else {
-                        submitBtn.setAttribute('disabled', 'disabled');
-                        submitBtn.innerText = 'Acceptă condițiile de mai sus mai întâi';
-                    }
-                }
-            </script>
         </div>
     </section>
+    <script src="/public/js/form-handle.js"></script>
 </main>
 <? require base_path('views/partials/footer.php'); ?>

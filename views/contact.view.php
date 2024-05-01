@@ -96,9 +96,7 @@
                 </button>
             </form>
         </div>
-    
-            
 </main>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5010.0806525572025!2d24.697419357913788!3d46.78921701040125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474a37846674e68b%3A0x9ec286ddb3f377d7!2sStr.%20Dedradului%2016%2C%20Reghin%20545300!5e0!3m2!1sro!2sro!4v1713297773394!5m2!1sro!2sro" width="100%" class="h-screen  md:h-[540px] mx-auto w-[100dvw] ml-[calc(50%-50dvw)] mt-16" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5010.0806525572025!2d24.697419357913788!3d46.78921701040125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474a37846674e68b%3A0x9ec286ddb3f377d7!2sStr.%20Dedradului%2016%2C%20Reghin%20545300!5e0!3m2!1sro!2sro!4v1713297773394!5m2!1sro!2sro" width="100%" class="h-screen  md:h-[540px] mx-auto w-[100dvw] ml-[calc(50%-50dvw)] mt-16" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 <? require base_path('views/partials/footer.php'); ?>

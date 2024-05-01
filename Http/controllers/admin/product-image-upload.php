@@ -25,10 +25,11 @@ if(isset($_FILES['image'])) {
         Session::flash('upload_error', 'Extensia trebuie să fie jpg, avif sau jpeg');
     }
 
-    // Verifică dimensiunea fișierului (maxim 500KB)
-    if ($fisier['size'] > 500 * 1024) { // 500KB exprimat în bytes
-        Session::flash('upload_error', 'Fișierul încărcat este prea mare, maxim 500kb');
-    }
+    // // Verifică dimensiunea fișierului (maxim 500KB)
+    // if ($fisier['size'] > 500 * 1024) { // 500KB exprimat în bytes
+    //     Session::flash('upload_error', 'Fișierul încărcat este prea mare, maxim 500kb');
+    // }
+    
     if(!is_file(base_path('public/images/products/' . $_POST['id'] .'/poster.avif')))
         $fileName = 'poster.avif';
     else $fileName = uniqid('tudor-halatiu-' . strtolower(str_replace(' ','-',$product['name'])) . '-') . '.avif';

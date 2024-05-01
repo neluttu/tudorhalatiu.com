@@ -22,6 +22,7 @@
             [&>a]:text-xs
             sm:[&>a]:text-sm">
     <? foreach($categories as $category) : ?>
-        <a href="/shop/<?=$category['slug']?>" class="px-2 md:px-4 py-1 md:py-2 border <?= ($category['category_id'] === $product['category'] or $category['slug'] === $current_category) ? 'bg-[#ed0078] border-[#ed0078] text-white' : 'text-slate-500' ?> hover:bg-[#ed0078]" title="<?= $category['name'] ?>"><?=$category['name']?></a>
+        <a href="/shop/<?= $category['slug'] ?>" class="px-2 md:px-4 py-1 md:py-2 border <?= (isset($product['category']) && $category['category_id'] === $product['category']) || (isset($current_category) && $category['slug'] === $current_category) ? 'bg-[#ed0078] border-[#ed0078] text-white' : 'text-slate-500' ?> hover:bg-[#ed0078]" title="<?= $category['name'] ?>"><?= $category['name'] ?></a>
+
     <? endforeach ?>
 </div>

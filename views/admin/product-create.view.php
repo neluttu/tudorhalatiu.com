@@ -10,8 +10,15 @@
             <div class="flex flex-wrap items-start justify-center w-full mt-4 md:gap-3 md:gap-y-1 text-slate-700">
                 <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1">Nume produs:</span>
                 <label class="w-full mb-2 border rounded-md bg-slate-50 md:w-auto md:flex-1">
-                    <input name="name" required type="text" value="<?= old('name') ?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
+                    <input id="name" name="name" required type="text" value="<?= old('name') ?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
                 </label>
+                <span class="w-full"></span>
+                <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1">Slug/URL produs:</span>
+                <label class="w-full mb-2 border rounded-md bg-slate-50 md:w-auto md:flex-1">
+                    <input id="slug" readonly name="slug" required type="text" value="<?= old('slug') ?? '' ?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
+                </label>
+                <input type="hidden" name="slugs_hidden" value='<?php echo json_encode($slugs); ?>' id="slugs_hidden">
+                <script src="/public/js/checkProductSlugs.js"></script>
                 <span class="w-full"></span>
                 <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1">Preț produs:</span>
                 <label class="flex items-center justify-center w-full mb-2 border rounded-md bg-slate-50 md:w-auto md:flex-1">
@@ -53,7 +60,7 @@
                 <textarea name="description" class="flex items-center justify-center w-full p-2 mb-2 text-sm border rounded-md h-44 bg-slate-50 md:w-auto md:flex-1"><?= old('description') ?></textarea>
                 <span class="w-full"></span>
                 
-                <button type="submit" class="px-10 py-3 text-white bg-green-700 rounded-md">
+                <button type="submit" class="px-10 py-3 text-white bg-green-700 rounded-md" id="submitBtn">
                     Adaugă produsul
                 </button>
             </div>

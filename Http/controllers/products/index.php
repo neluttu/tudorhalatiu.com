@@ -16,4 +16,6 @@ view('products/index', [
     'heading' => Core\Lang::text('heading.categories.0'),
     'heading_info' => Core\Lang::text('heading.categories.1'),
     'categories' => $categories,
+    'title' => 'Shop Tudor Halațiu',
+    'description' => 'Descoperă colecția exclusivă Tudor Halațiu: top-uri elegante, rochii de seară, rochii de zi, jachete și paltoane deosebite, plus ediții limitate pentru un stil unic.'
 ]);

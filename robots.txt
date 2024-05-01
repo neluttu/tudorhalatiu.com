@@ -1,0 +1,17 @@
+User-agent: *
+
+Disallow: /
+Disallow: /_RES/
+Disallow: /Core/
+Disallow: /Http/
+Disallow: /includes/
+Disallow: /Lang/
+Disallow: /vendor/
+Disallow: /views/
+
+Disallow: /public/css/
+Disallow: /public/template/
+Disallow: /public/videos/
+
+Disallow: /public/images/favicon/
+Disallow: /public/images/instagram/

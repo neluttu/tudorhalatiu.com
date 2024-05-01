@@ -1,7 +1,5 @@
 <?
-
 namespace Core;
-
 use PDO;
 
 class Database 
@@ -9,7 +7,12 @@ class Database
     private $connection;
     private $statement;
 
-    public function __construct($config, $username =  'root', $password = 'dreamsql') {
+    public function __construct($config) {
+        $username = $config['username'];
+        $password = $config['password'];
+
+        unset($config['username']);
+        unset($config['password']);
 
         $dsn = 'mysql:' . http_build_query($config,'', ';');
 

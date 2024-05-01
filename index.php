@@ -3,6 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+session_set_cookie_params(["SameSite" => "Strict"]);
+session_set_cookie_params(["Secure" => "true"]);
+
+$session_name = '__Secure-' . session_name();
+session_name($session_name);
 session_start();
 
 use Core\App;

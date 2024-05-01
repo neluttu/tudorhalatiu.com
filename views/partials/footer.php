@@ -36,38 +36,7 @@
         
     </div>
 </footer>
-<script>
-    let mobileMenu = document.getElementById("mobileMenu");
-    
-    function mobileHandler(val) {
-        if (val) {
-            document.body.classList.add('overflow-hidden');
-            fadeIn(mobileMenu);
-        } else {
-            document.body.classList.remove('overflow-hidden');
-            fadeOut(mobileMenu);
-        }
-    }
-
-    function fadeOut(el) {
-        el.style.opacity = 1;
-        (function fade() {
-            if ((el.style.opacity -= 0.1) < 0) el.style.display = "none";
-            else requestAnimationFrame(fade);
-        })();
-    }
-    function fadeIn(el, display) {
-        el.style.opacity = 0;
-        el.style.display = display || "flex";
-        (function fade() {
-            let val = parseFloat(el.style.opacity);
-            if (!((val += 0.2) > 1)) {
-                el.style.opacity = val;
-                requestAnimationFrame(fade);
-            }
-        })();
-    }
-</script>
+<script src="/public/js/mobileMenu.js"></script>
 
 <!-- <div class="flex items-center justify-start w-full gap-8 py-6 pt-4 mx-auto border-t max-w-7xl sm:px-6 lg:px-8 border-slate-300">
         <? foreach (getLangLinks() as $key => $value) : ?>

@@ -24,10 +24,17 @@ class ProductViewCounter {
         return [];
     }
 
-    private function setProductViews($productViews) {
-        setcookie($this->cookieName, json_encode($productViews), time()+3600, '/');
-    }
+	private function setProductViews($productViews) {
+		$cookieOptions = [
+			'expires' => time() + 3600, 
+			'path' => '/', 
+			'httponly' => true,
+			'samesite' => 'strict'
+		];
 
+		setcookie($this->cookieName, json_encode($productViews), $cookieOptions);
+	}
+	
     private function incrementDatabaseCounter($productID) {
         $db = App::resolve(Database::class);
         if(!$db->query("SELECT product_id FROM product_views WHERE product_id = :productID AND date = :date", ["productID" => $productID, "date" => date("Y-m-d")])->get())

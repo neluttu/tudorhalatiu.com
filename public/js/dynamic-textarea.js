@@ -6,7 +6,11 @@ function adjustTextareaHeight(event) {
     textarea.style.height = computedHeight + 'px';
 }
 
-const textareas = document.querySelectorAll('.auto-resize-textarea');
-textareas.forEach(textarea => {
-    adjustTextareaHeight({ target: textarea });
+document.addEventListener('DOMContentLoaded', function() {
+    const textareas = document.querySelectorAll('.dbText');
+    textareas.forEach(textarea => {
+        adjustTextareaHeight({ target: textarea });
+
+        textarea.addEventListener('input', adjustTextareaHeight);
+    });
 });

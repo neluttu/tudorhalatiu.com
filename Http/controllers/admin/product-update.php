@@ -5,6 +5,7 @@ if($_POST['name'] and $_POST['price'] and $_POST['excerpt'] and $_POST['descript
 {
     
     $name = $_POST['name'];
+    $slug = $_POST['slug'];
     $price = (int) $_POST['price'];
     $excerpt = $_POST['excerpt'];
     $description = $_POST['description'];
@@ -15,9 +16,10 @@ if($_POST['name'] and $_POST['price'] and $_POST['excerpt'] and $_POST['descript
     $stock = $_POST['stock'];
 
     $db = App::resolve(Core\Database::class);
-    $update = $db->query("UPDATE products SET name = :name, price = :price, excerpt = :excerpt, sizes = :sizes, description = :description, stock = :stock, status = :status, category = :category WHERE id = :id", 
+    $update = $db->query("UPDATE products SET name = :name, slug = :slug, price = :price, excerpt = :excerpt, sizes = :sizes, description = :description, stock = :stock, status = :status, category = :category WHERE id = :id", 
                         [
                             ':name' => $name,
+                            ':slug' => $slug,
                             ':price' => $price,
                             ':excerpt' => $excerpt,
                             ':description' => $description,

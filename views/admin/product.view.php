@@ -13,8 +13,21 @@
             <div class="flex flex-wrap items-start justify-center w-full mt-4 md:gap-3 md:gap-y-1 text-slate-700">
                 <span class="w-full py-2 text-sm font-normal md:flex-1">Nume produs:</span>
                 <label class="w-full mb-2 border rounded-md bg-slate-50 md:flex-1">
-                    <input name="name" required type="text" value="<?=$product['name']?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
+                    <input id="name" name="name" required type="text" value="<?=$product['name']?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
                 </label>
+                <span class="w-full"></span>
+                <span class="w-full py-2 text-sm font-normal md:flex-1">Slug/URL produs:</span>
+                <label class="w-full mb-2 border rounded-md bg-slate-50 md:flex-1">
+                    <input id="slug" readonly name="slug" required type="text" value="<?=$product['slug']?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
+                </label>
+
+                <!-- Load all product slugs and current product slug into hidden fields -->
+                <input type="hidden" name="slugs_hidden" value='<?= json_encode($slugs); ?>' id="slugs_hidden">
+                <input type="hidden" name="current_slug" value='<?= $product['slug'] ?>' id="current_slug">
+                <!-- JS below grabs the input fields with the correct data and loads the script externally -->
+                <script src="/public/js/checkProductSlugs.js">
+                    
+                </script>
                 <span class="w-full"></span>
                 <span class="w-full py-2 text-sm font-normal md:flex-1">Preț produs:</span>
                 <label class="flex items-center justify-center w-full mb-2 border rounded-md bg-slate-50 md:flex-1">
@@ -51,14 +64,14 @@
                 </select>
                 <span class="w-full"></span>
                 <span class="self-start w-full py-2 text-sm font-normal md:flex-1">Rezumat</span>
-                <textarea oninput="adjustTextareaHeight()" name="excerpt" class="flex items-center justify-center w-full p-2 mb-2 text-sm border rounded-md auto-resize-textarea h-28 bg-slate-50 md:flex-1"><?=$product['excerpt']; ?></textarea>
+                <textarea name="excerpt" class="flex items-center justify-center w-full p-2 mb-2 text-sm border rounded-md auto-resize-textarea h-28 bg-slate-50 md:flex-1 dbText"><?=$product['excerpt']; ?></textarea>
                 <span class="w-full"></span>
                 <span class="self-start w-full py-2 text-sm font-normal md:flex-1">Descriere</span>
-                <textarea oninput="adjustTextareaHeight()" name="description" class="flex items-center justify-center w-full p-2 mb-2 text-sm border rounded-md auto-resize-textarea h-44 bg-slate-50 md:flex-1"><?=$product['description']; ?></textarea>
+                <textarea name="description" class="flex items-center justify-center w-full p-2 mb-2 text-sm border rounded-md auto-resize-textarea h-44 bg-slate-50 md:flex-1 dbText"><?=$product['description']; ?></textarea>
                 <script src="/public/js/dynamic-textarea.js"></script>
                 <span class="w-full"></span>
                 <div class="self-start w-full">
-                    <button type="submit" class="px-6 py-4 text-sm text-white bg-green-700 rounded-md">
+                    <button type="submit" class="px-6 py-4 text-sm text-white bg-green-700 rounded-md" id="submitBtn">
                         Actualizează datele produsului
                     </button>
                 </div>
@@ -69,7 +82,7 @@
             Adaugă o imagine la acest produs:
             <input type="file" name="image" class="hidden" accept=".avif" id="fileInput" required>
             <div class="flex items-center justify-start w-full gap-4">
-                <div class="relative flex items-center justify-start gap-4 p-3 mt-3 bg-white border border-gray-300 rounded-md cursor-pointer grow" onclick="document.getElementById('fileInput').click()">
+                <div class="relative flex items-center justify-start gap-4 p-3 mt-3 bg-white border border-gray-300 rounded-md cursor-pointer grow file-input-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer shrink-0" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M15 8h.01" />
@@ -86,12 +99,7 @@
             </div>
             <small class="block pt-2 text-xs text-rose-700">Important: imaginea să fie de <u>fix 600 x 900 pixeli</u></small>
         </form>
-        <script>
-            document.getElementById('fileInput').addEventListener('change', function() {
-                const fileName = this.files[0].name;
-                document.getElementById('fileName').textContent = fileName;
-            });
-        </script>
+        <script src="/public/js/input_image.js"></script>
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
             <? 
             $i = 0;
@@ -142,14 +150,7 @@
             <button type="submit" class="px-6 py-3 mt-4 text-sm text-white rounded-md bg-rose-700" disabled="true" id="deleteButton">
                         Șterge produsul din baza de date
             </button>
-            <script>
-                const destroyCheckbox = document.getElementById('destory');
-                const deleteButton = document.getElementById('deleteButton');
-                destroyCheckbox.addEventListener('change', function() {
-                    if (this.checked) deleteButton.removeAttribute('disabled');
-                    else deleteButton.setAttribute('disabled', true);
-                });
-            </script>
+            <script src="/public/js/deleteImageButton.js"></script>
         </form>
     </div>
 </main>

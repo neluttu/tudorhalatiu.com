@@ -22,6 +22,7 @@ if(!$form->validate($name, $price, $excerpt, $description)) {
     Session::flash('errors', $form->errors());
     Session::flash('old', [ 
         'name' => $name,
+        'slug' => $slug,
         'price' => $price,
         'sizes' => $sizes,
         'category2' => $category,
@@ -36,12 +37,13 @@ if(!$form->validate($name, $price, $excerpt, $description)) {
 }
 
 $db->query("
-        INSERT INTO products (category, name, sizes, price, excerpt, description, stock, status)
-        VALUES (:category, :name, :sizes, :price, :excerpt, :description, :stock, :status)
+        INSERT INTO products (category, name, slug, sizes, price, excerpt, description, stock, status)
+        VALUES (:category, :name, :slug, :sizes, :price, :excerpt, :description, :stock, :status)
         ", 
         [
             'category' => $category,
             'name' => $name,
+            'slug' => $slug,
             'sizes' => implode(',', $sizes),
             'price' => $price,
             'excerpt' => $excerpt,

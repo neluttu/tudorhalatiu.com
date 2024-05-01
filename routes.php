@@ -2,7 +2,7 @@
 use Core\App;
 use Core\Database;
 
-$db = App::resolve(Database::class)->query("SELECT * FROM routes ORDER BY page ASC")->get();
+$db = App::resolve(Database::class)->query("SELECT * FROM routes ORDER BY id, page ASC")->get();
 
 foreach ($db as $route) {
     $method = $route['method'];

@@ -44,29 +44,14 @@ use Core\Lang;
             <? if(count($photos) > 0) : ?>
             <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-4">
                 <span class="[&>img]:transition-all [&>img]:duration-300 [&>img]:ease-in sm:[&>img:hover]:scale-105 [&>img]:rounded-lg [&>img]:cursor-pointer [&>img]:w-full group overflow-hidden rounded-lg">
-                    <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="hidden transition-all duration-300 ease-in rounded-lg cursor-pointer md:block group-hover:scale-105" alt="<?=$product['name']?> - Tudor Halațiu"  onclick="changePoster(this.src)">
+                    <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="hidden transition-all duration-300 ease-in rounded-lg cursor-pointer productImage md:block group-hover:scale-105" alt="<?=$product['name']?> - Tudor Halațiu">
                 </span>
                 <? foreach($photos as $photo) : ?>
                 <span class="overflow-hidden rounded-lg group">
-                    <img src="/<?= $photo ?>" alt="<?= $product['name'] ?>" onclick="changePoster(this.src)" class="transition-all duration-300 ease-in rounded-lg cursor-pointer group-hover:scale-105">
+                    <img src="/<?= $photo ?>" alt="<?= $product['name'] ?>" class="transition-all duration-300 ease-in rounded-lg cursor-pointer productImage group-hover:scale-105">
                 </span>
                 <? endforeach ?>
-                <script>
-                    function changePoster(src) {
-                        if (window.innerWidth >= 640) {
-                            const posterImg = document.getElementById('poster');
-                            posterImg.classList.remove('opacity-100'); 
-                            posterImg.classList.add('opacity-0');
-
-                            setTimeout(function() {
-                                posterImg.src = src;
-                                posterImg.classList.remove('opacity-0');
-                                posterImg.classList.add('opacity-100');
-                                if (window.innerWidth <= 768) posterImg.scrollIntoView({ behavior: 'smooth' });
-                            }, 300);
-                        }
-                    }
-                </script>
+                <script src="/public/js/changePoster.js"></script>
             </div>
             <? endif ?>
             <hr class="w-[100px] border-b-2 border-slate-700 mt-8 mb-4">

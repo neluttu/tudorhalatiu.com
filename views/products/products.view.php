@@ -14,7 +14,7 @@ require base_path('views/partials/banner.php');
 <main class="w-full px-2 py-10 mx-auto xl:px-0 max-w-7xl">
     <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl">
         <? foreach($products as $product) :?>
-        <a href="<?= \Core\Session::getLang(); ?>/product/<?=slug($product['name']) . '/' . $product['id']; ?>" class="group" title="<?= $product['excerpt'] ?>">
+        <a href="<?= \Core\Session::getLang(); ?>/shop/<?= $product['category_slug'] ?>/<?= $product['slug']; ?>" class="group" title="<?= $product['excerpt'] ?>">
             <div class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
                 <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110">
             </div>

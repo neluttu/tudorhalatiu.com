@@ -3,7 +3,6 @@ use Core\Session;
 use Core\App;
 use Core\Database;
 use Core\ShoppingCart;
-
 $db = App::resolve(Database::class);
 
 
@@ -21,6 +20,4 @@ if (empty($_POST['cartID']) && $checkID === 1)
 Session::flash('cart_message', [ 
                     'result' => $result
             ]);
-
-//return redirect('/product/' . slug($_POST['name']) . '/' . $_POST['id']);
 return redirect('/cart');
