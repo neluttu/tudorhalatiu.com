@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="ro" class="h-full">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4KFM440Y9"></script>
     <script src="/public/js/googleAnalytics.js">
@@ -23,6 +23,7 @@
     <meta name="twitter:card"               content="summary_large_image">
     <meta property="twitter:domain"         content="tudorhalatiu.com">
     <meta property="twitter:url"            content="https://tudorhalatiu.com">
+    <?= $product_schema ?? '' ?>
     <meta property="twitter:title"          content="<?= $title ?? Core\Lang::text('header.title') ?>">
     <meta property="twitter:description"    content="<?= $description ?? Core\Lang::text('header.description') ?>">
     <meta name="twitter:image"              content="https://www.tudorhalatiu.com/public/images/tudor-halatiu-og.jpg">

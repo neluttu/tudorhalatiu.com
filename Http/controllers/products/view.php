@@ -35,6 +35,20 @@ elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a
                 $imagesFiles[$key] = str_replace(base_path(), '', $file);
             else 
                 unset($imagesFiles[$key]);
+    
+$product_schema = '<script type="application/ld+json">
+        {
+        "@context":"https://schema.org",
+        "@type":"Product",
+        "name":"'.$product['name'].'",
+        "description":"'.$product['excerpt'].'",
+        "category":"'.$product['category_name'].'",
+        "image":"https://tudorhalatiu.com/public/images/products/'.$product['id'].'/poster.avif",
+        "brand":{"@type":"Brand","name":"Tudor Halațiu"},
+        "offers":{"@type":"Offer","priceCurrency":"RON","price":"' . number_format(($product['discount'] > 0 ? $product['price'] - ($product['price'] * ($product['discount'] / 100)) : $product['price']), 2, '.', '') . '","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"Tudor Halațiu"}}
+        }
+    </script>
+';
 
      view('products/view', [
         'heading' => $product['name'],
@@ -44,7 +58,8 @@ elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a
         'description' => $product['excerpt'] . ' by Tudor Halațiu creator de modă, haine și vestimentație',
         'categories' => $categories,
         'views' => $getViews[0]['views'],
-        'photos' => $imagesFiles
+        'photos' => $imagesFiles,
+        'product_schema' => $product_schema
     ]);
 }
 else abort();

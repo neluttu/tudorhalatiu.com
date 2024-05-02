@@ -1,6 +1,5 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
-
 <?php require base_path('views/partials/categories.php'); ?>
 
 <?php
@@ -21,12 +20,12 @@ use Core\Lang;
         <script src="/public/js/fixedPosterImage.js"></script>
         <div class="relative w-full text-sm font-light leading-loose md:flex-1 text-slate-700">
             <span class="fixed bottom-0 left-0 w-full px-3 pt-1 pb-2 sm:p-0 sm:static bg-white/50 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
-                <h1 class="flex items-center justify-between text-xl font-semibold sm:text-2xl md:text-4xl text-main-color">
+                <h2 class="flex items-center justify-between text-xl font-semibold sm:text-2xl md:text-4xl text-main-color">
                     <p class="flex-1 text-base sm:text-xl md:hidden"><?= $product['name'] ?></p>
                     <p class="flex-1 text-right">
                         <?= $product['discount'] > 0 ? '<span>' . number_format($product['price'] / $product['discount'], 2) . ' lei</span> <span class="text-gray-500 line-through">' .$product['price']. ' lei</span>' : $product['price'] . ' lei'; ?>
                     </p>
-                </h1>
+                </h2>
                 <hr class="w-[100px] border-b-2 border-slate-700 md:mt-4 float-end hidden md:block">
                 <form method="post" class="flex items-center justify-end gap-1 mt-4 md:mt-10 sm:gap-3">
                     <? if($product['sizes']) { 
@@ -97,7 +96,7 @@ use Core\Lang;
             </ul>
             <? endif ?>
             <hr class="w-[100px] border-b-2 border-slate-700 mt-8 mb-4">
-            <h2 class="mb-10 text-base font-semibold"><?=$product['excerpt'];?></h2>
+            <h3 class="mb-10 text-base font-semibold"><?=$product['excerpt'];?></h3>
             <p class="[&>a]:text-main-color [&>a]:underline">
             <?= nl2br($product['description']) ?>
             </p>
