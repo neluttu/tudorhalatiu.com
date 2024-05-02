@@ -13,7 +13,9 @@
                 <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110">
             </div>
             <h3 class="mt-4 text-sm text-main-color"><?=$product['name'] ?></h3>
-            <p class="mt-1 text-lg font-medium text-gray-900"><?= number_format($product['price'], 2, ',','.') ?> lei</p>
+            <p class="mt-1 text-lg font-medium text-gray-900">
+                <?= $product['discount'] > 0 ? '<span>' . number_format($product['price'] / $product['discount'], 2, ',', '.') . ' lei</span> <span class="text-gray-500 line-through">' .number_format($product['price'], 2, ',', '.'). ' lei</span>' : number_format($product['price'], 2, ',', '.') . ' lei'; ?>
+            </p>
         </a>
         <? endforeach; ?>
     </div>

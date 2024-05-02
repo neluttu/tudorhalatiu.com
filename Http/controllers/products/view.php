@@ -4,8 +4,6 @@ use Core\ProductViewCounter;
 
 $db = App::resolve('Core\Database');
 
-
-
 // Check if is old URL with id from wrong Google indexed page.
 if (isset($params['id']) && is_numeric($params['id']) && preg_match('/^\d{1,4}$/', $params['id'])) {
     $product = $db->query('SELECT id, products.slug, products.name, category, sizes, price, excerpt, description, status, categories.name AS category_name, categories.slug AS category_slug FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE id = :id AND status = "Online"', 
@@ -18,12 +16,12 @@ if (isset($params['id']) && is_numeric($params['id']) && preg_match('/^\d{1,4}$/
 }
 // Normal url with SLUG
 elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a-zA-Z0-9\-]+$/', $params['slug'])) {
-    $product = $db->query('SELECT id, products.name, products.slug, category, sizes, price, excerpt, description, status, categories.name AS category_name FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE products.slug = :slug AND status = "Online"', 
+    $product = $db->query('SELECT id, products.name, products.slug, discount, category, sizes, price, excerpt, description, status, categories.name AS category_name FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE products.slug = :slug AND status = "Online"', 
     [
         ':slug' => $params['slug']
     ])->findOrFail();
-
-    //$productViewCounter = new ProductViewCounter();
+        
+    //$productViewCounter = new ProductViewCounter(); // FIXME fix product view counter
     //$productViewCounter->incrementProductView($params['id']); 
     
     $categories = $db->query('SELECT category_id, name, slug FROM categories')->get();

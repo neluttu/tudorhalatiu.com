@@ -1,0 +1,32 @@
+[01-May-2024 02:11:20 Europe/Bucharest] PHP Warning:  Undefined array key "user" in /home/thalatiu/public_html/Core/Middleware/Admin.php on line 8
+[01-May-2024 08:51:31 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 08:51:47 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 08:52:23 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 08:53:28 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 08:53:37 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 08:54:06 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 08:56:17 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 09:02:25 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 09:02:57 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 09:03:35 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 09:05:06 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 09:05:51 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 09:06:11 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 09:06:37 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 23:06:56 Europe/Bucharest] PHP Warning:  require(/home/thalatiu/public_html/Http/controllers/termeni.php): Failed to open stream: No such file or directory in /home/thalatiu/public_html/Core/Router.php on line 102
+[01-May-2024 23:06:56 Europe/Bucharest] PHP Fatal error:  Uncaught Error: Failed opening required '/home/thalatiu/public_html/Http/controllers/termeni.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/thalatiu/public_html/Core/Router.php:102
+Stack trace:
+#0 /home/thalatiu/public_html/index.php(35): Core\Router->route()
+#1 {main}
+  thrown in /home/thalatiu/public_html/Core/Router.php on line 102
+[01-May-2024 23:29:18 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[01-May-2024 23:33:21 Europe/Bucharest] PHP Warning:  Undefined variable $heading_info in /home/thalatiu/public_html/views/partials/banner.php on line 5
+[02-May-2024 00:07:41 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/views/admin/product.view.php on line 39
+[02-May-2024 00:07:56 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/views/admin/product.view.php on line 40
+[02-May-2024 00:08:28 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/views/admin/product.view.php on line 40
+[02-May-2024 00:09:22 Europe/Bucharest] PHP Warning:  Undefined variable $slugs in /home/thalatiu/public_html/views/admin/product.view.php on line 25
+[02-May-2024 00:09:22 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/views/admin/product.view.php on line 40
+[02-May-2024 00:10:35 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/views/admin/product.view.php on line 40
+[02-May-2024 00:10:40 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/views/admin/product.view.php on line 40
+[02-May-2024 00:13:16 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/Http/controllers/admin/product-update.php on line 10
+[02-May-2024 00:14:08 Europe/Bucharest] PHP Warning:  Undefined array key "discount" in /home/thalatiu/public_html/Http/controllers/admin/product-update.php on line 10

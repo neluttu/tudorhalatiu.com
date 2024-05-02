@@ -29,6 +29,7 @@
     <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
     <link rel="icon" type="image/png" href="/public/images/favicon.png">
     <title><?= $title ?? Core\Lang::text('header.title') ?></title>
+    <link rel="canonical" href="https://tudorhalatiu.com<?= $_SERVER['REQUEST_URI'] ?>">
     <link rel="stylesheet" href="/public/css/styles.css" class="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

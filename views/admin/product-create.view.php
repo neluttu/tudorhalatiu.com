@@ -44,6 +44,7 @@
                     </label>
                     <? endforeach ?>
                 </span>
+                
                 <span class="w-full"></span>
                 <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1">Categorie produs:</span>
                 <select name="category" class="flex items-center justify-center w-full p-2 mb-2 text-sm text-right border rounded-md bg-slate-50 md:w-auto md:flex-1">

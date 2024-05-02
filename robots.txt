@@ -15,3 +15,16 @@ Disallow: /public/videos/
 
 Disallow: /public/images/favicon/
 Disallow: /public/images/instagram/
+
+Disallow: /Core/
+Disallow: /Http/
+Disallow: /admin/
+Disallow: /*.pdf$
+Disallow: /*.doc$
+
+Crawl-delay: 1
+
+Sitemap: https://tudorhalatiu.com/sitemap.xml
+
+# Permitând toate paginile pentru indexare
+Allow: /
