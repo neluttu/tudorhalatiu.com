@@ -42,7 +42,7 @@ return [
     ],
     'header' => [
         'title' => 'Tudor Halatiu - ',
-        'keywords' => 'php, oop, mysql',
+        'keywords' => 'tudor halatiu, designer moda, creator moda, instagram tudor halatiu, reghin, haine, vestimentatie',
         'description' => 'website description'
     ]
 ];

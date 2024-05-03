@@ -8,7 +8,7 @@ window.addEventListener('scroll', function() {
         if (scrollPosition >= stickyOffset) {
             stickyContainer.classList.add('relative');
             stickyContainer.classList.remove('sticky', 'top-0');
-            console.log('fuic');
+            
             if(windowWidth >= 768)
                 stickyContainer.style.top = `${stickyOffset}px`;
 

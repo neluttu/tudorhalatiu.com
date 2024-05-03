@@ -15,11 +15,14 @@ require base_path('views/partials/banner.php');
     <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl">
         <? foreach($products as $product) :?>
         <a href="<?= \Core\Session::getLang(); ?>/shop/<?= $product['category_slug'] ?>/<?= $product['slug']; ?>" class="group" title="<?= $product['excerpt'] ?>">
-            <div class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110">
+            <div class="relative w-full overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
+                <? if($product['discount'] and isset($product['discount'])) : ?><span class="absolute z-50 p-2 text-white rounded-lg md:p-4 top-3 left-3 bg-main-color flicker-1">-<?= $product['discount'] ?> % discount</span> <? endif ?>
+                <img loading="lazy" src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110" loading="lazy">
             </div>
-            <h3 class="mt-4 text-sm font-semibold text-gray-700"><?=$product['name'] ?></h3>
-            <p class="mt-1 text-lg font-medium text-main-color"><?= number_format($product['price'], 2, ',','.') ?> lei</p>
+            <h2 class="mt-4 text-sm font-semibold text-gray-700"><?=$product['name'] ?></h2>
+            <p class="mt-1 text-lg font-medium text-main-color">
+                <?= showPrice($product['price'], $product['discount']) ?>
+            </p>
         </a>
         <? endforeach; ?>
     </div>

@@ -10,11 +10,11 @@
         <? foreach($products as $product) :?>
         <a href="<?= \Core\Session::getLang(); ?>/shop/<?= $product['category_slug'] ?>/<?= $product['slug'] ?>" class="group" title="<?= $product['excerpt'] ?>">
             <div class="w-full overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110">
+                <img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110" loading="lazy">
             </div>
             <h3 class="mt-4 text-sm text-main-color"><?=$product['name'] ?></h3>
             <p class="mt-1 text-lg font-medium text-gray-900">
-                <?= $product['discount'] > 0 ? '<span>' . number_format($product['price'] / $product['discount'], 2, ',', '.') . ' lei</span> <span class="text-gray-500 line-through">' .number_format($product['price'], 2, ',', '.'). ' lei</span>' : number_format($product['price'], 2, ',', '.') . ' lei'; ?>
+            <?= showPrice($product['price'], $product['discount']) ?>
             </p>
         </a>
         <? endforeach; ?>

@@ -13,19 +13,19 @@ use Core\Lang;
     <div class="relative flex flex-col items-start justify-start gap-4 py-6 sm:gap-10 md:flex-row">
         <div class="w-full overflow-hidden rounded-lg md:sticky md:top-0 md:flex-1" id="stickyContainer">
             <div class="relative bg-gray-200">
-                <? if($product['discount']) : ?><span class="absolute p-2 text-white rounded-lg md:p-4 top-3 left-3 bg-main-color flicker-1">-<?= $product['discount'] ?> % discount</span> <? endif ?>
+                <? if($product['discount'] and isset($product['discount'])) : ?><span class="absolute p-2 text-white rounded-lg md:p-4 top-3 left-3 bg-main-color flicker-1">-<?= $product['discount'] ?> % discount</span> <? endif ?>
                 <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="w-full transition-all duration-300 ease-in rounded-lg" alt="<?=$product['name']?> - Tudor Halațiu" id="poster">
             </div>
         </div>
         <script src="/public/js/fixedPosterImage.js"></script>
         <div class="relative w-full text-sm font-light leading-loose md:flex-1 text-slate-700">
-            <span class="fixed bottom-0 left-0 w-full px-3 pt-1 pb-2 sm:p-0 sm:static bg-white/50 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
-                <h2 class="flex items-center justify-between text-xl font-semibold sm:text-2xl md:text-4xl text-main-color">
-                    <p class="flex-1 text-base sm:text-xl md:hidden"><?= $product['name'] ?></p>
+            <div class="fixed bottom-0 left-0 w-full px-3 pt-1 pb-2 sm:p-0 sm:static bg-white/50 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
+                <div class="flex items-center justify-between text-xl font-semibold sm:text-2xl md:text-4xl text-main-color">
+                    <h2 class="flex-1 text-base sm:text-xl md:hidden"><?= $product['name'] ?></h2>
                     <p class="flex-1 text-right">
-                        <?= $product['discount'] > 0 ? '<span>' . number_format($product['price'] / $product['discount'], 2) . ' lei</span> <span class="text-gray-500 line-through">' .$product['price']. ' lei</span>' : $product['price'] . ' lei'; ?>
+                    <?= showPrice($product['price'], $product['discount']) ?>
                     </p>
-                </h2>
+                </div>
                 <hr class="w-[100px] border-b-2 border-slate-700 md:mt-4 float-end hidden md:block">
                 <form method="post" class="flex items-center justify-end gap-1 mt-4 md:mt-10 sm:gap-3">
                     <? if($product['sizes']) { 
@@ -45,7 +45,7 @@ use Core\Lang;
                         <?= Lang::text('product.add_to_cart'); ?>
                     </button>
                 </form>
-            </span>
+            </div>
             <? if(count($photos) > 0) : ?>
             <div class="grid grid-cols-1 gap-6 mt-0 md:mt-6 sm:grid-cols-4">
                 <span class="[&>img]:transition-all [&>img]:duration-300 [&>img]:ease-in sm:[&>img:hover]:scale-105 [&>img]:rounded-lg [&>img]:cursor-pointer [&>img]:w-full group overflow-hidden rounded-lg">

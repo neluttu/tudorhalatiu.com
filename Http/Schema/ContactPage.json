@@ -1,0 +1,27 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Tudor Halațiu",
+  "description": "Descopera categoriile din magazinul online, dar si colectiile exclusive de rochii de seara, rochii de zi, topuri si multe altele,semnate Tudor Halatiu, pentru momentul tau de stralucire",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Strada Dedradului, Nr. 16",
+    "addressLocality": "Reghin",
+    "postalCode": "545300",
+    "addressCountry": "Romania"
+  },
+  "telephone": "+4 0754 784 303",
+  "email": "contact@tudorhalatiu.com",
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+4 0754 784 303",
+    "contactType": "customer service",
+    "areaServed": "RO",
+    "availableLanguage": ["Romanian"]
+  },
+  "sameAs": [
+    "https://www.facebook.com/tudor.halatiu",
+    "https://instasgram.com/tudorhalatiu"
+  ]
+}

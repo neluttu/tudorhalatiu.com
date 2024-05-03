@@ -1,0 +1,21 @@
+{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "url": "https://tudorhalatiu.com/despre",
+    "name": "Povestea din spatele brandului Tudor Halațiu",
+    "description": "Descopera povestea din spatele brandului Tudor Halatiu, sursa de inspiratie, dar si perspectiva de viitor a brandului.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tudor Halațiu - creator de modă",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://tudorhalatiu.com/public/images/tudor-halatiu-logo.svg",
+        "width": 100,
+        "height": 107
+      }
+    },
+    "sameAs": [
+      "https://www.facebook.com/tudor.halatiu",
+      "https://www.instagram.com/tudorhalatiu"
+    ]
+  }

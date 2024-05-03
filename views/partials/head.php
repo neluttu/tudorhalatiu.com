@@ -2,9 +2,10 @@
 <html lang="ro" class="h-full">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4KFM440Y9"></script>
-    <script src="/public/js/googleAnalytics.js">
-    </script>
+    <script src="/public/js/googleAnalytics.js"></script>
+    <?= $schema ?? '' ?>
     <meta charset="UTF-8">
+    <meta http-equiv="expires" content="Thu, 31 Dec 2024 23:59:59 GMT">
     <meta name="view-transition"            content="same-origin" />
     <meta name="viewport"                   content="user-scalable=yes, initial-scale=1, maximum-scale=5, minimum-scale=1, width=device-width">
     <meta name="format-detection"           content="telephone=yes">
@@ -15,6 +16,7 @@
     <meta name="googlebot"                  content="index,follow">
     <meta name="description"                content="<?= $description ?? Core\Lang::text('header.description') ?>">
     <meta name="keywords"                   content="<?= $keywords ?? Core\Lang::text('header.keywords') ?>">
+    <meta property="og:locale"              content="ro-RO">
     <meta property="og:url"                 content="https://www.tudorhalatiu.com/">
     <meta property="og:type"                content="website">
     <meta property="og:title"               content="<?= $title ?? Core\Lang::text('header.title') ?>">
@@ -23,10 +25,9 @@
     <meta name="twitter:card"               content="summary_large_image">
     <meta property="twitter:domain"         content="tudorhalatiu.com">
     <meta property="twitter:url"            content="https://tudorhalatiu.com">
-    <?= $product_schema ?? '' ?>
     <meta property="twitter:title"          content="<?= $title ?? Core\Lang::text('header.title') ?>">
     <meta property="twitter:description"    content="<?= $description ?? Core\Lang::text('header.description') ?>">
-    <meta name="twitter:image"              content="https://www.tudorhalatiu.com/public/images/tudor-halatiu-og.jpg">
+    <meta name="twitter:image" content="https://www.tudorhalatiu.com/public/images/tudor-halatiu-og.jpg">
     <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
     <link rel="icon" type="image/png" href="/public/images/favicon.png">
     <title><?= $title ?? Core\Lang::text('header.title') ?></title>

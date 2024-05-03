@@ -1,0 +1,7 @@
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "{{category_name}}",
+    "description": "{{excerpt}}",
+    "itemListElement": [{{items}}]
+}

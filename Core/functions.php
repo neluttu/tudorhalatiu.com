@@ -107,3 +107,7 @@ function limitText($text, $limit = 155) {
         return substr($text, 0, $last_space) . '...';
     }
 }
+
+function showPrice($price, $discount) {
+    return $discount > 0 ? '<span class="text-gray-500 line-through">' .number_format($price, 2, ',', ''). '</span> <span>' . number_format($price - ($price * ($discount / 100)), 2, ',', '') . ' lei</span>' : number_format($price, 2, ',', '') . ' lei';
+}
