@@ -17,17 +17,17 @@ if (isset($params['id']) && is_numeric($params['id']) && preg_match('/^\d{1,4}$/
 }
 // Normal url with SLUG
 elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a-zA-Z0-9\-]+$/', $params['slug'])) {
-    $product = $db->query('SELECT id, products.name, products.slug, discount, category, sizes, price, excerpt, description, status, categories.name AS category_name FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE products.slug = :slug AND status = "Online"', 
+    $product = $db->query('SELECT id, products.name, products.slug, discount, category, sizes, stock, price, excerpt, description, status, categories.name AS category_name FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE products.slug = :slug AND status = "Online"', 
     [
         ':slug' => $params['slug']
     ])->findOrFail();
         
-    //$productViewCounter = new ProductViewCounter(); // FIXME fix product view counter
-    //$productViewCounter->incrementProductView($params['id']); 
-    
+    $pageViewCounter = new ProductViewCounter();
+    $pageViewCounter->incrementPageView($product['id']);
+
     $categories = $db->query('SELECT category_id, name, slug FROM categories')->get();
 
-    $getViews = $db->query('SELECT count(views) AS views FROM product_views WHERE product_id = :id', [':id' => $product['id']])->get();
+    $getViews = $db->query('SELECT SUM(views) AS views FROM product_views WHERE product_id = :id', [':id' => $product['id']])->get();
 
     $imagesFiles = glob(base_path('public/images/products/'.$product['id'].'/*.{jpg,png,avif,jpeg}'), GLOB_BRACE);
     if($imagesFiles !== false and count($imagesFiles) > 0)
@@ -52,7 +52,7 @@ elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a
         'heading_info' => 'Produs din categoria ' .$product['category_name'],
         'product' => $product,
         'title' => ucwords(strtolower($product['name'])) . ' by Tudor Halațiu - creator de modă',
-        'description' => $product['excerpt'] . ' by Tudor Halațiu creator de modă, haine și vestimentație',
+        'description' => $product['excerpt'] . ' by Tudor Halațiu creator de modă',
         'categories' => $categories,
         'views' => $getViews[0]['views'],
         'photos' => $imagesFiles,

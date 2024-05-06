@@ -19,7 +19,9 @@ class SchemaGenerator {
                 $variable = '{{' . $key . '}}';
                 $templateContent = str_replace($variable, $value, $templateContent);
             }
-        $templateContent .= '</script>';
+        $templateContent .= '
+    </script>
+';
         return $templateContent;
     }
 }

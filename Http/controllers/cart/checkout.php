@@ -140,13 +140,15 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
 
     if(!empty($_SESSION['cart']))
         foreach($_SESSION['cart'] as $key => $product) {
-            $db->query("INSERT INTO ordered_products (order_id, product_id, name, price, size)
-                        VALUES (:order_id, :product_id, :name, :price, :size)",
+            $productdb = $db->query("SELECT price, discount FROM products WHERE id = :product_id", [':product_id' => $product['id']])->find();
+            $db->query("INSERT INTO ordered_products (order_id, product_id, name, price, discount, size)
+                        VALUES (:order_id, :product_id, :name, :price, :discount, :size)",
                         [
                             'order_id' => $order_id,
                             'product_id' => $product['id'],
                             'name' => $product['name'],
-                            'price' => $product['price'],
+                            'price' => $productdb['price'],
+                            'discount' => $productdb['discount'],
                             'size' => $product['features']['size']
                         ]);
         }

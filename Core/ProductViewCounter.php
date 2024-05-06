@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace Core;
 
@@ -6,44 +6,57 @@ use Core\Database;
 use Core\App;
 
 class ProductViewCounter {
-    private $cookieName = 'product_views';
-    public function incrementProductView($productID) {
-        $productViews = $this->getProductViews();
+    private $cookieName = 'page_views';
+    private $expiryTime = 1800;
 
-        if(!isset($productViews[$productID])) {
-            $productViews[$productID] = 1;
-            $this->setProductViews($productViews);
+    public function incrementPageView($productID) {
+        $pageViews = $this->getPageViews();
+
+        if (!isset($pageViews[$productID]) || $this->isExpired($pageViews[$productID])) {
+            $pageViews[$productID] = time();
+
+            $this->setPageViews($pageViews);
             $this->incrementDatabaseCounter($productID);
         }
     }
 
-    private function getProductViews() {
-        if(isset($_COOKIE[$this->cookieName]))
+    private function getPageViews() {
+        if (isset($_COOKIE[$this->cookieName])) {
             return json_decode($_COOKIE[$this->cookieName], true);
-    
+        }
         return [];
     }
 
-	private function setProductViews($productViews) {
-		$cookieOptions = [
-			'expires' => time() + 3600, 
-			'path' => '/', 
-			'httponly' => true,
-			'samesite' => 'strict'
-		];
+    private function setPageViews($pageViews) {
+        $cookieOptions = [
+            'expires' => time() + $this->expiryTime,
+            'path' => '/',
+            'httponly' => true,
+            'secure' => true,
+            'samesite' => 'strict'
+        ];
 
-		setcookie($this->cookieName, json_encode($productViews), $cookieOptions);
-	}
-	
+        setcookie($this->cookieName, json_encode($pageViews), $cookieOptions);
+    }
+
+    private function isExpired($timestamp) {
+        return (time() - $timestamp) >= $this->expiryTime;
+    }
+
     private function incrementDatabaseCounter($productID) {
         $db = App::resolve(Database::class);
-        if(!$db->query("SELECT product_id FROM product_views WHERE product_id = :productID AND date = :date", ["productID" => $productID, "date" => date("Y-m-d")])->get())
-            $db->query("INSERT INTO product_views (product_id, date) VALUES (:productID, :date)", ["productID" => $productID, "date" => date('Y-m-d')]);
-        else            
-            $db->query("UPDATE product_views SET views = views + 1 WHERE product_id = :productID AND date = :date", 
-                    [
-                        "productID" => $productID,
-                        "date" => date('Y-m-d')
-                    ]);
+        $date = date('Y-m-d');
+
+        // Verificăm dacă există o înregistrare pentru acest produs în aceeași zi
+        $existingRecord = $db->query("SELECT * FROM product_views WHERE product_id = :productID AND date = :date", ["productID" => $productID, "date" => $date])->get();
+
+        if (!$existingRecord) {
+            // Nu există o înregistrare, inserăm una nouă
+            $db->query("INSERT INTO product_views (product_id, date, views) VALUES (:productID, :date, 1)", ["productID" => $productID, "date" => $date]);
+        
+        } else {
+            // Actualizăm numărul de vizualizări existent
+            $db->query("UPDATE product_views SET views = views + 1 WHERE product_id = :productID AND date = :date", ["productID" => $productID, "date" => $date]);
+        }
     }
 }

@@ -35,7 +35,7 @@
                 <a href="<?= \Core\Session::getLang(); ?>/register" class="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Deschid cont nou</a> sau <a href="<?= \Core\Session::getLang(); ?>/reset-password" class="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">resetez parola contului.</a>
             </p>
         </form>
-        <img src="/public/images/dress-model.jpg" class="self-start order-1 w-full mt-10 md:mt-0 md:flex-1 md:w-1/2 md:order-2" alt="Autentificare cont client tudorhalatiu.com" />
+        <img src="/public/images/dress-model.jpg" class="self-start order-1 w-full mt-10 md:mt-0 md:flex-1 md:w-1/2 md:order-2" alt="Autentificare cont client tudorhalatiu.com" loading="lazy" />
     </section>
 </main>
 

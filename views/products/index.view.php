@@ -8,7 +8,7 @@
         <a href="<?= \Core\Session::getLang(); ?>/shop/<?=$category['slug'];?>" class="group">
             <h3 class="py-4 text-base text-gray-700 transition-all duration-300 ease-in group-hover:text-main-color md:text-lg"><?=$category['name']; ?></h3>
             <div class="w-full overflow-hidden transition-all duration-300 ease-in bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="/public/images/categories/<?=$category['slug'];?>.jpg" alt="<?=$category['text']?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110">
+                <img src="/public/images/categories/<?=$category['slug'];?>.jpg" alt="Tudor Halațiu - <?=$category['text']?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110" loading="lazy">
             </div>
             </a>
         <? endforeach ?>

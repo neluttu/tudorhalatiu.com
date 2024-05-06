@@ -24,6 +24,7 @@ class ShoppingCart
                 'name' => $product['name'],
                 'quantity' => 1, //(int) $product['quantity'], -- only quantity available for this webiste is 1.
                 'price' => (float) $product['price'],
+                'discount' => (int) $product['discount'],
                 'features' => $this->extractProductFeatures($product),
             ];
 
@@ -50,7 +51,7 @@ class ShoppingCart
     {
         $features = $product;
         // Remove base product variables so we get only custom product features.
-        unset($features['id'], $features['name'], $features['quantity'], $features['price']);
+        unset($features['id'], $features['name'], $features['quantity'], $features['price'], $features['discount']);
 
         return $features;
     }
@@ -93,11 +94,10 @@ class ShoppingCart
     public static function getCartPrice() {
         $Price = 0;
         if(!empty($_SESSION["cart"])) {
-            
             foreach($_SESSION['cart'] as $_ => $value) {
-                $Price += (float) $value['price'] * (int) $value['quantity'];
+                $Price += getPrice($value['price'], $value['discount']);
             }
-            return '$' . number_format($Price, 2);
+            return number_format($Price, 2, ',', '');
         }
         else return 0;
     }

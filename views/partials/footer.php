@@ -1,12 +1,12 @@
 <footer class="w-full px-2 pb-10 mx-auto mt-20 mb-2 max-w-7xl">
     <div class="flex items-center w-full gap-10 px-2 text-sm justify-evenly sm:justify-end md:px-0 text-slate-600">
-            <a href="/" class="hover:text-main-color" title="">Acasă</a>
-            <a href="/shop" class="hover:text-main-color" title="">Shop</a>
-            <a href="/despre" class="hover:text-main-color" title="">Despre</a>
-            <a href="/contact" class="hover:text-main-color" title="">Contact</a>
+            <a href="/" class="hover:text-main-color" title="Tudor Halațiu - creator de modă, vestimentație, haine">Acasă</a>
+            <a href="/shop" class="text-main-color" title="Tudor Halațiu - shop online creator de modă, vestimentație, haine">Shop</a>
+            <a href="/despre" class="hover:text-main-color" title="Despre Tudor Halațiu - creator de modă">Despre</a>
+            <a href="/contact" class="hover:text-main-color" title="Contact Tudor Halațiu - creator de modă">Contact</a>
     </div>
     <hr class="h-px my-6 bg-gray-200 border-0 grow">
-    <div class="font-sans text-sm font-light leading-loose tracking-tight text-left text-slate-600">
+    <div class="font-sans text-sm font-light leading-loose text-left text-slate-600">
         © TUDOR HALATIU EMPIRE SRL 2024 - Toate drepturile rezervate<br>
         Str. Dedradului nr. 16, Reghin, Județul Mureș<br>
         CIF: 44940912, RC: J26/1550/2021<br>
@@ -21,7 +21,7 @@
             </svg>
         </a>
 
-        <a href="https://www.instagram.com/tudor.halatiu/" title="Tudor Halațiu Instagram" target="_blank" class="group">
+        <a href="https://www.instagram.com/tudorhalatiu/" title="Tudor Halațiu Instagram" target="_blank" class="group">
             <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:stroke-main-color" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#65676d" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <rect x="4" y="4" width="16" height="16" rx="4"></rect>
@@ -30,10 +30,15 @@
             </svg>
         </a>
 
-        <a href="/termeni-si-conditii" class="font-sans font-light text-slate-600" title="">Termeni și condiții</a>
-
-        <a href="/politica-confidentialitate" class="font-sans font-light text-slate-600" title="">Politică confidențialitate</a>
-        
+        <a href="https://www.facebook.com/tudor.halatiu/" title="Tudor Halațiu Facebook" target="_blank" class="group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:stroke-main-color" width="28" height="28" viewBox="0 0 24 24" stroke-width="1" stroke="#65676d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+            </svg>
+        </a>
+        <a href="/termeni-si-conditii" class="font-sans font-normal hover:underline hover:text-main-color text-slate-600" title="Termeni si conditii">Termeni și condiții</a>
+        <a href="/politica-confidentialitate" class="font-sans font-normal hover:underline hover:text-main-color text-slate-600" title="Politica confidențialitate">Politică confidențialitate</a>
+        <a href="/livrare-si-retur" class="font-sans font-normal hover:underline hover:text-main-color text-slate-600" title="Livrare si retur">Livrare și retur</a>
     </div>
 </footer>
 <script src="/public/js/mobileMenu.js"></script>

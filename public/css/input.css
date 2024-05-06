@@ -6,7 +6,8 @@
 .root,
 #root,
 #docs-root {
-  --main-color: #ed0078;
+  /* --main-color: #ed0078; */
+  --main-color: #AF0054;
 }
 
 @layer base {

@@ -3,7 +3,7 @@ use Core\App;
 
 $db = App::resolve('Core\Database');
 
-$product = $db->query('SELECT id, products.name, products.slug, category, discount, sizes, price, excerpt, description, status, stock, categories.name AS category_name FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE id = :id', 
+$product = $db->query('SELECT id, products.name, products.slug, category, discount, sizes, price, excerpt, description, status, stock, categories.name AS category_name, categories.slug AS category_slug FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE id = :id', 
                     [
                         'id' => $params['id']
                     ])->findOrFail();

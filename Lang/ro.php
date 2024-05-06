@@ -41,8 +41,8 @@ return [
         'account' => ['Cont client', 'Administrați contul de client']
     ],
     'header' => [
-        'title' => 'Tudor Halatiu - ',
-        'keywords' => 'tudor halatiu, designer moda, creator moda, instagram tudor halatiu, reghin, haine, vestimentatie',
+        'title' => 'Tudor Halatiu - creator de modă',
+        'keywords' => 'creator moda roman, brand moda roman, design vestimentar extravagant, haine dama unice, moda excentrica si spectaculoasa, tinute must-have femei, piese vestimentare paiete, glamour ready-to-wear, colectii toamna-iarna capsule, texturi si estetica noua, stralucire si incredere, Reghin, Mures, Romania, shop online haine designer, topuri, fuste zi seara, pantaloni, rochii, jachete paltoane, accesorii, editie limitata, Fusta BUTTERFLY (mini, clos, roz, imprimeu, 43 cm), HANORAC BUTTERFLY, fondat 2020, design vestimentar extravagant vandabil, design-uri must-have, semnatura brandului zona paiete, colectii spectaculoase podium, colectii capsule fiecare sezon, texturi si estetica noua, stralucire si incredere femei, design vestimentar unic, haine designer calitate, moda romaneasca, stil personal, tinute feminine, cadouri femei, ocazii speciale, eleganta si rafinament, modern si trendy',
         'description' => 'website description'
     ]
 ];

@@ -1,3 +1,4 @@
+
     {
         "@context": "https://schema.org",
         "@type": "Product",
@@ -13,11 +14,10 @@
         "availability": "https://schema.org/InStock",
         "seller": { "@type": "Organization", "name": "Tudor Halațiu" },
         "priceValidUntil": "2099-12-31",
-        "hasMerchantReturnPolicy": { "@type": "MerchantReturnPolicy", "merchantReturnDays": "15", "merchantReturnLink": "https://tudorhalatiu.com/politica-retur" },
-        "applicableLocation": { "@type": "Country", "name": "Romania" }
-        },
-        "deliveryLeadTime": { "@type": "QuantitativeValue", "value": "4-7 zile lucrătoare" },
+        "hasMerchantReturnPolicy": { "@type": "MerchantReturnPolicy", "merchantReturnDays": "15", "merchantReturnLink": "https://tudorhalatiu.com/termeni-si-conditii", "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow", "applicableCountry": "RO", "returnMethod": "https://schema.org/ReturnByMail", "returnFees": "https://schema.org/FreeReturn" },
+        "applicableLocation": { "@type": "Country", "name": "Romania" },
+        "shippingDetails": { "@type": "OfferShippingDetails",  "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "RO", "addressRegion": ["RO"] }, "shippingRate": { "@type": "MonetaryAmount", "currency": "RON", "value": "{{shipping_tax}}" }, "deliveryTime": { "@type": "ShippingDeliveryTime", "handlingTime": { "@type": "QuantitativeValue", "minValue": 2,  "maxValue": 7, "unitCode": "DAY" }, "transitTime": { "@type": "QuantitativeValue", "minValue": 1,  "maxValue": 5, "unitCode": "DAY" } } } },
+        
         "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "10" },
-        "shippingRate": { "@type": "MonetaryAmount", "currency": "RON", "value": "{{shipping_tax}}" },
-        "shippingDetails": { "@type": "ShippingDetails", "shippingDestination": { "@type": "Country", "name": "Romania" } }
-  }
+        "shippingRate": { "@type": "MonetaryAmount", "currency": "RON", "value": "{{shipping_tax}}" }
+    }

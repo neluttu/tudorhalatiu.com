@@ -2,7 +2,7 @@
 use Core\App;
 $db = App::resolve('Core\Database');
 
-$products = $db->query('SELECT products.*, categories.name AS category_name, categories.slug AS category_slug FROM products LEFT JOIN categories ON categories.category_id = products.category ORDER BY RAND() LIMIT 8')->get();
+$products = $db->query('SELECT products.*, categories.name AS category_name, categories.slug AS category_slug FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE status = "Online" ORDER BY RAND() LIMIT 8')->get();
 
 view('index', [
     'products' => $products,

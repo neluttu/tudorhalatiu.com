@@ -41,7 +41,7 @@
                     class="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Autentifică-te</a> sau <a href="/reset-password" class="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">resetează parola.</a>
             </p>
         </form>
-        <img src="/public/images/register.webp" class="self-start w-full mt-10 md:mt-0 md:flex-1 md:w-1/2" alt="Cont client tudorhalatiu.com" />
+        <img src="/public/images/register.webp" class="self-start w-full mt-10 md:mt-0 md:flex-1 md:w-1/2" alt="Cont client tudorhalatiu.com" loading="lazy" />
     </section>
 </main>
 

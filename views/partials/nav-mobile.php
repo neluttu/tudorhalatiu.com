@@ -1,7 +1,7 @@
 <? use Core\Session; ?>
 <div class="fixed top-0 bottom-0 left-0 right-0 hidden overflow-auto min-h-screen transition duration-150 ease-in-out z-[999] bg-black/90 backdrop-blur-sm mobileMenuClose" id="mobileMenu">
     <div class="w-full px-10 py-4 mx-auto text-white md:w-full [&>a]:text-lg flex items-start justify-start gap-3 flex-col relative">
-        <a href="/" title="Tudor Halațiu" class="block mx-auto mb-4"><img src="/public/images/logo-inverted.png" width="140" alt="Tudor Halațiu - Magazin online" class="w-[100px]"></a>
+        <a href="/" title="Tudor Halațiu" class="block mx-auto mb-4"><img src="/public/images/tudor-halatiu-logo-inverted.svg" loading="lazy" width="140" alt="Tudor Halațiu - Magazin online" class="w-[100px]"></a>
         <a href="<?= Session::getLang(); ?>/" class="<?= urlIs('/') ? 'border-b border-main-color text-main-color' : '' ?>" title="Tudor Halațiu - Acasă">Acasă</a>
         <a href="<?= Session::getLang(); ?>/shop" class="<?= urlIs('/shop') ? 'border-b border-main-color text-main-color' : '' ?>" title="Tudor Halațiu - Magazin - shop online">Shop</a>
         <a href="<?= Session::getLang(); ?>/contact" class="<?= urlIs('/contact') ? 'border-b border-main-color text-main-color' : '' ?>" title="Contact Tudor Halațiu magazin shop online">Contact</a>

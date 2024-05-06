@@ -15,7 +15,7 @@ $orders = App::resolve(Database::class)->query("
                                                 users_data.firstname,
                                                 users_data.lastname,
                                                 users_data.phone,
-                                                GROUP_CONCAT(CONCAT_WS(':', ordered_products.product_id, ordered_products.name, ordered_products.price, ordered_products.currency, ordered_products.quantity, ordered_products.size) SEPARATOR ';') AS products
+                                                GROUP_CONCAT(CONCAT_WS(':', ordered_products.product_id, ordered_products.name, ordered_products.price, ordered_products.discount, ordered_products.currency, ordered_products.quantity, ordered_products.size) SEPARATOR ';') AS products
                                                 FROM 
                                                 orders
                                                 LEFT JOIN ordered_products ON orders.id = ordered_products.order_id

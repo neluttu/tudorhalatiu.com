@@ -18,7 +18,8 @@
                 <span class="block mb-4 text-main-color">Comanda numarul: <?=$order['order_id']?></span>
                 <?
                 $products = explode(';',$order['products']);
-                $total_price = 0;
+                // Start with the shipping tax as a total.
+                $total_price = $order['shipping_tax'];
                 foreach($products as $product) {
                     $product_data = explode(':',$product);
                     if (count($product_data) >= 6) { 
@@ -26,27 +27,31 @@
                             'product_id' => $product_data[0],
                             'name' => $product_data[1],
                             'price' => $product_data[2],
-                            'currency' => $product_data[3],
-                            'quantity' => $product_data[4],
-                            'size' => $product_data[5]
+                            'discount' => $product_data[3],
+                            'currency' => $product_data[4],
+                            'quantity' => $product_data[5],
+                            'size' => $product_data[6]
                         ];
                     }
-                    $total_price += $product['price'];
+                    $total_price += getPrice($product['price'], $product['discount']);
                     ?>
                     <div class="flex items-center justify-start w-full gap-3 p-2 mb-2 text-sm text-gray-700 border rounded-lg">
                         <a href="/product/<?= strtolower(str_replace(' ','-',$product['name'])) ?>/<?= $product['product_id']?>">
-                            <img src="/public/images/products/<?=$product['product_id']?>/poster.avif" width="40" class="rounded-md">
+                            <img src="/public/images/products/<?= $product['product_id'] ?>/poster.avif" width="30" class="rounded-md" loading="lazy" alt="<?= $product['name'] ?>">
                         </a>
                         <span>
                             <?= $product['name'] ?><br>
                             Mărime: <?= $product['size'] ?>
                         </span>
                         <span class="text-right grow">
-                            <?= $product['price']. ' ' . $product['currency'] ?>
+                            <?= $product['discount'] > 0 ? '<span class="line-through">' . $product['price'] . '</span> ' . getPrice($product['price'], $product['discount']). ' ' . $product['currency'] : $product['price'] . ' ' . $product['currency'] ?>
+                            <br>
+                            <small><?= $product['discount'] > 0 ? '(-'.$product['discount'].'%)' : '' ?></small>
                         </span>
                     </div>
                 <? } ?>
-                <p class="float-right w-full text-right">Total: <?= number_format($total_price, 2, ',', '.') ?> lei</p>
+                <p class="float-right w-full text-sm text-right text-main-color">Transport: <?= $order['shipping_tax'] ?> lei</p>
+                <p class="float-right w-full text-sm text-right text-main-color">Total: <?= number_format($total_price, 2, ',', '.') ?> lei</p>
             </div>
         <? endforeach ?>
     </div>

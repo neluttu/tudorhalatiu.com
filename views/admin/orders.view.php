@@ -6,7 +6,19 @@
         <? require base_path('views/admin/menu.view.php') ?>        
     </div>
     <div class="flex-1 text-sm">
-        <p class="mb-10 text-lg">Până în prezent s-au făcut <?= count($orders) ?> comenzi în magazinul virtual.</p>
+        <p class="mb-4 text-lg">Până în prezent s-au făcut <?= count($orders) ?> comenzi în magazinul virtual.</p>
+        <form nane="filter" class="flex items-center justify-start mb-5" method="get">
+            <label for="filters">
+                Afișează:
+                <select class="p-2 mb-2 text-sm border rounded-md bg-slate-50" id="filters" name="filter" onchange="this.form.submit()">
+                    <option value="" <?= (isset($_GET['filter']) and $_GET['filter'] === '') ? 'selected' : '' ?>>toate comenzile</option>
+                    <option value="Pending" <?= (isset($_GET['filter']) and $_GET['filter'] === 'Pending') ? 'selected' : '' ?>>comenzile nepreluate</option>
+                    <option value="Processing" <?= (isset($_GET['filter']) and $_GET['filter'] === 'Processing') ? 'selected' : '' ?>>comenzile în lucru</option>
+                    <option value="Completed" <?= (isset($_GET['filter']) and $_GET['filter'] === 'Completed') ? 'selected' : '' ?>>comenzile finalizate</option>
+                    <option value="Canceled" <?= (isset($_GET['filter']) and $_GET['filter'] === 'Canceled') ? 'selected' : '' ?>>comenzile anluate</option>
+                </select>
+            </label>
+        </form>
             <div class="grid grid-cols-1 gap-y-4">
             <? 
             foreach($orders as $order) : 
@@ -21,12 +33,13 @@
                             'product_id' => $product_data[0],
                             'name' => $product_data[1],
                             'price' => $product_data[2],
-                            'currency' => $product_data[3],
-                            'quantity' => $product_data[4],
-                            'size' => $product_data[5]
+                            'discount' => $product_data[3],
+                            'currency' => $product_data[4],
+                            'quantity' => $product_data[5],
+                            'size' => $product_data[6]
                         ];
                     }
-                    $total_price += $product['price'];
+                    $total_price += getPrice($product['price'], $product['discount']);
                     $total_products++;
                     $productList .= '<span class="text-xs">'.$product['name'].' (' . $product['size'] .') </span>';
                     }

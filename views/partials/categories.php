@@ -13,8 +13,8 @@
             max-w-7xl 
             lg:px-0 
             text-slate-600 
-            [&>a:hover]:bg-[#ed0078] 
-            [&>a:hover]:border-[#ed0078] 
+            [&>a:hover]:bg-main-color 
+            [&>a:hover]:border-main-color 
             [&>a:hover]:text-white 
             [&>a]:transition-all 
             [&>a]:duration-150 
@@ -22,7 +22,7 @@
             [&>a]:text-xs
             sm:[&>a]:text-sm">
     <? foreach($categories as $category) : ?>
-        <a href="/shop/<?= $category['slug'] ?>" class="px-2 md:px-4 py-1 md:py-2 border <?= (isset($product['category']) && $category['category_id'] === $product['category']) || (isset($current_category) && $category['slug'] === $current_category) ? 'bg-[#ed0078] border-[#ed0078] text-white' : 'text-slate-500' ?> hover:bg-[#ed0078]" title="<?= $category['name'] ?>"><?= $category['name'] ?></a>
+        <a href="/shop/<?= $category['slug'] ?>" class="px-2 md:px-4 py-1 md:py-2 border <?= (isset($product['category']) && $category['category_id'] === $product['category']) || (isset($current_category) && $category['slug'] === $current_category) ? 'bg-main-color border-main-color text-white' : 'text-slate-500' ?> hover:bg-main-color" title="<?= $category['name'] ?>"><?= $category['name'] ?></a>
 
     <? endforeach ?>
 </div>
