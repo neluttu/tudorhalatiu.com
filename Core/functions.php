@@ -115,3 +115,13 @@ function showPrice($price, $discount) {
 function getPrice($price, $discount) {
     return number_format($price - ($price * ($discount / 100)), 2, '.', '');
 }
+
+function roDate($dateTimeFromDatabase, $format = 'd m, Y') {
+    $dateTime = new DateTime($dateTimeFromDatabase);
+    $monthNames = [
+        1 => 'ianuarie', 2 => 'februarie', 3 => 'martie', 4 => 'aprilie',
+        5 => 'mai', 6 => 'iunie', 7 => 'iulie', 8 => 'august',
+        9 => 'septembrie', 10 => 'octombrie', 11 => 'noiembrie', 12 => 'decembrie'
+    ];
+    return str_replace(['d', 'm', 'Y'], [$dateTime->format('d'), $monthNames[(int) $dateTime->format('n')], $dateTime->format('Y')], $format);
+}

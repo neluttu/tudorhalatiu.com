@@ -40,7 +40,7 @@ class Validator {
     public static function phone($phoneNumber) : bool {
         $phoneNumber = preg_replace('/\D/', '', $phoneNumber);
     
-        if (strlen($phoneNumber) >= 10 && strlen($phoneNumber) <= 11) 
+        if (strlen($phoneNumber) >= 10 && strlen($phoneNumber) <= 14) 
             if (ctype_digit($phoneNumber)) 
                 return true;
 
