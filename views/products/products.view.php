@@ -16,7 +16,7 @@ require base_path('views/partials/banner.php');
         <? foreach($products as $product) :?>
         <a href="<?= \Core\Session::getLang(); ?>/shop/<?= $product['category_slug'] ?>/<?= $product['slug']; ?>" class="group" title="<?= $product['excerpt'] ?>">
             <div class="relative w-full mb-3 overflow-hidden bg-gray-200 rounded-lg aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7">
-                <? if($product['discount'] and isset($product['discount'])) : ?><span class="absolute z-50 p-2 text-white rounded-lg md:p-4 top-3 left-3 bg-main-color flicker-1">-<?= $product['discount'] ?> % discount</span> <? endif ?>
+                <? if($product['discount'] and isset($product['discount'])) : ?><span class="absolute p-2 text-white rounded-lg md:p-4 top-3 left-3 bg-main-color flicker-1">-<?= $product['discount'] ?> % discount</span> <? endif ?>
                 <img loading="lazy" src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?= $product['excerpt'] ?>" class="object-cover object-center w-full h-full transition-all duration-300 ease-in group-hover:scale-110" loading="lazy">
             </div>
             <h2 class="text-base font-semibold text-gray-700"><?=$product['name'] ?></h2>

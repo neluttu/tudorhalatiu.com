@@ -49,6 +49,21 @@ function urlIs($value) {
     return $_SERVER['REQUEST_URI'] === \Core\Session::getLang() . $value;
 }
 
+// function urlIs($value) {
+//     $requestUri = $_SERVER['REQUEST_URI'];
+//     $langPrefix = \Core\Session::getLang();
+//     $targetUri = $langPrefix . $value;
+//     dd($requestUri . ' - ' . $targetUri);
+    
+//     if ($requestUri === $targetUri) return true;
+    
+//     $containsValue = strpos($requestUri, $targetUri) !== false;
+//     $exactMatch = rtrim($requestUri, '/') === $targetUri;
+//     return $containsValue || $exactMatch;
+// }
+
+
+
 function abort($code = 404) {
     http_response_code($code);
     require base_path("views/{$code}.php");

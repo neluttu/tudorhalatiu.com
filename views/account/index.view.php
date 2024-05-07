@@ -26,7 +26,7 @@
                         <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
                         <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
                     </svg>
-                    <input type="text" name="email" id="email" value="<?= $user['email'] ?>" readonly class="w-full px-0 py-2 mt-1 text-right border-b-2 border-gray-200 focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                    <input type="text" name="email" id="email" value="<?= $user['email'] ?>" readonly class="w-full px-0 py-2 mt-1 text-right border-b-2 border-gray-200 focus:outline-none" autocomplete="NA" />
                 </div>
                 <div class="w-full col-span-1 sm:col-span-2"></div>
                 <span class="self-center">
@@ -43,7 +43,7 @@
                     <small class="block text-gray-500">La care te putem contacta pentru comenzile tale.</small>
                 </span>
                 <div class="relative self-center">
-                    <input type="text" name="phone" required id="phone" value="<?= $user['phone']?>" class="w-full px-0 py-2 mt-1 text-right border-b-2 border-gray-200 focus:border-gray-500 focus:outline-none" autocomplete="NA" />
+                    <input type="text" name="phone" required id="phone" value="<?= $user['phone']?>" class="w-full px-0 py-2 mt-1 border-b-2 border-gray-200 focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                 </div>
                 <div class="w-full col-span-1 mt-6 sm:col-span-2 text-main-color">Schimbă parola contului tău (opțional)</div>
                 <span class="self-center">
@@ -51,7 +51,7 @@
                     <small class="block text-gray-500">Setează o parolă nouă pentru acces în cont</small>
                 </span>
                 <div class="relative self-center">
-                    <input type="password" name="password" id="password" value="" class="w-full px-0 py-2 mt-1 mb-1 text-right border-b-2 border-gray-200 focus:border-gray-500 focus:outline-none" autocomplete="new-password" />
+                    <input type="password" name="password" id="password" value="" class="w-full px-0 py-2 mt-1 mb-1 border-b-2 border-gray-200 focus:border-gray-500 focus:outline-none" autocomplete="new-password" />
                     <small class="text-xs text-gray-600">Minim <span class="text-main-color" id="check_min_length">8 caractere</span>, unul <span class="text-main-color" id="check_special_char">speci@l</span>, o <span class="text-main-color" id="check_uppercase">Litera mare</span> și <span class="text-main-color" id="check_number">1 număr</span>.</small>
                 </div>
                 <div class="w-full col-span-1 sm:col-span-2"></div>
@@ -60,7 +60,7 @@
                     <small class="block text-gray-500">Reintrodu parola introdusă în câmpul anterior pentru verificare</small>
                 </span>
                 <div class="relative self-center">
-                    <input type="password" name="password_verify" id="password_verify" value="" class="w-full px-0 py-2 mt-1 text-right border-b-2 border-gray-200 focus:outline-none" autocomplete="NA" />
+                    <input type="password" name="password_verify" id="password_verify" value="" class="w-full px-0 py-2 mt-1 border-b-2 border-gray-200 focus:outline-none" autocomplete="NA" />
                 </div>
                 <script src="/public/js/passwordInputValidate.js"></script>
                 <div class="w-full col-span-1 mt-6 text-right sm:col-span-2">
