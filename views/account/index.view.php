@@ -6,7 +6,6 @@
     <div class="flex shrink-0 flex-row md:flex-col flex-wrap items-start md:justify-center w-full md:w-64 gap-3 text-slate-600  [&>a]:border-b [&>a]:border-transparent  [&>a:hover]:text-main-color [&>a:hover]:border-b [&>a:hover]:border-main-color">
         <? require base_path('views/account/menu.view.php') ?>
     </div>
-    
     <div class="w-full md:grow">
         <p class="mb-2 text-xl font-semibold text-main-color">Ești clientul magazinului din data de <?= roDate($user['created_at']) ?> </p>
         <p class="text-lg">Acestea sunt datele contului de client:</p>
@@ -21,6 +20,12 @@
                     <small class="block text-gray-500">Ea nu se poate edita, reprezintă numele tău de utilizator și de acces în magazin.</small>
                 </span>
                 <div class="relative self-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-1 top-3" width="22" height="22" viewBox="0 0 24 24" stroke-width="1" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                        <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                        <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+                    </svg>
                     <input type="text" name="email" id="email" value="<?= $user['email'] ?>" readonly class="w-full px-0 py-2 mt-1 text-right border-b-2 border-gray-200 focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                 </div>
                 <div class="w-full col-span-1 sm:col-span-2"></div>
@@ -57,44 +62,7 @@
                 <div class="relative self-center">
                     <input type="password" name="password_verify" id="password_verify" value="" class="w-full px-0 py-2 mt-1 text-right border-b-2 border-gray-200 focus:outline-none" autocomplete="NA" />
                 </div>
-                <script>
-        const passwordInput = document.getElementById('password');
-        const passwordVerifyInput = document.getElementById('password_verify');
-        const checkMinLength = document.getElementById('check_min_length');
-        const checkSpecialChar = document.getElementById('check_special_char');
-        const checkUppercase = document.getElementById('check_uppercase');
-        const checkNumber = document.getElementById('check_number');
-
-        passwordInput.addEventListener('input', () => {
-            const password = passwordInput.value;
-
-            const isMinLengthValid = password.length >= 8;
-            checkMinLength.classList.toggle('text-green-600', isMinLengthValid);
-            checkMinLength.classList.toggle('text-main-color', !isMinLengthValid);
-
-            const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-            const hasSpecialChar = specialCharRegex.test(password);
-            checkSpecialChar.classList.toggle('text-green-600', hasSpecialChar);
-            checkSpecialChar.classList.toggle('text-main-color', !hasSpecialChar);
-
-            const hasUppercase = /[A-Z]/.test(password);
-            checkUppercase.classList.toggle('text-green-600', hasUppercase);
-            checkUppercase.classList.toggle('text-main-color', !hasUppercase);
-
-            const hasNumber = /[0-9]/.test(password);
-            checkNumber.classList.toggle('text-green-600', hasNumber);
-            checkNumber.classList.toggle('text-main-color', !hasNumber);
-        });
-
-        passwordVerifyInput.addEventListener('input', () => {
-            const password = passwordInput.value;
-            const verifyPassword = passwordVerifyInput.value;
-
-            const passwordsMatch = password === verifyPassword;
-            passwordVerifyInput.classList.toggle('border-main-color', !passwordsMatch);
-            passwordVerifyInput.classList.toggle('border-gray-200', passwordsMatch);
-        });
-    </script>
+                <script src="/public/js/passwordInputValidate.js"></script>
                 <div class="w-full col-span-1 mt-6 text-right sm:col-span-2">
                     <button class="px-4 py-1 text-white rounded-md md:py-2 bg-main-color grow">Actualizează datele contului</button>
                 </div>

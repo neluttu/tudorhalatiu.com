@@ -21,14 +21,14 @@ $payment = $_POST['payment'];
 $create_account = isset($_POST['account-create']) ? true : false;
 $delivery = isset($_POST['delivery']) ? true : false;
 
-$delivery_lastname = $delivery ? $_POST['delivery_lastname'] : $_POST['lastname'] ;
-$delivery_firstname = $delivery ? $_POST['delivery_firstname'] : $_POST['firstname'] ;
-$delivery_phone = $delivery ? $_POST['delivery_phone'] : $_POST['phone'] ;
-$delivery_city = $delivery ? $_POST['delivery_city'] : $_POST['city'] ;
-$delivery_county = $delivery ? $_POST['delivery_county'] : $_POST['county'] ;
-$delivery_country = $delivery ? $_POST['delivery_country'] : $_POST['country'] ;
-$delivery_address = $delivery ? $_POST['delivery_address'] : $_POST['address'] ;
-$delivery_zip = $delivery ? $_POST['delivery_zip'] : $_POST['zip'] ;
+$delivery_lastname = $delivery ? $_POST['delivery_lastname'] : $_POST['lastname'];
+$delivery_firstname = $delivery ? $_POST['delivery_firstname'] : $_POST['firstname'];
+$delivery_phone = $delivery ? $_POST['delivery_phone'] : $_POST['phone'];
+$delivery_city = $delivery ? $_POST['delivery_city'] : $_POST['city'];
+$delivery_county = $delivery ? $_POST['delivery_county'] : $_POST['county'];
+$delivery_country = $delivery ? $_POST['delivery_country'] : $_POST['country'];
+$delivery_address = $delivery ? $_POST['delivery_address'] : $_POST['address'];
+$delivery_zip = $delivery ? $_POST['delivery_zip'] : $_POST['zip'];
 
 $form = new CheckoutForm();
 
@@ -180,6 +180,52 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                     'city' => $delivery_city,
                     'address' => $delivery_address,
                     'zip' => $delivery_zip,
+                ]);
+
+    // Update billing information if this is the first order. Fill in the missing fields.
+    $db->query("UPDATE users_address 
+                SET 
+                    phone = COALESCE(NULLIF(:phone, ''), phone),
+                    county = COALESCE(NULLIF(:county, ''), county),
+                    country = COALESCE(NULLIF(:country, ''), country),
+                    address = COALESCE(NULLIF(:address, ''), address),
+                    zip = COALESCE(NULLIF(:zip, ''), zip),
+                    city = COALESCE(NULLIF(:city, ''), city)
+                WHERE 
+                    user_id = '".$_SESSION['user']['id']."'
+                    AND type = 'billing'", 
+                [
+                    'phone' => $phone,
+                    'country' => $country,
+                    'county' => $county,
+                    'address' => $address,
+                    'zip' => $zip,
+                    'city' => $city
+                ]);
+
+    // Update shipping information if this is the first order. Fill in the missing fields.
+    $db->query("UPDATE users_address 
+                SET 
+                    firstname = COALESCE(NULLIF(:firstname, ''), firstname),
+                    lastname = COALESCE(NULLIF(:lastname, ''), lastname),
+                    county = COALESCE(NULLIF(:county, ''), county),
+                    country = COALESCE(NULLIF(:country, ''), country),
+                    address = COALESCE(NULLIF(:address, ''), address),
+                    zip = COALESCE(NULLIF(:zip, ''), zip),
+                    phone = COALESCE(NULLIF(:phone, ''), phone),
+                    city = COALESCE(NULLIF(:city, ''), city)
+                WHERE 
+                    user_id = '".$_SESSION['user']['id']."' 
+                    AND type = 'shipping'",
+                [
+                    'firstname' => $delivery_firstname,
+                    'lastname' => $delivery_lastname,
+                    'county' => $delivery_county,
+                    'country' => $delivery_country,
+                    'address' => $delivery_address,
+                    'zip' => $delivery_zip,
+                    'phone' => $delivery_phone,
+                    'city' => $delivery_city
                 ]);
 
     \Core\ShoppingCart::emptyCart();

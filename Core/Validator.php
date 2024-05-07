@@ -53,4 +53,10 @@ class Validator {
             return (preg_match('/^[A-Za-z\-\. ]+$/', trim($name))) ? true : false;
         else return false;
     }
+
+    public static function zip($zip) {
+        $value = trim($zip);
+        if (!is_numeric($zip)) return false;
+        return strlen($zip) === 6;
+    }
 }

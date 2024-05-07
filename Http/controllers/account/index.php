@@ -8,5 +8,6 @@ view('account/index', [
     'heading' => 'Bună '. $_SESSION['user']['name'] ,
     'heading_info' => 'Administrați contul de client',
     'user' => $user,
-    'errors' => Session::get('errors')
+    'errors' => Session::get('errors'),
+    'message' => Session::get('message')
 ]);

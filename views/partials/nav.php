@@ -6,6 +6,7 @@
             <ul class="w-full [&>li:hover]:text-main-color [&>li:hover]:border-b [&>li:hover]:border-main-color [&>li]:py-1 flex justify-between items-center">
                 <li class="<?= urlIs('/') ? 'border-b border-main-color text-main-color' : '' ?>"><a href="/" title="Tudor Halațiu">Acasă</a></li>
                 <li class="<?= urlIs('/shop') ? 'border-b border-main-color text-main-color' : '' ?>"><a href="<?= Session::getLang(); ?>/shop" title="Shop - magazin online Tudor Halațiu">Shop</a></li>
+                <!-- <li class="<?= urlIs('/sale') ? 'border-b border-main-color text-main-color' : '' ?> bg-main-color text-white px-4 rounded-md"><a href="<?= Session::getLang(); ?>/sale" title="Shop - magazin online Tudor Halațiu">Reduceri</a></li> -->
                 <li class="<?= urlIs('/despre') ? 'border-b border-main-color text-main-color' : '' ?>"><a href="/despre" title="Despre Tudor Halațiu">Despre</a></li>
                 <li class="<?= urlIs('/contact') ? 'border-b border-main-color text-main-color' : '' ?>"><a href="/contact" title="Informații contact shop magazin online Tudor Halațiu">Contact</a></li>
             </ul>

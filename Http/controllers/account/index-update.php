@@ -26,4 +26,17 @@ $db->query("UPDATE users_data SET firstname = :firstname, lastname = :lastname, 
             ':phone' => $phone,
         ]
     );
+
+// if New Password was requested:
+if($password) {
+    if($password === $password_verify) {
+        $db->query("UPDATE users SET password = :password WHERE id = :id", 
+                    [
+                        ':password' => password_hash($password, PASSWORD_BCRYPT),
+                        ':id' => $_SESSION['user']['id']
+                    ]);
+        Session::flash('errors', ['password' => 'Parola contului a fost modificată cu succes!']);
+    }
+    else Session::flash('errors', ['password' => 'Parola de verificare nu coincide cu parola aleasă.']);
+}
 redirect('/account');
