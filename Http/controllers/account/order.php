@@ -22,7 +22,6 @@ $products = App::resolve(Database::class)->query("SELECT ordered_products.order_
                                                 WHERE order_id = '".$order['id']."'")->get();
 
 $status = [ 'Pending' => 'În așteptare', 'Processing' => 'În lucru', 'Completed' => 'Finalizată', 'Canceled' => 'Anulată' ];
-$order['status'] = $status[$order['status']];
 
 view('account/order', [
     'heading' => 'Comanda nr. '. str_pad($order['id'], 4, '0', STR_PAD_LEFT),
@@ -30,5 +29,6 @@ view('account/order', [
     'order' => $order,
     'products' => $products,
     'billing' => $billing,
-    'shipping' => $shipping
+    'shipping' => $shipping,
+    'status' => $status
 ]);

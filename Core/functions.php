@@ -138,5 +138,5 @@ function roDate($dateTimeFromDatabase, $format = 'd m, Y') {
         5 => 'mai', 6 => 'iunie', 7 => 'iulie', 8 => 'august',
         9 => 'septembrie', 10 => 'octombrie', 11 => 'noiembrie', 12 => 'decembrie'
     ];
-    return str_replace(['d', 'm', 'Y'], [$dateTime->format('d'), $monthNames[(int) $dateTime->format('n')], $dateTime->format('Y')], $format);
+    return str_replace(['d', 'm', 'Y'], [$dateTime->format('j'), $monthNames[(int) $dateTime->format('n')], $dateTime->format('Y')], $format);
 }
