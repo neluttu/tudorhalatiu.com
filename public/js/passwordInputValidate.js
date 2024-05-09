@@ -4,6 +4,7 @@ const passwordInput = document.getElementById('password');
         const checkSpecialChar = document.getElementById('check_special_char');
         const checkUppercase = document.getElementById('check_uppercase');
         const checkNumber = document.getElementById('check_number');
+        const submitButton = document.getElementById('submitButton');
 
         passwordInput.addEventListener('input', () => {
             const password = passwordInput.value;
@@ -32,6 +33,19 @@ const passwordInput = document.getElementById('password');
                 const verifyPassword = passwordVerifyInput.value;
 
                 const passwordsMatch = password === verifyPassword;
-                passwordVerifyInput.classList.toggle('border-main-color', !passwordsMatch);
-                passwordVerifyInput.classList.toggle('border-gray-200', passwordsMatch);
+                if (passwordsMatch) {
+                    passwordVerifyInput.classList.remove('border-main-color');
+                    passwordVerifyInput.classList.add('border-gray-200');
+                    if(submitButton) { 
+                        submitButton.innerText = 'Setază parola nouă';
+                        submitButton.disabled = false;
+                    }
+                } else {
+                    passwordVerifyInput.classList.remove('border-gray-200');
+                    passwordVerifyInput.classList.add('border-main-color');
+                    if(submitButton)  {
+                        submitButton.innerText = 'Parolele nu coincid, rectificați';
+                        submitButton.disabled = true;
+                    }
+                }
             });

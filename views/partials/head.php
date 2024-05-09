@@ -5,8 +5,9 @@
     <script src="/public/js/googleAnalytics.js"></script>
     <?= $schema ?? '' ?>
     <meta charset="UTF-8">
-    <meta http-equiv="expires" content="Thu, 31 Dec 2024 23:59:59 GMT">
-    <meta http-equiv="Cache-Control" content="max-age=31536000">
+    <meta http-equiv="expires"              content="Thu, 31 Dec 2024 23:59:59 GMT">
+    <meta http-equiv="Cache-Control"        content="max-age=31536000">
+    <meta http-equiv="refresh"              content="86400">
     <meta name="view-transition"            content="same-origin" />
     <meta name="viewport"                   content="user-scalable=yes, initial-scale=1, maximum-scale=5, minimum-scale=1, width=device-width">
     <meta name="format-detection"           content="telephone=yes">
@@ -31,6 +32,7 @@
     <meta name="twitter:image" content="https://tudorhalatiu.com/public/images/tudor-halatiu-og.jpg">
     <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
     <link rel="icon" type="image/png" href="/public/images/favicon.png">
+    <link rel="icon" href="/favicon.ico" />
     <title><?= $title ?? Core\Lang::text('header.title') ?></title>
     <link rel="canonical" href="https://tudorhalatiu.com<?= $_SERVER['REQUEST_URI'] ?>">
     <link rel="stylesheet" href="/public/css/styles.css" class="stylesheet">

@@ -7,7 +7,7 @@ use Http\Forms\UpdatePassword;
 
 $form = new UpdatePassword();
 $password = $_POST['password'];
-$form->validate($password, $_POST['passwd']);
+$form->validate($password, $_POST['password_verify']);
 
 if($form->errors())  {
     Session::flash('errors', $form->errors());

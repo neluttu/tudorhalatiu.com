@@ -15,7 +15,7 @@ use Core\Lang;
     <div class="relative flex flex-col items-start justify-start gap-4 py-6 sm:gap-10 md:flex-row">
         <div class="w-full overflow-hidden rounded-lg md:sticky md:top-0 md:w-2/5" id="stickyContainer">
             <div class="relative bg-gray-200">
-                <? if($product['discount'] and isset($product['discount'])) : ?><span class="absolute z-0 p-2 text-white rounded-lg md:p-4 top-3 left-3 bg-main-color flicker-1">-<?= $product['discount'] ?> % discount</span> <? endif ?>
+                <? if($product['discount'] and isset($product['discount'])) : ?><span class="absolute z-0 p-2 font-bold text-white rounded-lg md:p-4 top-3 left-3 bg-main-color ">-<?= $product['discount'] ?> % discount</span> <? endif ?>
                 <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="w-full transition-all duration-300 ease-in rounded-lg" alt="<?=$product['name']?> - Tudor Halațiu" id="poster" loading="lazy">
             </div>
             <script src="/public/js/fixedPosterImage.js"></script>
@@ -28,6 +28,7 @@ use Core\Lang;
                     <?= showPrice($product['price'], $product['discount']) ?>
                     </p>
                 </div>
+                
                 <hr class="w-[100px] border-b-2 border-slate-700 md:mt-4 float-end hidden md:block">
                 <form method="post" class="flex items-center justify-end gap-1 mt-4 md:mt-10 sm:gap-3">
                     <? if($product['sizes'] and $product['stock'] === 'Yes') { 
@@ -56,14 +57,15 @@ use Core\Lang;
                 </span>
                 <? foreach($photos as $photo) : ?>
                 <span class="overflow-hidden rounded-lg group">
-                    <img src="/<?= $photo ?>" alt="<?= $product['name'] ?>" class="transition-all duration-300 ease-in rounded-lg cursor-pointer productImage group-hover:scale-105" alt="<?=$product['name']?> by Tudor Halațiu" loading="lazy">
+                    <img src="/<?= $photo ?>" class="transition-all duration-300 ease-in rounded-lg cursor-pointer productImage group-hover:scale-105" alt="<?=$product['name']?> by Tudor Halațiu" loading="lazy">
                 </span>
                 <? endforeach ?>
                 <script src="/public/js/changePoster.js"></script>
             </div>
             <? endif ?>
+            <p class="mt-4 text-base font-semibold"><?=$product['excerpt'];?></p>
             <? if($product['sizes'] != 'ONE SIZE') : ?>
-            <ul class="flex flex-col items-center justify-start w-full mt-4 text-xs md:text-sm">
+            <ul class="flex flex-col items-center justify-start w-full mt-1 text-xs md:text-sm">
                 <li class="flex items-center justify-center w-full border-b [&>span]:p-2 [&>span]:font-semibold">
                     <span class="flex-1 text-left"></span>
                     <span class="flex-1 text-right text-main-color">XS</span>
@@ -99,7 +101,7 @@ use Core\Lang;
             </ul>
             <? endif ?>
             <hr class="w-[100px] border-b-2 border-slate-700 mt-8 mb-4">
-            <p class="mb-2 text-base font-semibold"><?=$product['excerpt'];?></p>
+            
             <p class="[&>a]:text-main-color [&>a]:underline">
             <? 
             $product['description'] = str_replace(['[b]','[/b]'], ['<b class="font-semibold">','</b>'], $product['description']);

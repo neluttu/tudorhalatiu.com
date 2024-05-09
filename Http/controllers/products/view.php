@@ -12,7 +12,7 @@ if (isset($params['id']) && is_numeric($params['id']) && preg_match('/^\d{1,4}$/
         ':id' => $params['id']
     ])->findOrFail();
     header("HTTP/1.1 301 Moved Permanently");
-    header("Location: /shop/" . $product['category_slug'] . "/" . $product['slug']);
+    header("Location: https://tudorhalatiu.com/shop/" . $product['category_slug'] . "/" . $product['slug'], true, 301);
     exit();
 }
 // Normal url with SLUG
