@@ -7,10 +7,10 @@ class UpdatePassword {
     public function validate($password, $password_verify) {
 
         if(empty($password) or empty($password_verify))
-            $this->errors['empty'] = 'empty_password';
+            $this->errors['empty'] = 'Câmpul trebuie completat.';
 
         if(!Validator::password($password))
-            $this->errors['password'] = 'weak_password';
+            $this->errors['password'] = 'Alege o parolă mai puternică.';
 
         if(!Validator::match($password, $password_verify))
             $this->errors['password_verify'] = 'password_verify';

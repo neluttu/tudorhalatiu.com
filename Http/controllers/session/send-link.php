@@ -10,7 +10,7 @@ $form = new Http\Forms\ResetForm();
 $email = $_POST['email'];
 
 // Dev unset token request.
-unset($_SESSION['token'],$_SESSION['token_expires']);
+//unset($_SESSION['token'],$_SESSION['token_expires']);
 $form->validate($email);
 
 if(Session::has('token') and Session::has('token_expires') > time() and empty($form->errors())) {

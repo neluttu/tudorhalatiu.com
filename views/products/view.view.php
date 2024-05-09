@@ -15,20 +15,21 @@ use Core\Lang;
     <div class="relative flex flex-col items-start justify-start gap-4 py-6 sm:gap-10 md:flex-row">
         <div class="w-full overflow-hidden rounded-lg md:sticky md:top-0 md:w-2/5" id="stickyContainer">
             <div class="relative bg-gray-200">
-                <? if($product['discount'] and isset($product['discount'])) : ?><span class="absolute z-0 p-2 font-bold text-white rounded-lg md:p-4 top-3 left-3 bg-main-color ">-<?= $product['discount'] ?> % discount</span> <? endif ?>
+                <? if($product['discount'] and isset($product['discount']) and $GLOBALS['conf']['shop_status'] != 0) : ?><span class="absolute z-0 p-2 font-bold text-white rounded-lg md:p-4 top-3 left-3 bg-main-color ">-<?= $product['discount'] ?> % discount</span> <? endif ?>
                 <img src="/public/images/products/<?=$product['id']?>/poster.avif" class="w-full transition-all duration-300 ease-in rounded-lg" alt="<?=$product['name']?> - Tudor Halațiu" id="poster" loading="lazy">
             </div>
             <script src="/public/js/fixedPosterImage.js"></script>
         </div>
-        <div class="relative w-full text-sm font-light leading-loose md:-mt-20 md:flex-1 text-slate-700">
-            <div class="fixed bottom-0 left-0 z-50 w-full px-3 pt-3 pb-3 sm:p-0 sm:static bg-white/80 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
+        <div class="relative w-full text-sm font-light leading-loose md:flex-1 text-slate-700">
+            <? if($GLOBALS['conf']['shop_status'] == 1) : ?>
+            <div class="fixed bottom-0 left-0 z-50 w-full px-3 pt-3 pb-3 md:-mt-20 sm:p-0 sm:static bg-white/80 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
+
                 <div class="flex items-center justify-between text-xl font-semibold sm:text-2xl md:text-4xl text-main-color">
                     <h2 class="flex-1 text-base sm:text-xl md:hidden"><?= $product['name'] ?></h2>
                     <p class="flex-1 text-right">
                     <?= showPrice($product['price'], $product['discount']) ?>
                     </p>
                 </div>
-                
                 <hr class="w-[100px] border-b-2 border-slate-700 md:mt-4 float-end hidden md:block">
                 <form method="post" class="flex items-center justify-end gap-1 mt-4 md:mt-10 sm:gap-3">
                     <? if($product['sizes'] and $product['stock'] === 'Yes') { 
@@ -50,6 +51,7 @@ use Core\Lang;
                     </button>
                 </form>
             </div>
+            <? endif ?>
             <? if(count($photos) > 0) : ?>
             <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-4">
                 <span class="[&>img]:transition-all [&>img]:duration-300 [&>img]:ease-in sm:[&>img:hover]:scale-105 [&>img]:rounded-lg [&>img]:cursor-pointer [&>img]:w-full hidden group overflow-hidden rounded-lg sm:block ">

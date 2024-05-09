@@ -21,6 +21,10 @@ Core\Lang::loadLanguage();
 
 require base_path('bootstrap.php');
 
+// Get site config
+$db = App::resolve(Database::class)->query("SELECT * FROM config")->get();
+foreach ($db as $setting) $GLOBALS['conf'][$setting['name']] = $setting['value'];
+
 // Setup router.
 $router = new \Core\Router;
 $db = App::resolve(Database::class)->query("SELECT * FROM routes ORDER BY page ASC")->get();
@@ -32,6 +36,7 @@ foreach ($db as $route) {
     else 
         $router->$method('/{lang}' . $route['uri'], $route['controller'])->only($route['middleware'], $route['middleware_redirect']);
 }
+
 $router->route();
 
 // unflash session variables

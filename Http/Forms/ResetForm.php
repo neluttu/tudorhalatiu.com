@@ -8,7 +8,7 @@ class ResetForm {
     public function validate($email) {
 
         if(!Validator::email($email))
-            $this->errors['invalid_email'] = Lang::text('userForms.invalid_email');
+            $this->errors['invalid_email'] = 'Adresă de email invalidă';
         
         return empty($this->errors);
     }

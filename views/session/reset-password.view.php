@@ -3,9 +3,7 @@
 <?php require base_path('views/partials/banner.php'); ?>
 <main class="w-full px-2 max-w-7xl">
     <? if(!empty($errors)) : ?>
-        <div class="p-3 mb-4 text-sm border rounded-md border-rose-400 bg-rose-100 text-rose-600">
-            <?= $errors['invalid_email'] ?? $errors['null_user'] ?? $errors['reset_active'] ?? '' ?>
-        </div>
+        <div class="p-3 mb-4 text-sm border rounded-md empty:hidden border-rose-400 bg-rose-100 text-rose-600"><?= $errors['invalid_email'] ?? $errors['null_user'] ?? $errors['reset_active'] ?? '' ?></div>
     <? endif ?>
     <!-- <p><?=$result['token'] ?? '' ?></p> -->
     <section class="flex flex-wrap items-center justify-center px-2 lg:justify-between lg:px-0">
