@@ -7,7 +7,7 @@ $db = App::resolve(Database::class);
 
 
 // Check if the product ID from the page matches the product ID in the database.
-$checkID = $db->query('SELECT id FROM products WHERE id = :id LIMIT 1', 
+$checkID = $db->query('SELECT id FROM products WHERE id = :id AND stock = "Yes" AND status = "Online" LIMIT 1', 
                     [
                         'id' => $_POST['id']
                     ])->totlaRows();

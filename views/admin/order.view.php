@@ -50,15 +50,19 @@
             </li>
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
                 <h2 class="mb-4 font-bold">Date facturare:</h2>
-                <p>Client: <?= $billing['firstname'] . ' ' . $billing['lastname'] ?>, <?= $billing['phone'] ?></p>
+                <p><a href="" class="underline">Client: <?= $billing['firstname'] . ' ' . $billing['lastname'] ?>, <?= $billing['phone'] ?></a></p>
                 <p>Adresa: <?= $billing['address'] . ', ' . $billing['city'] . ', ' . $billing['county'] . ', '. $billing['zip'] ?></p>
                 <p>Telefon: <?= $billing['phone'] ?></p>
             </li>
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
                 <h2 class="mb-4 font-bold">Modalitate plată:</h2>
                 <p>Plată online prin Netopia</p>
-                <p>Stare plată: <?= $order['payed'] === 'Yes' ? 'confirmată' : '<span class="text-main-color">neachitată.</span>' ?></p>
-                
+                <p>Stare plată: 
+                <select class="p-2 bg-transparent border rounded-md border-main-color">
+                    <option value="Yes" <?= $order['payed'] === 'Yes' ? 'selected' : '' ?>>achitată</option>
+                    <option value="No" <?= $order['payed'] === 'No' ? 'selected' : '' ?>>neachitată</option>
+                </select>    
+                </p>
                 <p><? if($order['invoice'] !== null) : ?><button type="submit" class="px-2 py-1 text-sm font-normal text-white rounded-md bg-cyan-600 md:py-2 ">Vezi factura</button><? endif ?></p>
             </li>
         </ul>

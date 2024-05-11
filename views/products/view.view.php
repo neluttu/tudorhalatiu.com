@@ -32,12 +32,12 @@ use Core\Lang;
                 </div>
                 <hr class="w-[100px] border-b-2 border-slate-700 md:mt-4 float-end hidden md:block">
                 <form method="post" class="flex items-center justify-end gap-1 mt-4 md:mt-10 sm:gap-3">
-                    <? if($product['sizes'] and $product['stock'] === 'Yes') { 
+                    <? if($product['sizes']) { 
                         $i = 0;
                         foreach(explode(',', $product['sizes']) as $Size) {
                     ?>
                     <div class="font-sans font-semibold text-center min-w-[34px] md:min-w-[46px] cursor-pointer">
-                        <input type="radio" name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> />
+                        <input type="radio" name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> required />
                         <label for="size_<?= $Size ?>" class="peer-checked:bg-main-color block p-[3px] md:p-[9px]  hover:bg-main-color transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-lg"><?= $Size ?></label>
                     </div>
                     <? $i = 1; } } ?>
@@ -46,7 +46,7 @@ use Core\Lang;
                     <input type="hidden" name="price" value="<?=$product['price'] ?>">
                     <input type="hidden" name="discount" value="<?=$product['discount'] ?>">
                     
-                    <button <?= $product['stock'] === 'No' ? 'disabled' : '' ?> type="submit" class="px-2 py-1 ml-10 font-semibold text-white rounded-lg md:py-2 <?= $product['stock'] === 'No' ? 'bg-gray-300' : 'bg-main-color grow' ?>">
+                    <button <?= $product['stock'] === 'No' ? 'disabled' : '' ?> type="submit" class="px-2 py-1 ml-10 font-semibold text-white rounded-lg md:py-2 <?= $product['stock'] === 'No' ? 'bg-gray-300 grow' : 'bg-main-color grow' ?>">
                         <?= $product['stock'] === 'Yes' ? Lang::text('product.add_to_cart') : 'Stoc indisponibil' ?>
                     </button>
                 </form>
