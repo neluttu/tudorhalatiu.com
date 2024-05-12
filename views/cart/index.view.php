@@ -202,11 +202,11 @@
             </p>
             <p class="flex items-center justify-start py-3 border-b">
                 <span class="grow">Transport</span>
-                <span class="text-right">16 lei</span>
+                <span class="text-right"><?= $Total >= $GLOBALS['conf']['shipping_threshold'] ? 'gratuit' : $GLOBALS['conf']['shipping_tax'] . ' lei' ?></span>
             </p>
             <p class="flex items-center justify-start py-3 border-b">
                 <span class="grow">Total</span>
-                <span><?= number_format($Total + 16, 2, ',', '.');?> lei</span>
+                <span><?= number_format($Total + ($Total >= $GLOBALS['conf']['shipping_threshold'] ? 0 : $GLOBALS['conf']['shipping_tax']), 2, ',', '.');?> lei</span>
             </p>
 
             <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>

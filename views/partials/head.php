@@ -23,13 +23,13 @@
     <meta property="og:type"                content="website">
     <meta property="og:title"               content="<?= $title ?? Core\Lang::text('header.title') ?>">
     <meta property="og:description"         content="<?= $description ?? Core\Lang::text('header.description') ?>">
-    <meta property="og:image"               content="https://tudorhalatiu.com/public/images/tudor-halatiu-og.jpg">
+    <meta property="og:image"               content="<?= $fb_og ?? 'https://tudorhalatiu.com/public/images/tudor-halatiu-og.jpg' ?>">
     <meta name="twitter:card"               content="summary_large_image">
     <meta property="twitter:domain"         content="tudorhalatiu.com">
     <meta property="twitter:url"            content="https://tudorhalatiu.com">
     <meta property="twitter:title"          content="<?= $title ?? Core\Lang::text('header.title') ?>">
     <meta property="twitter:description"    content="<?= $description ?? Core\Lang::text('header.description') ?>">
-    <meta name="twitter:image" content="https://tudorhalatiu.com/public/images/tudor-halatiu-og.jpg">
+    <meta name="twitter:image" content="<?= $fb_og ?? 'https://tudorhalatiu.com/public/images/tudor-halatiu-og.jpg' ?>">
     <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
     <link rel="icon" type="image/png" href="/public/images/favicon.png">
     <link rel="icon" href="/favicon.ico" />

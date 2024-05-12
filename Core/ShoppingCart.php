@@ -97,7 +97,7 @@ class ShoppingCart
             foreach($_SESSION['cart'] as $_ => $value) {
                 $Price += getPrice($value['price'], $value['discount']);
             }
-            return number_format($Price, 2, ',', '');
+            return number_format($Price, 2, '.', '');
         }
         else return 0;
     }

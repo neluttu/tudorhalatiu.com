@@ -48,7 +48,7 @@
                 <div class="flex flex-col px-2 transition-all duration-150 ease-in border rounded-md hover:bg-white bg-gray-50">
                     <div class="flex items-center justify-start gap-3">
                         <span class="flex flex-col flex-1 py-2 mb-0 gap-y-2">
-                            <a href="/admin/order/<?= $order['order_id']?>"><span class="p-1 px-2 text-sm font-bold text-white rounded-md bg-<?=$status[$order['status']]?>-600"> <?= str_pad($order['order_id'], 3, '0', STR_PAD_LEFT) ?></span> <?= $order['firstname'] . ' ' . $order['lastname'] ?>, <?= $total_products ?> produs(e), <span class="text-main-color"><?= number_format($total_price, 2, ',', '.') ?> lei</span>, în data: <?= date('d F Y, H:i', strtotime($order['ordered_at'])) ?></a>
+                            <a href="/admin/order/<?= $order['order_id']?>"><span class="p-1 px-2 text-sm font-bold text-white rounded-md bg-<?=$status[$order['status']]?>-600"> <?= str_pad($order['order_id'], 6, '0', STR_PAD_LEFT) ?></span> <?= $order['firstname'] . ' ' . $order['lastname'] ?>, <?= $total_products ?> produs(e), <span class="text-main-color"><?= number_format($total_price, 2, ',', '.') ?> lei</span>, în data: <?= date('d F Y, H:i', strtotime($order['ordered_at'])) ?></a>
                             <div class="flex items-center justify-start flex-1 gap-2 text-gray-400"><?= $productList ?></div>
                         </span>
                         <div class="flex items-center justify-center gap-3 m-2">

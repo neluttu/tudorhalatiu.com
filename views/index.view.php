@@ -20,5 +20,4 @@
         <? endforeach; ?>
     </div>
 </main>
-
 <? require base_path('views/partials/footer.php'); ?>

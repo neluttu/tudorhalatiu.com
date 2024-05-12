@@ -17,7 +17,7 @@ if (isset($params['id']) && is_numeric($params['id']) && preg_match('/^\d{1,4}$/
 }
 // Normal url with SLUG
 elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a-zA-Z0-9\-]+$/', $params['slug'])) {
-    $product = $db->query('SELECT id, products.name, products.slug, discount, category, sizes, stock, price, excerpt, description, status, categories.name AS category_name FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE products.slug = :slug AND status = "Online"', 
+    $product = $db->query('SELECT id, products.name, products.slug, discount, category, sizes, stock, price, excerpt, description, status, categories.name AS category_name, categories.slug AS category_slug FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE products.slug = :slug AND status = "Online"', 
     [
         ':slug' => $params['slug']
     ])->findOrFail();
@@ -56,7 +56,8 @@ elseif (isset($params['slug']) && is_string($params['slug']) && preg_match('/^[a
         'categories' => $categories,
         'views' => $getViews[0]['views'],
         'photos' => $imagesFiles,
-        'schema' => $schema
+        'schema' => $schema,
+        'fb_og' => 'https://tudorhalatiu.com/public/images/products/' . $product['id'] . '/poster.avif'
     ]);
 }
 else abort();

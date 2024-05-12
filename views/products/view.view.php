@@ -37,7 +37,7 @@ use Core\Lang;
                         foreach(explode(',', $product['sizes']) as $Size) {
                     ?>
                     <div class="font-sans font-semibold text-center min-w-[34px] md:min-w-[46px] cursor-pointer">
-                        <input type="radio" name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> required />
+                        <input type="radio" <?= $product['stock'] === 'No' ? 'disabled' : '' ?> name="size" id="size_<?= $Size ?>" value="<?= $Size ?>" class="hidden peer" <?= $i === 0 ? 'checked' : '' ?> required />
                         <label for="size_<?= $Size ?>" class="peer-checked:bg-main-color block p-[3px] md:p-[9px]  hover:bg-main-color transition-all duration-150 ease-in cursor-pointer text-white bg-black rounded-lg"><?= $Size ?></label>
                     </div>
                     <? $i = 1; } } ?>

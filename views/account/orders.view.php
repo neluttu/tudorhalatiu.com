@@ -21,11 +21,11 @@
                         <path d="M11 13l9 -9" />
                         <path d="M15 4h5v5" />
                     </svg>
-                    Comanda numarul #<?= str_pad($order['order_id'], 3, '0', STR_PAD_LEFT) ?>
+                    Comanda numarul #<?= str_pad($order['order_id'], 6, '0', STR_PAD_LEFT) ?>
                 </a>
                 <ul class="flex items-start justify-start gap-8 pb-2 mb-4 text-sm font-light text-gray-600 ">
                     <li>Din <?= roDate($order['ordered_at']) ?></li>
-                    <li>În procesare</li>
+                    <li>În procesare</li> <!-- WTF -->
                     <li>Achitată</li>
                 </ul>
                 <?

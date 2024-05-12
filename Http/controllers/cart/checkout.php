@@ -51,6 +51,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     // get new user ID
     $user_id = $db->getLastID();
 
+
     $db->query("
             INSERT INTO users_data (user_id, firstname, lastname, phone)
             VALUES (:user_id, :firstname, :lastname, :phone)
@@ -125,12 +126,16 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     }
     else $user_id = null;
 
-    $db->query("INSERT INTO orders (user_id, status, payed, payment_type, remote_ip)
-                VALUES (:user_id, :status, :payed, :payment_type, INET_ATON(:ipAddress))",
+    // Calculate shipping tax based on items in cart
+    $shipping_tax = \Core\ShoppingCart::getCartPrice() >= $GLOBALS['conf']['shipping_threshold'] ? 0 : $GLOBALS['conf']['shipping_tax'];
+
+    $db->query("INSERT INTO orders (user_id, status, payed, shipping_tax, payment_type, remote_ip)
+                VALUES (:user_id, :status, :payed, :shipping_tax, :payment_type, INET_ATON(:ipAddress))",
                 [
                     'user_id' => $user_id,
                     'status' => 'Pending',
                     'payed' => 'No',
+                    'shipping_tax' => $shipping_tax,
                     'payment_type' => $payment,
                     'ipAddress' => $_SERVER['REMOTE_ADDR']
                 ]
@@ -138,9 +143,11 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
 
     $order_id = $db->getLastID();
 
-    if(!empty($_SESSION['cart']))
+    if(!empty($_SESSION['cart'])) {
+        $Products_total = 0;
+        $email_products = '';
         foreach($_SESSION['cart'] as $key => $product) {
-            $productdb = $db->query("SELECT price, discount FROM products WHERE id = :product_id", [':product_id' => $product['id']])->find();
+            $productdb = $db->query("SELECT price, discount, products.slug, categories.slug AS category_slug FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE id = :product_id", [':product_id' => $product['id']])->find();
             $db->query("INSERT INTO ordered_products (order_id, product_id, name, price, discount, size)
                         VALUES (:order_id, :product_id, :name, :price, :discount, :size)",
                         [
@@ -151,7 +158,22 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                             'discount' => $productdb['discount'],
                             'size' => $product['features']['size']
                         ]);
+            // Build email product list
+            $email_products .= '<tr>';
+            $email_products .= '<td style="width: 70%;">';
+            $email_products .= '<a href="{{host}}/shop/'.$productdb['category_slug'].'/'.$productdb['slug'].'" target="_blank" style="text-decoration:none; color:#858585"><img src="https://tudorhalatiu.com/public/images/products/'.$product['id'].'/poster.avif" width="40" style="border-radius: 4px; float: left; margin-right: 10px;">';
+            $email_products .= '<p>'.$product['name'].'<br>Mărime '.$product['features']['size'].'</p>';
+            $email_products .= '</td>';
+            $email_products .= '<td style="padding-bottom: 6px; padding-top: 6px; font-size: 13px; font-weight:600; text-align: right;">'.number_format(getPrice($productdb['price'], $productdb['discount']), 2, ',', '.') .' lei</td>';
+            $email_products .= '</tr>';
+
+            // Get total product price.
+            $Products_total += getPrice($productdb['price'], $productdb['discount']);
+
         }
+        // Set free shipping tax for orders over 400 lei.
+        if($Products_total >= $GLOBALS['conf']['shipping_threshold']) $GLOBALS['conf']['shipping_tax'] = 0;
+    }
     
     $db->query("INSERT INTO orders_billing (order_id, firstname, lastname, email, phone, country, county, city, address, zip)
                 VALUES (:order_id, :firstname, :lastname, :email, :phone, :country, :county, :city, :address, :zip)", 
@@ -228,6 +250,38 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                     'city' => $delivery_city
                 ]);
 
+    $emailSender = new Core\EmailSender();
+    $emailSender->sendEmail(
+        $email,
+        'Comanda numărul TH'. str_pad($order_id, 6, '0', STR_PAD_LEFT),
+        'views/emails/Order.html',
+        [
+            'firstname' => $firstname,  
+            'lastname' => $lastname,  
+            'address' => $address,  
+            'city' => $city,  
+            'county' => $county,  
+            'zip' => $zip,  
+            'phone' => $phone,  
+            'delivery_firstname' => $delivery_firstname,  
+            'delivery_lastname' => $delivery_lastname,  
+            'delivery_address' => $delivery_address,  
+            'delivery_city' => $delivery_city,  
+            'delivery_county' => $delivery_county,  
+            'delivery_zip' => $delivery_zip,  
+            'delivery_phone' => $delivery_phone,
+            'delivery_email' => $delivery_email,
+            'shipping_tax' => $GLOBALS['conf']['shipping_tax'] == 0 ? '<span style="color:#ed0078">gratuit</span>' : $GLOBALS['conf']['shipping_tax'] . ' lei',
+            'date' => roDate(date('Y-m-d')),
+            'products_total' => number_format($Products_total, 2, ',', '.'),
+            'products' => $email_products,
+            'total' => number_format(($Products_total + $GLOBALS['conf']['shipping_tax']), 2, ',', '.'),
+            'payment_method' => $payment,
+            'order_id' => str_pad($order_id, 6, '0', STR_PAD_LEFT),
+            'currency' => 'lei',
+            'host' => $_SERVER['HTTP_HOST']
+        ]
+    );
     \Core\ShoppingCart::emptyCart();
     return redirect('/comanda-trimisa');
 }
