@@ -38,6 +38,7 @@
         </a>
         <a href="/termeni-si-conditii" class="font-sans font-normal hover:underline hover:text-main-color text-slate-600" title="Termeni si conditii">Termeni și condiții</a>
         <a href="/politica-confidentialitate" class="font-sans font-normal hover:underline hover:text-main-color text-slate-600" title="Politica confidențialitate">Politică confidențialitate</a>
+        <a href="/politica-cookies" class="font-sans font-normal hover:underline hover:text-main-color text-slate-600" title="Politica cookie-uri">Politică cookie-uri</a>
         <a href="/livrare-si-retur" class="font-sans font-normal hover:underline hover:text-main-color text-slate-600" title="Livrare si retur">Livrare și retur</a>
     </div>
 </footer>

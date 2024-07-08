@@ -212,7 +212,7 @@
             <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>
 
             <label for="mobilpay" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
-                <input type="radio" name="payment" id="mobilpay" value="Credit Card" class="accent-main-color" disabled> <span>Card Online prin </span> <img src="/public/images/mobilpay.gif"  loading="lazy">
+                <input type="radio" name="payment" id="mobilpay" value="Credit Card" class="accent-main-color" disabled> <span>Card Online prin </span> <img src="/public/images/twispay.png" alt="Twispay" loading="lazy">
             </label>
 
             <label for="ramburs" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
