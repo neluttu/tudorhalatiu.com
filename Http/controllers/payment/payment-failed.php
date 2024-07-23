@@ -4,5 +4,5 @@ view('payment/payment-failed',[
     'heading_info' => 'Statusul plății comenzii',
     'title' => 'Rezultat plată comandă online',
     'description' => 'Rezultat plată comandă online',
-    'result' => \Core\Session::get('result')
+    'data' => \Core\Session::get('payment')
 ]);

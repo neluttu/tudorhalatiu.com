@@ -23,7 +23,6 @@ use Core\Lang;
         <div class="relative w-full text-sm font-light leading-loose md:flex-1 text-slate-700">
             <? if($GLOBALS['conf']['shop_status'] == 1) : ?>
             <div class="fixed bottom-0 left-0 z-50 w-full px-3 pt-3 pb-3 md:-mt-20 sm:p-0 sm:static bg-white/80 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
-
                 <div class="flex items-center justify-between text-xl font-semibold sm:text-2xl md:text-4xl text-main-color">
                     <h2 class="flex-1 text-base sm:text-xl md:hidden"><?= $product['name'] ?></h2>
                     <p class="flex-1 text-right">
@@ -44,6 +43,7 @@ use Core\Lang;
                     <input type="hidden" name="id" value="<?=$product['id'] ?>">
                     <input type="hidden" name="name" value="<?=$product['name'] ?>">
                     <input type="hidden" name="price" value="<?=$product['price'] ?>">
+                    <input type="hidden" name="weight" value="<?=$product['weight'] ?>">
                     <input type="hidden" name="discount" value="<?=$product['discount'] ?>">
                     
                     <button <?= $product['stock'] === 'No' ? 'disabled' : '' ?> type="submit" class="px-2 py-1 ml-10 font-semibold text-white rounded-lg md:py-2 <?= $product['stock'] === 'No' ? 'bg-gray-300 grow' : 'bg-main-color grow' ?>">

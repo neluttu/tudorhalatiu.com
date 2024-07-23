@@ -25,6 +25,7 @@ class ShoppingCart
                 'quantity' => 1, //(int) $product['quantity'], -- only quantity available for this webiste is 1.
                 'price' => (float) $product['price'],
                 'discount' => (int) $product['discount'],
+                'weight' => (int) $product['weight'],
                 'features' => $this->extractProductFeatures($product),
             ];
 
@@ -51,7 +52,7 @@ class ShoppingCart
     {
         $features = $product;
         // Remove base product variables so we get only custom product features.
-        unset($features['id'], $features['name'], $features['quantity'], $features['price'], $features['discount']);
+        unset($features['id'], $features['name'], $features['quantity'], $features['price'], $features['discount'], $features['weight']);
 
         return $features;
     }

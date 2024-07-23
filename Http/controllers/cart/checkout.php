@@ -19,6 +19,7 @@ $zip = $_POST['zip'];
 $address = $_POST['address'];
 
 $payment = $_POST['payment'];
+$shipping_tax = $_POST['shipping_tax'];
 
 $create_account = isset($_POST['account-create']) ? true : false;
 $delivery = isset($_POST['delivery']) ? true : false;
@@ -43,7 +44,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     $db = App::resolve(Database::class);
     if($create_account and !isset($_SESSION['user']['email'])) {
 
-    // add user to database
+    // add new user to database
     $db->query("
             INSERT INTO users (email, password, status, remote_addr)
             VALUES (:email, :password, 'Active', INET_ATON(:ipAddress))
@@ -86,7 +87,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                 ]
             );
 
-        // Insert user account delivery addresse into db.
+        // Insert user account delivery address into db.
         if($delivery) 
             $db->query("
                     INSERT INTO users_address (user_id, type, firstname, lastname, country, address, city, county, zip, phone)
@@ -116,7 +117,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
             ]
         );
         
-        // Log the user in.
+        // Log the new user in automatically.
         $_SESSION['user'] = [
             'email' => $email,
             'name' => $firstname,
@@ -131,13 +132,14 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     }
     else $user_id = null;
 
-    $db->query("INSERT INTO orders (user_id, status, payed, payment_type, remote_ip)
-                VALUES (:user_id, :status, :payed, :payment_type, INET_ATON(:ipAddress))",
+    $db->query("INSERT INTO orders (user_id, status, payed, payment_type, shipping_tax, remote_ip)
+                VALUES (:user_id, :status, :payed, :payment_type, :shipping_tax, INET_ATON(:ipAddress))",
                 [
                     'user_id' => $user_id,
                     'status' => 'Pending',
                     'payed' => 'No',
                     'payment_type' => $payment,
+                    'shipping_tax' => calculateShippingTax(),
                     'ipAddress' => $_SERVER['REMOTE_ADDR']
                 ]
             );
@@ -145,33 +147,50 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     $order_id = $db->getLastID();
 
     if(!empty($_SESSION['cart'])) {
-        $amount = $GLOBALS['conf']['shipping_tax']; // Needs shipping tax fix.
+
+        $amount = 0; 
+
+        // Insert ordered products in db.
         foreach($_SESSION['cart'] as $key => $product) {
-            $productdb = $db->query("SELECT price, discount FROM products WHERE id = :product_id", [':product_id' => $product['id']])->find();
-            $db->query("INSERT INTO ordered_products (order_id, product_id, name, price, discount, size)
-                        VALUES (:order_id, :product_id, :name, :price, :discount, :size)",
+
+            // Get product data from db using cart ID;
+            $productdb = $db->query("SELECT id, name, price, discount, weight FROM products WHERE id = :product_id", [':product_id' => $product['id']])->find();
+            
+            // Insert cart products data into db.
+            $db->query("INSERT INTO ordered_products (order_id, product_id, name, price, discount, size, weight)
+                        VALUES (:order_id, :product_id, :name, :price, :discount, :size, :weight)",
                         [
                             'order_id' => $order_id,
                             'product_id' => $product['id'],
-                            'name' => $product['name'],
+                            'name' => $productdb['name'],
                             'price' => $productdb['price'],
                             'discount' => $productdb['discount'],
-                            'size' => $product['features']['size']
+                            'size' => $product['features']['size'],
+                            'weight' => $productdb['weight']
                         ]);
 
             $amount +=  getPrice($productdb['price'],$productdb['discount']);
 
+            // Build items for TwisPay
             $orderProducts[] = [
-                "item" => $product['name'],
-                "product_id" => $product['id'],
-                "unitPrice" => $productdb['price'],
+                "item" => $productdb['name'],
+                "product_id" => $productdb['id'],
+                "unitPrice" => getPrice($productdb['price'],$productdb['discount']),
                 "units" => 1,
                 "type" => "physical",
-                "discount" => $productdb['discount'],
                 "size" => $product['features']['size'],
                 "vatPercent" => 0
                 ];
         }
+        $orderProducts[] = [
+            "item" => "Taxă transport",
+            "product_id" => 99999,
+            "unitPrice" => calculateShippingTax(),
+            "units" => 1,
+            "type" => "physical",
+            "size" => "",
+            "vatPercent" => 0
+        ];
     }
 
     $db->query("INSERT INTO orders_billing (order_id, firstname, lastname, email, phone, country, county, city, address, zip)
@@ -249,7 +268,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                     'city' => $delivery_city
                 ]);
 
-
+    // Build TwisPay data array
     $orderData = [
         "siteId" => Twispay::getSiteID(),
         "customer" => [
@@ -265,16 +284,16 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
             "phone" => $phone
         ],
         "order" => [
-            "orderId" => $order_id,
+            "orderId" => $order_id . '-' . time(),
             "type" => "purchase",
-            "amount" => $amount,
+            "amount" => number_format($amount, 2, '.', ''),
             "currency" => "RON",
             "description" => "Comandă online",
             "items" => $orderProducts
         ],
         "cardTransactionMode" => "authAndCapture",
         "invoiceEmail" => 'ionel.olariu@gmail.com', // edit with client email.
-        "backUrl" => "https://th.devserver.ro/payment-result"
+        "backUrl" => 'https://' . $_SERVER['HTTP_HOST'] . "/payment-result"
     ];
     Session::flash('orderData', $orderData);
     $payment == 'Credit Card' ? redirect('/payment') : redirect('/comanda-trimisa');

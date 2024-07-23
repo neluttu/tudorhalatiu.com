@@ -4,7 +4,7 @@
 
 <main class="mx-auto max-w-7xl">
     <div class="py-6 sm:px-6 lg:px-8 [&>p]:mb-10 [&>p]:font-[200] px-2">
-        <?= d($result) ?>
+        <?= d($data) ?>
         Ne pare rau, dar plata nu a fost acceptata... 
     </div>
 </main>

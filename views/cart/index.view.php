@@ -1,14 +1,13 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
-
 <main class="w-full md:mt-5 max-w-7xl">
     <? Core\Session::getMessage(); ?>
     <section class="flex flex-col items-start justify-start w-full gap-4 px-2 md:gap-10 lg:px-0 md:flex-row">
         <div class="w-full grow">
             <ul class="flex flex-col flex-wrap items-start justify-center gap-4 pb-4 border-b-[3px] border-black">
-                <? $Total = 0; ?>
-                <? if(!empty($_SESSION['cart'])) foreach($_SESSION['cart'] as $key => $product) : ?>
+                <? $Total = 0; $weight = 0; ?>
+                <? if(!empty($_SESSION['cart'])) { foreach($_SESSION['cart'] as $key => $product) : ?>
                     <li class="w-full p-1 transition-all duration-200 ease-in bg-white rounded-md hover:bg-slate-100 border-slate-300">
                         <form name="updateCart" method="post" class="flex items-center justify-start gap-4">
                             <input type="hidden" name="_method" value="patch">
@@ -32,8 +31,12 @@
                 </li>
                 <? 
                 $Total +=  getPrice($product['price'],$product['discount']);
-                endforeach; 
+                $weight += $product['weight'];
+                endforeach;
+                $shipping_tax = calculateShippingTax();
+                }
                 else echo 'You do not have any items in your shopping cart.';
+                
                 ?>
             </ul>
             <? if(!isset($_SESSION['user']['email'])) : ?>
@@ -70,6 +73,7 @@
             
             <form id="checkout" class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" method="post" action="/cart">
                 <input type="hidden" name="payment" value="Cash on delivery" id="payment">
+                <input type="hidden" name="shipping_tax" value="<?= $shipping_tax ?>">
                 <div class="relative">
                     <input required type="text" name="lastname" id="lastname" value="<?= (old('lastname') !== '') ? old('lastname') : ($billing['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['lastname']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
                     <label for="lastname" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Nume</label>
@@ -203,11 +207,11 @@
             </p>
             <p class="flex items-center justify-start py-3 border-b">
                 <span class="grow">Transport</span>
-                <span class="text-right">16 lei</span>
+                <span class="text-right"><?= $shipping_tax === 0 ? 'gratuit' : str_replace('.',',', $shipping_tax) . ' lei' ?> </span>
             </p>
             <p class="flex items-center justify-start py-3 border-b">
                 <span class="grow">Total</span>
-                <span><?= number_format($Total + 16, 2, ',', '.');?> lei</span>
+                <span><?= number_format($Total + $shipping_tax, 2, ',', '.');?> lei</span>
             </p>
 
             <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>

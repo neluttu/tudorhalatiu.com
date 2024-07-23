@@ -165,3 +165,32 @@ function decrypt($encrypted, $key = '7c952ebc1a6a529e0baadc6368d5ffec')
         }
     return null;   
     }
+
+    function calculateShippingTax() {
+
+        if(count($_SESSION['cart']) > 0) {
+            $amount = 0;
+            $weight = 0;
+            foreach($_SESSION['cart'] as $key => $product) {
+                $amount +=  getPrice($product['price'],$product['discount']);
+                $weight += $product['weight'];
+            }
+        }
+
+        // TODO: update shipping tax values from db.
+        if($amount < $GLOBALS['conf']['shipping_threshold']) {
+            switch (true) {
+                case ($weight <= 3):
+                    return 15.5; // needs value from db
+                case ($weight > 3 && $weight <= 5):
+                    return 26; // needs value from db
+                case ($weight > 5 && $weight <= 10):
+                    return 36; // needs value from db
+                default:
+                    return 50; // needs value from db
+            }
+        }
+        else 
+            return 0;
+        
+    }
