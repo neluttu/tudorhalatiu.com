@@ -1572,6 +1572,10 @@ img:not([alt]) {
   max-width: 28rem;
 }
 
+.max-w-xl {
+  max-width: 36rem;
+}
+
 .max-w-xs {
   max-width: 20rem;
 }
@@ -1862,6 +1866,10 @@ img:not([alt]) {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-14 {
+  gap: 3.5rem;
 }
 
 .gap-x-2 {
@@ -3122,6 +3130,11 @@ img:not([alt]) {
 .text-yellow-600 {
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity));
+}
+
+.text-\[\#3b61fc\] {
+  --tw-text-opacity: 1;
+  color: rgb(59 97 252 / var(--tw-text-opacity));
 }
 
 .underline {

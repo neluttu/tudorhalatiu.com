@@ -61,6 +61,13 @@
                     <? endforeach ?>
                 </span>
                 <span class="w-full"></span>
+                <span class="w-full py-2 text-sm font-normal md:flex-1">Greutate produs:</span>
+                <select name="category" class="flex items-center justify-center w-full p-2 mb-2 text-sm text-right border rounded-md bg-slate-50 md:flex-1">
+                    <? for ($i=1; $i<=20;$i++) : ?>
+                        <option value="<?=$product['weight']?>"  <?= $product['weight'] === $i ? 'selected' : '' ?>><?=$i?> kg</option>
+                    <? endfor ?>
+                </select>
+                <span class="w-full"></span>
                 <span class="w-full py-2 text-sm font-normal md:flex-1">Categorie produs:</span>
                 <select name="category" class="flex items-center justify-center w-full p-2 mb-2 text-sm text-right border rounded-md bg-slate-50 md:flex-1">
                     <? foreach ($categories as $category) : ?>

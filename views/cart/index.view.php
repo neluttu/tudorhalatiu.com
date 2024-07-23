@@ -16,14 +16,15 @@
                             <input type="hidden" name="id" value="<?= $product['id'] ?>">
                             <input type="hidden" name="name" value="<?= $product['name'] ?>">
                             <input type="hidden" name="quantity" value="0">
-                            <a href="product/<?=slug($product['name'])?>/<?=$product['id']?>" title="<?=$product['name']?>"><img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?=$product['name']?>" class="w-[45px] inline  rounded-md" loading="lazy"></a>
+                            <a href="shop/<?=$slugs[$product['id']]['category_slug']?>/<?=$slugs[$product['id']]['product_slug']?>" title="<?=$product['name']?> by Tudor Halațiu"><img src="/public/images/products/<?=$product['id']?>/poster.avif" alt="<?=$product['name']?>" class="w-[45px] inline  rounded-md" loading="lazy"></a>
+                            
                             <p class="flex flex-col items-start justify-start flex-1">
                                 <? 
-                                echo '<a href="product/'. slug($product['name']) . '/' . $product['id'] .'" class="block text-sm md:text-base hover:underline">' . $product['name'] . '</a>';
+                                echo '<a href="shop/'. $slugs[$product['id']]['category_slug'] . '/' . $slugs[$product['id']]['product_slug'] .'" class="block text-sm md:text-base hover:underline" title="'.$product['name'].' by Tudor Halațiu">' . $product['name'] . '</a>';
                                 echo '<span class="block mt-2 text-xs md:text-sm text-slate-600">Mărime ' . implode(', ', $product['features']). '</span>';
                                 ?>
                             </p>
-                            <p class="pr-4 text-sm"><?= number_format(getPrice($product['price'], $product['discount']), 2, ',', '.'); ?> lei</p>
+                            <p class="pr-4 text-sm"><?= showPrice($product['price'], $product['discount']) ?></p>
                             <button type="submit" class="p-1 text-white bg-black rounded-md hover:bg-main-color">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                         </button>
@@ -212,7 +213,7 @@
             <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>
 
             <label for="mobilpay" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
-                <input type="radio" name="payment" id="mobilpay" value="Credit Card" class="accent-main-color" disabled> <span>Card Online prin </span> <img src="/public/images/twispay.png" alt="Twispay" loading="lazy">
+                <input type="radio" name="payment" id="mobilpay" value="Credit Card" class="accent-main-color" <?= ((isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') or isset($_GET['test']) or $_SERVER['HTTP_HOST'] == 'th.devserver.ro') ? '' : 'disabled' ?>> <span>Plata online prin </span> <img src="/public/images/twispay.png" alt="Twispay" loading="lazy">
             </label>
 
             <label for="ramburs" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">

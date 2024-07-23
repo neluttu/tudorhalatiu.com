@@ -35,7 +35,7 @@ class Authenticator {
             'id' => $userData['id']
         ];
     
-        session_regenerate_id(true);
+        //session_regenerate_id(true);
     }
 
     // public function logout() {

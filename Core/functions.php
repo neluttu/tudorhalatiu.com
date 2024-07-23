@@ -140,3 +140,28 @@ function roDate($dateTimeFromDatabase, $format = 'd m, Y') {
     ];
     return str_replace(['d', 'm', 'Y'], [$dateTime->format('j'), $monthNames[(int) $dateTime->format('n')], $dateTime->format('Y')], $format);
 }
+
+function decrypt($encrypted, $key = '7c952ebc1a6a529e0baadc6368d5ffec') 
+    {
+        $encrypted = (string)$encrypted;
+        if(!strlen($encrypted)) {
+            return null;
+        }
+        if(strpos($encrypted, ',') !== false) {
+            $encryptedParts = explode(',', $encrypted, 2);
+            $iv = base64_decode($encryptedParts[0]);
+            if (false === $iv) {
+                throw new Exception("Invalid encryption iv");
+            }
+            $encrypted = base64_decode($encryptedParts[1]);
+            if (false === $encrypted) {
+                throw new Exception("Invalid encrypted data");
+            }
+            $decrypted = openssl_decrypt($encrypted, "aes-256-cbc", $key, OPENSSL_RAW_DATA, $iv);
+            if (false === $decrypted) {
+                throw new Exception("Data could not be decrypted");
+            }
+            return $decrypted;	
+        }
+    return null;   
+    }

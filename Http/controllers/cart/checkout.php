@@ -3,6 +3,8 @@ use Http\Forms\CheckoutForm;
 use Core\Database;
 use Core\Session;
 use Core\App;
+use Core\Twispay;
+
 
 $email = $_POST['email'];
 $password = isset($_POST['password']) ? $_POST['password'] : false;
@@ -29,6 +31,10 @@ $delivery_county = $delivery ? $_POST['delivery_county'] : $_POST['county'];
 $delivery_country = $delivery ? $_POST['delivery_country'] : $_POST['country'];
 $delivery_address = $delivery ? $_POST['delivery_address'] : $_POST['address'];
 $delivery_zip = $delivery ? $_POST['delivery_zip'] : $_POST['zip'];
+
+$secretKey = "f0b8b70eadc6d16a34ffeccbfc8f619b";
+$siteId = 8117;
+
 
 $form = new CheckoutForm();
 
@@ -138,7 +144,8 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
 
     $order_id = $db->getLastID();
 
-    if(!empty($_SESSION['cart']))
+    if(!empty($_SESSION['cart'])) {
+        $amount = $GLOBALS['conf']['shipping_tax']; // Needs shipping tax fix.
         foreach($_SESSION['cart'] as $key => $product) {
             $productdb = $db->query("SELECT price, discount FROM products WHERE id = :product_id", [':product_id' => $product['id']])->find();
             $db->query("INSERT INTO ordered_products (order_id, product_id, name, price, discount, size)
@@ -151,8 +158,22 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                             'discount' => $productdb['discount'],
                             'size' => $product['features']['size']
                         ]);
+
+            $amount +=  getPrice($productdb['price'],$productdb['discount']);
+
+            $orderProducts[] = [
+                "item" => $product['name'],
+                "product_id" => $product['id'],
+                "unitPrice" => $productdb['price'],
+                "units" => 1,
+                "type" => "physical",
+                "discount" => $productdb['discount'],
+                "size" => $product['features']['size'],
+                "vatPercent" => 0
+                ];
         }
-    
+    }
+
     $db->query("INSERT INTO orders_billing (order_id, firstname, lastname, email, phone, country, county, city, address, zip)
                 VALUES (:order_id, :firstname, :lastname, :email, :phone, :country, :county, :city, :address, :zip)", 
                 [
@@ -228,8 +249,35 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                     'city' => $delivery_city
                 ]);
 
-    \Core\ShoppingCart::emptyCart();
-    return redirect('/comanda-trimisa');
+
+    $orderData = [
+        "siteId" => Twispay::getSiteID(),
+        "customer" => [
+            "identifier" => $user_id ?? 0,
+            "firstName" => $firstname,
+            "lastName" => $lastname,
+            "country" => 'RO',
+            // "state" => $county,
+            "city" => $city,
+            "address" => $address,
+            "zip" => $zip,
+            "email" => $email,
+            "phone" => $phone
+        ],
+        "order" => [
+            "orderId" => $order_id,
+            "type" => "purchase",
+            "amount" => $amount,
+            "currency" => "RON",
+            "description" => "Comandă online",
+            "items" => $orderProducts
+        ],
+        "cardTransactionMode" => "authAndCapture",
+        "invoiceEmail" => 'ionel.olariu@gmail.com', // edit with client email.
+        "backUrl" => "https://th.devserver.ro/payment-result"
+    ];
+    Session::flash('orderData', $orderData);
+    $payment == 'Credit Card' ? redirect('/payment') : redirect('/comanda-trimisa');
 }
 
 Session::flash('errors', $form->errors());

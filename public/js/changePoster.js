@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var imageElements = document.querySelectorAll('img.productImage');
+    const imageElements = document.querySelectorAll('img.productImage');
     imageElements.forEach(function(img) {
         img.addEventListener('click', function() {
-            var src = img.getAttribute('src');
+            const src = img.getAttribute('src');
+            const posterImg = document.getElementById('poster');
 
-            if (window.innerWidth >= 640) {
-                const posterImg = document.getElementById('poster');
+            if (window.innerWidth >= 640 && src != posterImg.getAttribute('src')) {
                 posterImg.classList.remove('opacity-100'); 
                 posterImg.classList.add('opacity-0');
 
