@@ -132,15 +132,18 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     }
     else $user_id = null;
 
-    $db->query("INSERT INTO orders (user_id, status, payed, payment_type, shipping_tax, remote_ip)
-                VALUES (:user_id, :status, :payed, :payment_type, :shipping_tax, INET_ATON(:ipAddress))",
+    // generated for no account orders
+
+    $db->query("INSERT INTO orders (user_id, status, payed, payment_type, shipping_tax, remote_ip, token)
+                VALUES (:user_id, :status, :payed, :payment_type, :shipping_tax, INET_ATON(:ipAddress), :token)",
                 [
-                    'user_id' => $user_id,
-                    'status' => 'Pending',
-                    'payed' => 'No',
-                    'payment_type' => $payment,
-                    'shipping_tax' => calculateShippingTax(),
-                    'ipAddress' => $_SERVER['REMOTE_ADDR']
+                    ':user_id' => $user_id,
+                    ':status' => 'Pending', // default status of any order
+                    ':payed' => 'No', // default = not payed
+                    ':payment_type' => $payment, // payment type
+                    ':shipping_tax' => calculateShippingTax(), // calculate shipping tax based on cart product kilograms
+                    ':ipAddress' => $_SERVER['REMOTE_ADDR'],
+                    ':token' => generateToken(16) // generate token for no account orders
                 ]
             );
 
@@ -272,7 +275,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     $orderData = [
         "siteId" => Twispay::getSiteID(),
         "customer" => [
-            "identifier" => $user_id ?? 0,
+            "identifier" => $user_id ?? 99999, // set 99999 for quick orders w/o account
             "firstName" => $firstname,
             "lastName" => $lastname,
             "country" => 'RO',
@@ -286,6 +289,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
         "order" => [
             "orderId" => $order_id . '-' . time(),
             "type" => "purchase",
+            //"amount" => number_format($amount + calculateShippingTax(), 2, '.', ''),
             "amount" => number_format($amount, 2, '.', ''),
             "currency" => "RON",
             "description" => "Comandă online",

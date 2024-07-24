@@ -1836,6 +1836,10 @@ img:not([alt]) {
   gap: 2.5rem;
 }
 
+.gap-14 {
+  gap: 3.5rem;
+}
+
 .gap-16 {
   gap: 4rem;
 }
@@ -1866,10 +1870,6 @@ img:not([alt]) {
 
 .gap-8 {
   gap: 2rem;
-}
-
-.gap-14 {
-  gap: 3.5rem;
 }
 
 .gap-x-2 {
@@ -2969,6 +2969,16 @@ img:not([alt]) {
   letter-spacing: -0.025em;
 }
 
+.text-\[\#3b61fc\] {
+  --tw-text-opacity: 1;
+  color: rgb(59 97 252 / var(--tw-text-opacity));
+}
+
+.text-\[\#466afc\] {
+  --tw-text-opacity: 1;
+  color: rgb(70 106 252 / var(--tw-text-opacity));
+}
+
 .text-\[\#ed0078\] {
   --tw-text-opacity: 1;
   color: rgb(237 0 120 / var(--tw-text-opacity));
@@ -3132,9 +3142,9 @@ img:not([alt]) {
   color: rgb(202 138 4 / var(--tw-text-opacity));
 }
 
-.text-\[\#3b61fc\] {
+.text-\[\#dc0032\] {
   --tw-text-opacity: 1;
-  color: rgb(59 97 252 / var(--tw-text-opacity));
+  color: rgb(220 0 50 / var(--tw-text-opacity));
 }
 
 .underline {

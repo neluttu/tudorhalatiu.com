@@ -3,6 +3,7 @@
 <?php require base_path('views/partials/banner.php'); ?>
 <main class="w-full md:mt-5 max-w-7xl">
     <? Core\Session::getMessage(); ?>
+    
     <section class="flex flex-col items-start justify-start w-full gap-4 px-2 md:gap-10 lg:px-0 md:flex-row">
         <div class="w-full grow">
             <ul class="flex flex-col flex-wrap items-start justify-center gap-4 pb-4 border-b-[3px] border-black">
@@ -19,7 +20,7 @@
                             
                             <p class="flex flex-col items-start justify-start flex-1">
                                 <? 
-                                echo '<a href="shop/'. $slugs[$product['id']]['category_slug'] . '/' . $slugs[$product['id']]['product_slug'] .'" class="block text-sm md:text-base hover:underline" title="'.$product['name'].' by Tudor Halațiu">' . $product['name'] . '</a>';
+                                echo '<a href="shop/'. $slugs[$product['id']]['category_slug'] . '/' . $slugs[$product['id']]['product_slug'] .'" class="block text-sm md:text-base hover:underline" title="'.$product['name'].' by Tudor Halațiu">' . $product['name'] . '</a> ('.$product['weight'].' kg)';
                                 echo '<span class="block mt-2 text-xs md:text-sm text-slate-600">Mărime ' . implode(', ', $product['features']). '</span>';
                                 ?>
                             </p>
