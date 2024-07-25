@@ -2,6 +2,7 @@
 use Core\Database;
 use Core\App;
 use Core\Twispay;
+use Core\Session;
 
 $db = App::resolve(Database::class);
 $order = $db->query("SELECT * FROM orders WHERE token = :token",
@@ -48,6 +49,7 @@ if($order['payed'] == 'No') {
             "orderId" => $order['id'] . '-' . time(),
             "type" => "purchase",
             //"amount" => number_format($amount + calculateShippingTax(), 2, '.', ''),
+            // TODO: calculate shipping price based on products in db.
             "amount" => number_format($amount, 2, '.', ''),
             "currency" => "RON",
             "description" => "Comanda online nr. " . $order['id'],
@@ -76,5 +78,6 @@ view('client-order', [
     'orderData' => $orderData,
     'base64Checksum' => $base64Checksum,
     'base64JsonRequest' => $base64JsonRequest,
-    'twispayLive' => false
+    'twispayLive' => false,
+    'error' => Session::get('error')
 ]);

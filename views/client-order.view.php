@@ -4,9 +4,11 @@
 
 <main class="flex flex-col items-start justify-start w-full gap-6 px-2 mt-2 md:mt-10 md:flex-row max-w-7xl">
     <div class="w-full md:grow">
-        <div class="p-2 py-3 mb-5 border rounded-md empty:hidden font-lighter border-rose-400 bg-rose-50"><? if(isset($errors)) : foreach ($errors as $error) : ?>
-            <p class="text-sm text-main-color"><?= $error; ?></p>
-        <? endforeach; endif ?></div>
+        <? if(isset($error)) : ?>
+        <div class="p-2 py-3 mb-5 border rounded-md empty:hidden font-lighter border-rose-400 bg-rose-50">
+            <p class="text-sm text-main-color"><?= print_r($error['code'] . ' - ' . $error['message']); ?></p>
+        </div>
+        <? endif ?>
         <p class="mb-4 text-xl font-semibold text-main-color">Sumar comandă</p>
         <?
         $total = $order['shipping_tax'];
@@ -24,7 +26,7 @@
             </li>
             <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200">
                 <span class="grow">Sumă achitată:</span>
-                <span><?= $order['payed'] === 'Yes' ?  number_format($total, 2, ',', '.') : 0 ?> <?= $product['currency'] ?></span>
+                <span><?= $order['payed'] === 'Yes' ? number_format($total, 2, ',', '.') : 0 ?> <?= $product['currency'] ?></span>
             </li>
             <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200">
                 <span class="grow">Taxă transport:</span>

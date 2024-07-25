@@ -2979,6 +2979,11 @@ img:not([alt]) {
   color: rgb(70 106 252 / var(--tw-text-opacity));
 }
 
+.text-\[\#dc0032\] {
+  --tw-text-opacity: 1;
+  color: rgb(220 0 50 / var(--tw-text-opacity));
+}
+
 .text-\[\#ed0078\] {
   --tw-text-opacity: 1;
   color: rgb(237 0 120 / var(--tw-text-opacity));
@@ -3140,11 +3145,6 @@ img:not([alt]) {
 .text-yellow-600 {
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity));
-}
-
-.text-\[\#dc0032\] {
-  --tw-text-opacity: 1;
-  color: rgb(220 0 50 / var(--tw-text-opacity));
 }
 
 .underline {

@@ -38,6 +38,10 @@ if(is_array($data)) {
             
     }
     else {
+        Session::flash('error', [
+            'code' => $data['errors'][0]['code'],
+            'message' => $data['errors'][0]['message']
+        ]);
         $order['token'] ? redirect('/comanda-client/' . $order['token']) : redirect('/payment-failed');
     }
 }
