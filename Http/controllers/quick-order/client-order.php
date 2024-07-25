@@ -62,7 +62,7 @@ if($order['payed'] == 'No' and $order['status'] != 'Canceled') {
     $base64Checksum = Twispay::getBase64Checksum($orderData, Twispay::getKey());
 }
 
-view('client-order', [
+view('quick-order/client-order', [
     'heading' => 'Comanda nr. ' . $order['id'],
     'heading_info' => 'Client: ' . $billing['firstname'] . ' ' . $billing['lastname'] . ', din ' . roDate($order['ordered_at']),
     'title' => 'Comanda client',

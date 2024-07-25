@@ -1,10 +1,16 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
-
+<form name="cancel-order" id="cancel-order" method="post">
+        <input type="hidden" name="_method" value="PATCH" />
+        <input type="hidden" name="id" value="<?= $order['id']?>">
+        <input type="hidden" name="token" value="<?= $order['token']?>">
+</form>
 <main class="flex flex-col items-start justify-start w-full gap-6 px-2 mt-2 md:mt-10 md:flex-row max-w-7xl">
     <div class="w-full md:grow">
-        <? if(isset($errors)) : ?>
+        <? 
+        //TODO: check error message / success message
+        if(isset($errors)) : ?>
         <div class="p-2 py-3 mb-5 border rounded-md empty:hidden font-lighter border-rose-400 bg-rose-50">
             <p class="text-sm text-main-color"><?= $errors['message']; ?></p>
         </div>
