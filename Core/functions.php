@@ -166,15 +166,21 @@ function decrypt($encrypted, $key = '7c952ebc1a6a529e0baadc6368d5ffec')
     return null;   
     }
 
-    function calculateShippingTax($cart = true) {
+    function calculateShippingTax($products = null) {
         $amount = 0;
         $weight = 0;
 
-        if($cart and count($_SESSION['cart']) > 0) {
+        if(!$products and count($_SESSION['cart']) > 0) {
                 foreach($_SESSION['cart'] as $key => $product) {
                     $amount +=  getPrice($product['price'],$product['discount']);
                     $weight += $product['weight'];
                 }
+        }
+        else {
+            foreach($products as $product) {
+                $amount +=  getPrice($product['price'],$product['discount']);
+                $weight += $product['weight'];
+            }
         }
 
         if($amount < $GLOBALS['conf']['shipping_threshold']) {
@@ -182,8 +188,8 @@ function decrypt($encrypted, $key = '7c952ebc1a6a529e0baadc6368d5ffec')
                 // return default tax;
                 return $GLOBALS['conf']['shipping_tax'];
             else 
-                // Default tax + ($GLOBALS['conf']['shipping_tax'] - 3kgs. Add 2 RON for each extra kg.)
-                return $GLOBALS['conf']['shipping_tax'] + (($GLOBALS['conf']['shipping_tax'] - 3) * 2);
+                // Default tax + (total weight - 3kgs. Add 2 RON for each extra kg.)
+                return $GLOBALS['conf']['shipping_tax'] + (($weight - 3) * 2);
         }
         else 
             return 0;

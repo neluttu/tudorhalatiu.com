@@ -3,11 +3,9 @@ use Core\Twispay;
 
 $orderData = Core\Session::get('orderData');
 if($orderData) {
-    
-    d($orderData);
     $base64JsonRequest = Twispay::getBase64JsonRequest($orderData);
     $base64Checksum = Twispay::getBase64Checksum($orderData, Twispay::getKey());
-
+    
     view('payment/payment-redirect', [
         'heading' => 'Redirectare plată online',
         'heading_info' => 'Finalizează procesul de plată online',

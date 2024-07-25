@@ -4,9 +4,9 @@
 
 <main class="flex flex-col items-start justify-start w-full gap-6 px-2 mt-2 md:mt-10 md:flex-row max-w-7xl">
     <div class="w-full md:grow">
-        <? if(isset($error)) : ?>
+        <? if(isset($errors)) : ?>
         <div class="p-2 py-3 mb-5 border rounded-md empty:hidden font-lighter border-rose-400 bg-rose-50">
-            <p class="text-sm text-main-color"><?= print_r($error['code'] . ' - ' . $error['message']); ?></p>
+            <p class="text-sm text-main-color"><?= $errors['message']; ?></p>
         </div>
         <? endif ?>
         <p class="mb-4 text-xl font-semibold text-main-color">Sumar comandă</p>
@@ -24,12 +24,30 @@
                 <span class="grow">Sumă de plată:</span>
                 <span><?= number_format($total, 2, ',' ,'.') . '  ' . $product['currency'] ?></span>
             </li>
-            <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200">
-                <span class="grow">Sumă achitată:</span>
+            <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200 <?= $order['payed'] === 'No' ? 'text-main-color' : 'text-green-600' ?>">
+                <span class="flex items-center justify-start gap-1 grow">
+                    <? if($order['payed'] === 'No') :?>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#af0054" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M12 9v4" />
+                        <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" />
+                        <path d="M12 16h.01" />
+                    </svg>
+                    <? else : ?>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check-filled" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#00b341" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor" />
+                        </svg>
+                    <? endif ?>
+                    Sumă achitată:
+                </span>
                 <span><?= $order['payed'] === 'Yes' ? number_format($total, 2, ',', '.') : 0 ?> <?= $product['currency'] ?></span>
             </li>
             <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200">
-                <span class="grow">Taxă transport:</span>
+                <span class="grow">
+
+                    Taxă transport inclusă:
+                </span>
                 <span><?= $order['shipping_tax'] ?> <?= $product['currency'] ?></span>
             </li>
             <li class="flex items-center justify-end gap-2 pb-3">
@@ -55,7 +73,7 @@
                 <h2 class="mb-4 font-bold">Modalitate plată:</h2>
                 <p>Plată online prin <span class="text-[#466afc] font-semibold">TwisPay</span></p>
                 <p>Stare plată: <?= $order['payed'] === 'Yes' ? '<span class="font-semibold text-green-600">confirmată</span>' : '<span class="text-main-color">neachitată.</span>' ?></p>
-                <p><? if($order['payed'] === 'No' and $order['status'] != 'Anulată') : ?>
+                <p><? if($order['payed'] === 'No' and $order['status'] != 'Canceled') : ?>
                     <form id="twispay" action="https://<?= $twispayLive ? "secure.twispay.com" : "secure-stage.twispay.com" ?>" method="post" accept-charset="UTF-8" class="">
                         <input type="hidden" name="jsonRequest" value="<?= $base64JsonRequest ?>">
                         <input type="hidden" name="checksum" value="<?= $base64Checksum ?>">

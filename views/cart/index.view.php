@@ -73,7 +73,7 @@
             <? endif ?>
             
             <form id="checkout" class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" method="post" action="/cart">
-                <input type="hidden" name="payment" value="Cash on delivery" id="payment">
+                <input type="hidden" name="payment" value="Credit Card" id="payment">
                 <input type="hidden" name="shipping_tax" value="<?= $shipping_tax ?>">
                 <div class="relative">
                     <input required type="text" name="lastname" id="lastname" value="<?= (old('lastname') !== '') ? old('lastname') : ($billing['lastname'] ?? '') ?>" placeholder="Nume" class="w-full px-0 py-2 mt-1 border-b-2 <?= isset($errors['lastname']) ? 'border-main-color shake-horizontal' : 'border-gray-200' ?> peer placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" />
@@ -218,11 +218,7 @@
             <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>
 
             <label for="mobilpay" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
-                <input type="radio" name="payment" id="mobilpay" value="Credit Card" class="accent-main-color" <?= ((isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') or isset($_GET['test']) or $_SERVER['HTTP_HOST'] == 'th.devserver.ro') ? '' : 'disabled' ?>> <span>Plata online prin </span> <img src="/public/images/twispay.png" alt="Twispay" loading="lazy">
-            </label>
-
-            <label for="ramburs" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
-                <input type="radio" name="payment" id="ramburs" value="Cash on delivery" class="accent-main-color" checked> <span>Ramburs curier </span>
+                <input type="radio" name="payment" id="mobilpay" value="Credit Card" checked class="accent-main-color" <?= ((isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') or isset($_GET['test']) or $_SERVER['HTTP_HOST'] == 'th.devserver.ro') ? '' : 'disabled' ?>> <span>Plata online prin </span> <img src="/public/images/twispay.png" alt="Twispay" loading="lazy">
             </label>
             
             <label for="terms" class="flex items-start justify-start gap-3 mt-8 cursor-pointer">

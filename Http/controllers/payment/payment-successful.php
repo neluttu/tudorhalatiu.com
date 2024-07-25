@@ -1,8 +1,15 @@
 <?
+use Core\Session;
+$order = Session::get('order');
+
+if(!$order) abort();
+
+$order_url = $order['token'] ? '/comanda-client/' . $order['token'] : '/account/order/' . $order['order_id'];
+
 view('payment/payment-successful',[
-    'heading' => 'Livrare și retur',
-    'heading_info' => 'Politica de livrare și retur produse',
-    'title' => 'Tudor Halațiu - livrare și retur',
-    'description' => 'Livrare și retur produse magazin online TudorHalatiu.com - creator de modă',
-    'data' => \Core\Session::get('payment')
+    'heading' => 'mulțumim!',
+    'heading_info' => 'Comanda plasată a fost achitată',
+    'title' => 'Tudor Halațiu - confirmare plată online',
+    'description' => 'Tudor Halațiu - confirmare plată online',
+    'order_url' => $order_url,
 ]);

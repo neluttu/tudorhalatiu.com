@@ -5,7 +5,7 @@ use Core\Twispay;
 use Core\Session;
 
 $db = App::resolve(Database::class);
-$order = $db->query("SELECT * FROM orders WHERE token = :token",
+$order = $db->query("SELECT * FROM orders WHERE token = :token AND user_id IS NULL",
                                                 [
                                                     ':token' => $params['token']
                                                 ])->findOrFail();
@@ -14,7 +14,7 @@ $billing = $db->query("SELECT * FROM orders_billing WHERE order_id = '".$order['
 $shipping = $db->query("SELECT * FROM orders_shipping WHERE order_id = '".$order['id']."' LIMIT 1")->find();
 
 
-$products = $db->query("SELECT ordered_products.order_id, ordered_products.product_id, ordered_products.name, ordered_products.price, ordered_products.discount, ordered_products.currency, ordered_products.quantity, ordered_products.size, products.category, products.slug, categories.slug AS category_slug 
+$products = $db->query("SELECT ordered_products.order_id, ordered_products.product_id, ordered_products.name, ordered_products.price, ordered_products.weight, ordered_products.discount, ordered_products.currency, ordered_products.quantity, ordered_products.size, products.category, products.slug, categories.slug AS category_slug 
                                                 FROM ordered_products 
                                                 LEFT JOIN products ON products.id = ordered_products.product_id 
                                                 LEFT JOIN categories ON categories.category_id = products.category
@@ -30,11 +30,11 @@ $orderData = '';
 $base64JsonRequest = '';
 $base64Checksum = '';
 
-if($order['payed'] == 'No') {
+if($order['payed'] == 'No' and $order['status'] != 'Canceled') {
     $orderData = [
         "siteId" => Twispay::getSiteID(),
         "customer" => [
-            "identifier" => 99999, // set 99999 for quick orders w/o account
+            "identifier" => $billing['email'], // set email address for quick orders w/o account
             "firstName" => $billing['firstname'],
             "lastName" => $billing['lastname'],
             "country" => 'RO',
@@ -48,9 +48,7 @@ if($order['payed'] == 'No') {
         "order" => [
             "orderId" => $order['id'] . '-' . time(),
             "type" => "purchase",
-            //"amount" => number_format($amount + calculateShippingTax(), 2, '.', ''),
-            // TODO: calculate shipping price based on products in db.
-            "amount" => number_format($amount, 2, '.', ''),
+            "amount" => number_format($amount + calculateShippingTax($products), 2, '.', ''),
             "currency" => "RON",
             "description" => "Comanda online nr. " . $order['id'],
             //"items" => $orderProducts
@@ -79,5 +77,5 @@ view('client-order', [
     'base64Checksum' => $base64Checksum,
     'base64JsonRequest' => $base64JsonRequest,
     'twispayLive' => false,
-    'error' => Session::get('error')
+    'errors' => Session::get('errors'),
 ]);

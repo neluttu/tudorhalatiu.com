@@ -12,6 +12,7 @@ $orders = App::resolve(Database::class)->query("
                                                 orders.payed,
                                                 orders.payment_type,
                                                 orders.awb,
+                                                /* If you update below, it will break the view */
                                                 GROUP_CONCAT(CONCAT_WS(':', ordered_products.product_id, ordered_products.name, ordered_products.price, ordered_products.discount, ordered_products.currency, ordered_products.quantity, ordered_products.size) SEPARATOR ';') AS products
                                                 FROM 
                                                 orders

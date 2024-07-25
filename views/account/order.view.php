@@ -28,13 +28,28 @@
                 <span class="grow">Sumă de plată:</span>
                 <span><?= number_format($total, 2, ',' ,'.') . '  ' . $product['currency'] ?></span>
             </li>
-            <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200">
-                <span class="grow">Sumă achitată:</span>
-                <span><?= $order['payed'] === 'Yes' ?  number_format($total, 2, ',', '.') : 0 ?> <?= $product['currency'] ?></span>
+            <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200 <?= $order['payed'] === 'No' ? 'text-main-color' : 'text-green-600' ?>">
+                <span class="flex items-center justify-start gap-1 grow">
+                    <? if($order['payed'] === 'No') :?>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#af0054" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M12 9v4" />
+                        <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" />
+                        <path d="M12 16h.01" />
+                    </svg>
+                    <? else : ?>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check-filled" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#00b341" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor" />
+                        </svg>
+                    <? endif ?>
+                    Sumă achitată:
+                </span>
+                <span><?= $order['payed'] === 'Yes' ? number_format($total, 2, ',', '.') : 0 ?> <?= $product['currency'] ?></span>
             </li>
             <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200">
                 <span class="grow">Taxă transport inclusă:</span>
-                <span><?= $order['shipping_tax'] ?> <?= $product['currency'] ?></span>
+                <span><?= calculateShippingTax($products) ?> <?= $product['currency'] ?></span>
             </li>
             <li class="flex items-center justify-end gap-2 pb-3">
                 <? if($order['payed'] === 'No' and $order['status'] == 'Pending') : ?><button form="cancel-order" type="submit" class="px-2 py-1 text-sm font-normal text-white bg-red-600 rounded-md md:py-2">Anulează comanda</button><? endif ?>
@@ -44,7 +59,7 @@
         <ul class="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
                 <h2 class="mb-4 font-bold">Date livrare:</h2>
-                <p>Livrare curier Cargus</p>
+                <p>Livrare curier <span class="text-[#dc0032] font-semibold">DPD</span></p>
                 <p>Număr AWB: <?= $order['awb'] ? $order['awb'] : 'indisponibil' ?></p>
                 <p>Către: <?= $shipping['firstname'] . ' ' . $shipping['lastname'] ?></p>
                 <p>Telefon: <?= $shipping['phone'] ?></p>
@@ -57,9 +72,16 @@
             </li>
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
                 <h2 class="mb-4 font-bold">Modalitate plată:</h2>
-                <p>Plată online prin Netopia</p>
-                <p>Stare plată: <?= $order['payed'] === 'Yes' ? 'confirmată' : '<span class="text-main-color">neachitată.</span>' ?></p>
-                <p><? if($order['payed'] === 'No' and $order['status'] != 'Anulată') : ?><button type="submit" class="px-2 py-1 text-sm font-normal text-white bg-green-600 rounded-md md:py-2 ">Achită acum <?= number_format($total, 2, ',' ,'.'); ?> lei</button><? endif ?></p>
+                <p>Plată online prin <span class="text-[#466afc] font-semibold">TwisPay</span></p>
+                <p>Stare plată: <?= $order['payed'] === 'Yes' ? '<span class="font-semibold text-green-600">confirmată</span>' : '<span class="text-main-color">neachitată.</span>' ?></p>
+                <p><? if($order['payed'] === 'No' and $order['status'] != 'Canceled') : ?>
+                    <form id="twispay" action="https://<?= $twispayLive ? "secure.twispay.com" : "secure-stage.twispay.com" ?>" method="post" accept-charset="UTF-8" class="">
+                        <input type="hidden" name="jsonRequest" value="<?= $base64JsonRequest ?>">
+                        <input type="hidden" name="checksum" value="<?= $base64Checksum ?>">
+                        <button type="submit" class="px-2 py-1 text-sm font-normal text-white bg-green-600 rounded-md md:py-2 ">Achită acum <?= number_format($total, 2, ',' ,'.'); ?> lei</button>
+                    </form>
+                    <? endif ?>
+                </p>
                 <p><? if($order['invoice'] !== null) : ?><button type="submit" class="px-2 py-1 text-sm font-normal text-white rounded-md bg-cyan-600 md:py-2 ">Vezi factura</button><? endif ?></p>
             </li>
         </ul>

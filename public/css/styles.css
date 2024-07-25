@@ -565,6 +565,22 @@ img:not([alt]) {
   }
 }
 
+.loader {
+  width: 60px;
+  aspect-ratio: 4;
+  background: radial-gradient(circle closest-side,#000 90%,#0000) 0/calc(100%/3) 100% space;
+  -webkit-clip-path: inset(0 100% 0 0);
+          clip-path: inset(0 100% 0 0);
+  animation: l1 1s steps(4) infinite;
+}
+
+@keyframes l1 {
+  to{
+    -webkit-clip-path: inset(0 -34% 0 0);
+            clip-path: inset(0 -34% 0 0)
+  }
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -4156,6 +4172,10 @@ img:not([alt]) {
 
 .\[\&\>p\]\:mb-10>p {
   margin-bottom: 2.5rem;
+}
+
+.\[\&\>p\]\:mb-2>p {
+  margin-bottom: 0.5rem;
 }
 
 .\[\&\>p\]\:py-1>p {

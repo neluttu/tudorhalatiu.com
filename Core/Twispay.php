@@ -22,6 +22,21 @@ class Twispay
         return 8117;
     }
 
+    public static function code($code) {
+        $codes = [
+            844 => 'Răspuns invalid.',
+            840 => 'Nu am primit un răspuns ferm de la procesatorul de plăți superior. Considerați tranzacția eșuată.',
+            838 => 'Eroare de comunicare, vă rugăm reîncercați.',
+            837 => 'Transacție respinsă de furnizorul de plăți.',
+            836 => 'Tranziacție respinsă de către bancă.',
+            835 => 'Tranziacție respinsă, fonduri insuficiente.',
+            834 => 'Tranziacție suspectată de fraudă.',
+            830 => 'Tranzacție respinsă: status invalid.',
+            825 => 'Tranziacția există deja.',
+        ];
+        return '#' . $code . ' - ' . $codes[$code];
+    }
+
     public static function getOrder($id = '') {
         $ch = curl_init();
         $url = $id ? "https://api-stage.twispay.com/order/" . $id : "https://api-stage.twispay.com/order";

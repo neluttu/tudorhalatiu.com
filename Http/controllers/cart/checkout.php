@@ -4,6 +4,7 @@ use Core\Database;
 use Core\Session;
 use Core\App;
 use Core\Twispay;
+use Core\ShoppingCart;
 
 
 $email = $_POST['email'];
@@ -185,6 +186,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                 "vatPercent" => 0
                 ];
         }
+        // Add shipping tax as item
         $orderProducts[] = [
             "item" => "Taxă transport",
             "product_id" => 99999,
@@ -275,7 +277,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     $orderData = [
         "siteId" => Twispay::getSiteID(),
         "customer" => [
-            "identifier" => $user_id ?? 99999, // set 99999 for quick orders w/o account
+            "identifier" => $user_id ?? $email, // set user email address for quick orders w/o account
             "firstName" => $firstname,
             "lastName" => $lastname,
             "country" => 'RO',
@@ -300,6 +302,9 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
         "backUrl" => 'https://' . $_SERVER['HTTP_HOST'] . "/payment-result"
     ];
     Session::flash('orderData', $orderData);
+    // Empty the shopping cart as we have registered the order in the database.
+    ShoppingCart::emptyCart();
+
     $payment == 'Credit Card' ? redirect('/payment') : redirect('/comanda-trimisa');
 }
 
