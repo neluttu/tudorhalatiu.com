@@ -5,6 +5,7 @@ use Core\Session;
 use Core\App;
 use Core\Twispay;
 use Core\ShoppingCart;
+use Core\EmailSender;
 
 
 $email = $_POST['email'];
@@ -185,6 +186,9 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                 "size" => $product['features']['size'],
                 "vatPercent" => 0
                 ];
+
+            // Build email product list
+            $emailItems[] = '<a href="https://tudorhalatiu.com/">' . $productdb['name'] . '</a>' . ' (' . $product['features']['size'] . ') - ' . getPrice($productdb['price'],$productdb['discount']) . ' lei';
         }
         // Add shipping tax as item
         $orderProducts[] = [
@@ -303,9 +307,22 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     ];
     Session::flash('orderData', $orderData);
     // Empty the shopping cart as we have registered the order in the database.
+    $emailSender = new EmailSender();
+    $emailSender->sendEmail(
+        $email,
+        'Comanda numărul ' . $order_id,
+        'views/emails/NewOrder.html',
+        [
+            'firstname' => $firstname,
+            'order_id' => $order_id,
+            'amount' => number_format($amount + calculateShippingTax(), 2, '.', ''),
+            'shipping_tax' => calculateShippingTax(),
+            'products' => implode('<br>', $emailItems),
+            'host' => $_SERVER['HTTP_HOST']
+        ]
+    );    
     ShoppingCart::emptyCart();
-
-    $payment == 'Credit Card' ? redirect('/payment') : redirect('/comanda-trimisa');
+    redirect('/payment');
 }
 
 Session::flash('errors', $form->errors());

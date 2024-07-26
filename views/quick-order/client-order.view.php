@@ -57,9 +57,30 @@
                 <span><?= $order['shipping_tax'] ?> <?= $product['currency'] ?></span>
             </li>
             <li class="flex items-center justify-end gap-2 pb-3">
-                <? if($order['payed'] === 'No' and $order['status'] == 'Pending') : ?><button form="cancel-order" type="submit" class="px-2 py-1 text-sm font-normal text-white bg-red-600 rounded-md md:py-2">Anulează comanda</button><? endif ?>
+                <? if($order['payed'] === 'No' and $order['status'] == 'Pending') : ?><button type="button" class="px-2 py-1 text-sm font-normal text-white bg-red-600 rounded-md open-modal md:py-2">Anulează comanda</button><? endif ?>
             </li>
         </ul>
+        <script src="/public/js/simpleModal.js"></script>
+        <div class="fixed top-0 left-0 z-50 items-center justify-center hidden w-full h-screen bg-black/90 close-modal" id="modal">
+            <div class="flex items-start justify-start max-w-md gap-4 p-5 mx-2 bg-white rounded-lg min-w-80 sm:mx-0 modal-content">
+                <div class="flex flex-col items-start justify-start w-full gap-4 text-base font-normal">
+                    <span class="flex items-center justify-start w-full gap-2 pb-2 text-red-700 border-b-2 border-slate-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 stroke-red-700" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 9v4" />
+                            <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" />
+                            <path d="M12 16h.01" />
+                        </svg>
+                        Confirmă anularea
+                    </span>
+                    <span class="font-light">Ești sigur că dorești să anulezi această comandă? </span>
+                    <div class="flex items-center justify-end w-full gap-2 font-light">
+                        <button class="block w-auto px-4 py-3 text-sm font-normal text-red-700 bg-red-200 rounded-lg md:order-2 confirm-btn">Da</button>
+                        <button class="block w-auto px-4 py-3 text-sm font-normal bg-gray-200 rounded-lg md:order-1 close-modal">Nu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <p class="mt-10 mb-4 text-xl font-semibold text-main-color">Informații livrare și facturare</p>
         <ul class="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
@@ -76,7 +97,7 @@
                 <p>Telefon: <?= $billing['phone'] ?></p>
             </li>
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
-                <h2 class="mb-4 font-bold">Modalitate plată:</h2>
+                <h2 class="mb-4 font-bold">Informații plată:</h2>
                 <p>Plată online prin <span class="text-[#466afc] font-semibold">TwisPay</span></p>
                 <p>Stare plată: <?= $order['payed'] === 'Yes' ? '<span class="font-semibold text-green-600">confirmată</span>' : '<span class="text-main-color">neachitată.</span>' ?></p>
                 <p><? if($order['payed'] === 'No' and $order['status'] != 'Canceled') : ?>

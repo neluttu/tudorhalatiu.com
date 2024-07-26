@@ -218,7 +218,7 @@
             <p class="inline-block mt-12 text-base font-normal text-main-color">Metodă de plată</p>
 
             <label for="mobilpay" class="flex items-center justify-start gap-2 mt-8 cursor-pointer">
-                <input type="radio" name="payment" id="mobilpay" value="Credit Card" checked class="accent-main-color" <?= ((isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') or isset($_GET['test']) or $_SERVER['HTTP_HOST'] == 'th.devserver.ro') ? '' : 'disabled' ?>> <span>Plata online prin </span> <img src="/public/images/twispay.png" alt="Twispay" loading="lazy">
+                <input type="radio" name="payment" id="mobilpay" value="Credit Card" checked class="accent-main-color" <?= ($_SERVER['HTTP_HOST'] == 'th.devserver.ro') ? '' : 'disabled' ?>> <span>Plata online prin </span> <img src="/public/images/twispay.png" alt="Twispay" loading="lazy">
             </label>
             
             <label for="terms" class="flex items-start justify-start gap-3 mt-8 cursor-pointer">
