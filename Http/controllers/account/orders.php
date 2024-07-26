@@ -25,9 +25,11 @@ $orders = App::resolve(Database::class)->query("
                                                 orders.ordered_at DESC;
                                                 ")->get();
 
+$status = [ 'Pending' => 'În așteptare', 'Processing' => 'În lucru', 'Completed' => 'Finalizată', 'Canceled' => 'Anulată' ];
 
 view('account/orders', [
     'heading' => 'Comnezi magazin',
     'heading_info' => 'Vizualizare comenzi și facturi.',
-    'orders' => $orders
+    'orders' => $orders,
+    'status' => $status
 ]);

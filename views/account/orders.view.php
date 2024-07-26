@@ -23,10 +23,10 @@
                     </svg>
                     Comanda numarul #<?= str_pad($order['order_id'], 3, '0', STR_PAD_LEFT) ?>
                 </a>
-                <ul class="flex items-start justify-start gap-8 pb-2 mb-4 text-sm font-light text-gray-600 ">
+                <ul class="flex items-start justify-start gap-2 pb-2 mb-4 text-sm font-light text-gray-600 ">
                     <li>Din <?= roDate($order['ordered_at']) ?></li>
-                    <li>În procesare</li>
-                    <li>Achitată</li>
+                    <li><?= $status[$order['status']] ?></li>
+                    <li><?= $order['payed'] == 'No' ? 'Neachitată' : 'Achitată' ?></li>
                 </ul>
                 <?
                 $products = explode(';',$order['products']);
