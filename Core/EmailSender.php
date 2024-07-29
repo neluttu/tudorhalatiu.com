@@ -25,7 +25,7 @@ class EmailSender
         $this->mailer->Password = '88#2l&mN+}uo';
         $this->mailer->SMTPSecure = 'ssl';
         $this->mailer->Port = 465;
-        $this->mailer->setFrom('contact@tudorhalatiu.com', 'Tudor Halatiu');
+        $this->mailer->setFrom('contact@tudorhalatiu.com', 'TudorHalatiu.com');
         $this->mailer->CharSet = "UTF-8";
     }
 

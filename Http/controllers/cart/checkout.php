@@ -135,7 +135,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     else $user_id = null;
 
     // generated for no account orders
-
+    $token = generateToken(16);
     $db->query("INSERT INTO orders (user_id, status, payed, payment_type, shipping_tax, remote_ip, token)
                 VALUES (:user_id, :status, :payed, :payment_type, :shipping_tax, INET_ATON(:ipAddress), :token)",
                 [
@@ -145,7 +145,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                     ':payment_type' => $payment, // payment type
                     ':shipping_tax' => calculateShippingTax(), // calculate shipping tax based on cart product kilograms
                     ':ipAddress' => $_SERVER['REMOTE_ADDR'],
-                    ':token' => generateToken(16) // generate token for no account orders
+                    ':token' => $token // generate token for no account orders
                 ]
             );
 
@@ -188,7 +188,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
                 ];
 
             // Build email product list
-            $emailItems[] = '<a href="https://tudorhalatiu.com/">' . $productdb['name'] . '</a>' . ' (' . $product['features']['size'] . ') - ' . getPrice($productdb['price'],$productdb['discount']) . ' lei';
+            $emailItems[] = $productdb['name'] . ' (' . $product['features']['size'] . ') - ' . getPrice($productdb['price'],$productdb['discount']) . ' lei';
         }
         // Add shipping tax as item
         $orderProducts[] = [
@@ -307,6 +307,11 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
     ];
     Session::flash('orderData', $orderData);
     // Empty the shopping cart as we have registered the order in the database.
+    $amount = number_format($amount + calculateShippingTax(), 2, '.', '');
+
+    // Create backlink to order.
+    $order_url = !$user_id ? 'https://'. $_SERVER['HTTP_HOST'] .'/comanda-client/' . $token : $order_url = 'https://'. $_SERVER['HTTP_HOST'] .'/account/order/' . $order_id;
+
     $emailSender = new EmailSender();
     $emailSender->sendEmail(
         $email,
@@ -315,12 +320,31 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
         [
             'firstname' => $firstname,
             'order_id' => $order_id,
-            'amount' => number_format($amount + calculateShippingTax(), 2, '.', ''),
+            'amount' => $amount,
             'shipping_tax' => calculateShippingTax(),
             'products' => implode('<br>', $emailItems),
-            'host' => $_SERVER['HTTP_HOST']
+            'host' => 'tudorhalatiu.com',
+            'order_url' => $order_url
         ]
-    );    
+    ); 
+
+    $adminNotify = new EmailSender();
+    $adminNotify->sendEmail(
+        'ionel.olariu@gmail.com',
+        'Comandă nouă #' . $order_id . ' - ' . $amount . ' lei',
+        'views/emails/NewOrderNotifyAdmin.html',
+        [
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'order_id' => $order_id,
+            'amount' => $amount,
+            'shipping_tax' => calculateShippingTax(),
+            'products' => implode('<br>', $emailItems),
+            'host' => 'tudorhalatiu.com',
+            'order_url' => 'https://' . $_SERVER['HTTP_HOST'] . '/admin/order/' . $order_id
+        ]
+    ); 
+
     ShoppingCart::emptyCart();
     redirect('/payment');
 }
