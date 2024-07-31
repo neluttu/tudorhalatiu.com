@@ -108,7 +108,22 @@
                     </form>
                     <? endif ?>
                 </p>
-                <p><? if($order['invoice'] !== null) : ?><button type="submit" class="px-2 py-1 text-sm font-normal text-white rounded-md bg-cyan-600 md:py-2 ">Vezi factura</button><? endif ?></p>
+                <? if(is_file(BASE_PATH . 'public/invoices/' . $order['token'] . '.pdf')) : ?>
+                <p class="empty:hidden">
+                    <span class="flex items-center justify-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-rose-600" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                            <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+                            <path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6" />
+                            <path d="M17 18h2" />
+                            <path d="M20 15h-3v6" />
+                            <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z" />
+                        </svg>
+                        <a href="/invoice/<?= $order['token'] ?>" download class="font-semibold text-green-600 underline">Descară factura fiscală</a><br>
+                    </span>
+                </p>
+                <? endif ?> 
             </li>
         </ul>
         <p class="mt-10 mb-4 text-xl font-semibold text-main-color"><?= count($products) ?> produs(e) în această comandă</p>

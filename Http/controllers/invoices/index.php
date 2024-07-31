@@ -1,38 +1,21 @@
-<?
+<?php
 use Core\App;
 use Core\Database;
 
 $token = $params['token'];
-$invoice = BASE_PATH . 'public/invoices/blank.pdf';
+$invoice = BASE_PATH . 'public/invoices/' . $token . '.pdf';
 
-if(strlen($token) === 32 and is_file($invoice)) {
+if (strlen($token) === 32 && is_file($invoice)) {
+
     $db = App::resolve(Database::class);
+    $order = $db->query("SELECT id FROM orders WHERE token = :token", [
+        ':token' => $token
+    ])->findOrFail();
 
-    header('Content-Type: application/pdf');
-    header('Content-Disposition: inline; filename="' . basename($invoice) . '"');
-    header('Content-Length: ' . filesize($invoice));
-
-    readfile($invoice);
-    exit;
-
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . basename($invoice) . '"');
+        header('Content-Length: ' . filesize($invoice));
+        readfile($invoice);
+        exit;
 }
-
-
-//     $invoice = __DIR__ . '/public/invoices/' . $matches[1] . '.pdf';
-
-//     // Verificăm dacă fișierul există
-//     if (file_exists($invoice)) {
-//         // Setăm header-ele pentru a livra PDF-ul
-//         header('Content-Type: application/pdf');
-//         header('Content-Disposition: inline; filename="' . basename($invoice) . '"');
-//         header('Content-Length: ' . filesize($invoice));
-
-//         // Citim și livrăm fișierul
-//         readfile($invoice);
-//         exit;
-//     } else {
-//         // Fișierul nu există, returnăm 404
-//         header("HTTP/1.0 404 Not Found");
-//         echo "404 - Document not found.";
-//         exit;
-//     }
+abort();

@@ -3,18 +3,17 @@ use Core\App;
 use Core\Database;
 
 $order_id = $params['id'];
+$db = App::resolve(Database::class);
 
-$order = App::resolve(Database::class)->query("SELECT * FROM orders WHERE id = :id", 
+$order = $db->query("SELECT * FROM orders WHERE id = :id", 
                                                 [
                                                     ':id' => $order_id
                                                 ])->findOrFail();
 
-$order_info = App::resolve(Database::class)->query("SELECT * FROM users_address WHERE user_id = '".$order['user_id']."' LIMIT 2")->get();
-
-foreach($order_info as $info) 
-    $info['type'] === 'billing' ? $billing = $info : $shipping = $info;
-
-$products = App::resolve(Database::class)->query("SELECT ordered_products.order_id, ordered_products.product_id, ordered_products.name, ordered_products.price, ordered_products.discount, ordered_products.currency, ordered_products.quantity, ordered_products.size, products.category, products.slug, categories.slug AS category_slug 
+$billing = $db->query("SELECT * FROM orders_billing WHERE order_id = '".$order_id."' LIMIT 1")->find();
+$shipping = $db->query("SELECT * FROM orders_shipping WHERE order_id = '".$order_id."' LIMIT 1")->find();
+                                                
+$products = $db->query("SELECT ordered_products.order_id, ordered_products.product_id, ordered_products.name, ordered_products.price, ordered_products.discount, ordered_products.currency, ordered_products.quantity, ordered_products.size, products.category, products.slug, categories.slug AS category_slug 
                                                 FROM ordered_products 
                                                 LEFT JOIN products ON products.id = ordered_products.product_id 
                                                 LEFT JOIN categories ON categories.category_id = products.category

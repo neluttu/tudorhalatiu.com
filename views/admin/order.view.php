@@ -87,10 +87,12 @@
                     <p>Stare plată: <?= $order['payed'] === 'Yes' ? '<span class="font-semibold text-green-600">confirmată</span>' : '<span class="text-main-color">neachitată.</span>' ?></p>
                     <p>Plată online prin <span class="text-[#466afc] font-semibold">TwisPay</span></p>
                     <p>
-                        <? if($order['invoice'] === null) : ?>
+                        <? if(is_file(BASE_PATH . '/public/invoices/' . $order['token'] . '.pdf')) : ?>
                             <form method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="token" value="<?= $order['token'] ?>">
+                                <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                <input type="hidden" name="user_id" value="<?= $order['user_id'] ?>">
                                 <span class="flex items-center justify-start gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="text-rose-600" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -101,14 +103,15 @@
                                         <path d="M20 15h-3v6" />
                                         <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z" />
                                     </svg>
-                                    <a href="/invoice/<?= $order['token'] ?>" class="font-semibold text-green-600 underline">Descară factura fiscală</a><br>
+                                    <a href="/invoice/<?= $order['token'] ?>" download class="font-semibold text-green-600 underline">Descară factura fiscală</a><br>
 
                                 </span>
                                 <button type="submit" class="px-2 py-1 mt-2 text-sm font-normal text-white rounded-md bg-rose-600 md:py-2 ">Șterge factura</button>
                             </form>
                         <? else : ?> 
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="token" value="<?= $order['token'] ?>">
+                                <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                                 <input type="file" name="invoice" accept=".pdf" required>
                                 <button type="submit" class="px-2 py-1 mt-2 text-sm font-normal text-white rounded-md bg-cyan-600 md:py-2 ">Încarcă factură</button>
                             </form>
@@ -118,34 +121,35 @@
             </li>
         </ul>
         <p class="mt-10 mb-4 text-xl font-semibold text-main-color"><?= count($products) ?> produs(e) în această comandă</p>
-        <ul class="w-full">
+        <ul class="flex items-center justify-start w-full gap-2">
             <? foreach($products as $product) : ?>
-            <li class="flex items-center justify-start w-full gap-3 p-2 mb-2 text-sm text-gray-700 transition-all duration-150 ease-in hover:bg-gray-50">
+            <li class="flex items-center justify-start w-full gap-3 p-2 mb-2 text-sm text-gray-700 transition-all duration-150 ease-in border rounded-md hover:bg-gray-50">
                 <a href="/shop/<?= $product['category_slug'] ?>/<?= $product['slug'] ?>">
                     <img src="/public/images/products/<?= $product['product_id']?>/poster.avif" width="30" class="rounded-md" loading="lazy" alt="<?= $product['name']?>">
                 </a>
                 <div class="text-sm">
                     <p><?= $product['name']?></p>
                     <p>
-                        Mărime: 
-                        <select class="w-12 p-1 bg-transparent border rounded-md border-main-color" name="size">
+                        Mărime:  <?= $product['size'] ?>
+                        <!-- <select class="w-12 p-1 bg-transparent border rounded-md border-main-color" name="size">
                             <? foreach($sizes as $size) : ?>
                             <option value="<?= $size ?>" <?= $product['size'] == $size ? 'selected' : '' ?>><?= $size ?></option>
                             <? endforeach ?>
-                        </select>
+                        </select> -->
                     </p>
                 </div>
                 <span class="text-right grow">
-                    <input type="text" name="price" value="<?= number_format($product['price'], 2, '.', '') ?>" class="w-16 p-1 bg-white border rounded-lg border-main-color"> lei 
+                    <?= number_format(getPrice($product['price'], $product['discount']), 2, ',', '.') ?> lei
+                    <!-- <input type="text" name="price" value="<?= number_format(getPrice($product['price'], $product['discount']), 2, ',', '.') ?>" class="w-16 p-1 bg-white border rounded-lg border-main-color"> lei 
                     <select name="discount" class="w-16 p-1 text-sm text-right bg-white border rounded-md border-main-color">
                         <option value="0" <?= $product['discount'] == '0' ? 'selected' : '' ?>>-0%</option>
                         <option value="25" <?= $product['discount'] == '25' ? 'selected' : '' ?>>-25%</option>
                         <option value="50" <?= $product['discount'] == '50' ? 'selected' : '' ?>>-50%</option>
                         <option value="75" <?= $product['discount'] == '75' ? 'selected' : '' ?>>-75%</option>
-                    </select>
-                    <div class="mt-2">
+                    </select> -->
+                    <!-- <div class="mt-2">
                         <?= $product['discount'] > 0 ? '<span class="line-through">' . number_format($product['price'], 2, ',', '.') . '</span> ' . number_format(getPrice($product['price'], $product['discount']), 2, ',', '.'). ' ' . $product['currency'] : number_format($product['price'], 2, ',', '.') . ' ' . $product['currency'] ?>
-                    </div>
+                    </div> -->
                 </span>
             </li>
             <? endforeach ?>

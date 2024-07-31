@@ -4,10 +4,10 @@ RewriteRule ^(Core|Http|Lang|vendor|views)/?$ / [R=301,L]
 
 php_value session.cookie_httponly 1
 
-AuthUserFile /var/www/html/business/tudorhalatiu.com/Core/.htpasswd
-AuthType Basic
-AuthName "My restricted Area"
-Require valid-user
+#AuthUserFile /var/www/html/business/tudorhalatiu.com/Core/.htpasswd
+#AuthType Basic
+#AuthName "My restricted Area"
+#Require valid-user
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
