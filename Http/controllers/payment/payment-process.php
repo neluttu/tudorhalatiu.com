@@ -29,16 +29,13 @@ if (is_array($data) && !empty($data)) {
             
             if ($data['transactionStatus'] === 'complete-ok') {
                 // Transaction successful, update order in db.
-                if (!$db->query("UPDATE orders SET payed = 'Yes', twispay_orderId = :orderId, twispay_transactionId = :transactionId, twispay_customerId = :customerId, twispay_timestamp = :timestamp WHERE id = :externalOrderId", [
+                $db->query("UPDATE orders SET payed = 'Yes', twispay_orderId = :orderId, twispay_transactionId = :transactionId, twispay_customerId = :customerId, twispay_timestamp = :timestamp WHERE id = :externalOrderId", [
                                     ':orderId' => $data['orderId'], // Twispay order ID
                                     ':transactionId' => $data['transactionId'], // Twispay transaction ID
                                     ':customerId' => $data['customerId'], // Twispay customer ID
                                     ':externalOrderId' => $order_id, // Local db order ID,
                                     ':timestamp' => date('Y-m-d H:i:s', $data['timestamp']) // Twispay timestamp of transaction
-                                ]
-                            )) {
-                    // Log if something goes wrong with the transaction
-                    $errors['sqlQuery'] = 'Eroare modificare status comandă în baza de date.';
+                                ]);
                 }
             } else {
                 $errors = [
@@ -46,14 +43,12 @@ if (is_array($data) && !empty($data)) {
                     'message' => Twispay::code($data['errors'][0]['code']),
                 ];
             }
-        }
     } catch (Exception $e) {
         // Rollback transaction
         $db->rollBack();
         //echo 'ERROR: ' . $e->getMessage();
     }
 
-    //TODO: fix redirect to non user order.
     if (empty($errors)) {
         $db->commit();
         Session::flash('order', [
