@@ -22,7 +22,7 @@ $products = $db->query("SELECT ordered_products.order_id, ordered_products.produ
 $status = [ 'Pending' => 'În așteptare', 'Processing' => 'În lucru', 'Completed' => 'Finalizată', 'Canceled' => 'Anulată' ];
 
 view('admin/order', [
-    'heading' => 'Comanda nr. '. str_pad($order['id'], 4, '0', STR_PAD_LEFT),
+    'heading' => 'Comanda nr. '. str_pad($order['id'], 6, '0', STR_PAD_LEFT),
     'heading_info' => 'Plasată în ' . roDate($order['ordered_at']),
     'order' => $order,
     'products' => $products,

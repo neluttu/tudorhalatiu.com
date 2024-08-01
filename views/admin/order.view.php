@@ -19,8 +19,6 @@
         <form method="POST">
             <input type="hidden" name="_method" value="PATCH">
             <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-            <input type="hidden" name="user_id" value="<?= $order['user_id'] ?>">
-            <input type="hidden" name="token" value="<?= $order['token'] ?>">
             <ul class="flex flex-col gap-3 text-sm">
                 <li class="flex items-center justify-start gap-2 pb-3 border-b border-b-gray-200">
                     <span class="grow">Stare comandă:</span>
@@ -78,9 +76,10 @@
             </li>
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
                 <h2 class="mb-4 font-bold">Date facturare:</h2>
-                <p><a href="" class="underline">Client: <?= $billing['firstname'] . ' ' . $billing['lastname'] ?>, <?= $billing['phone'] ?></a></p>
+                <p>Client: <?= $billing['firstname'] . ' ' . $billing['lastname'] ?>, <?= $billing['phone'] ?></p>
                 <p>Adresa: <?= $billing['address'] . ', ' . $billing['city'] . ', ' . $billing['county'] . ', '. $billing['zip'] ?></p>
                 <p>Telefon: <?= $billing['phone'] ?></p>
+                <p>Email: <?= $billing['email'] ?></p>
             </li>
             <li class="p-3 border rounded-md [&>p]:text-sm [&>p]:py-1 font-light">
                     <h2 class="mb-4 font-bold">Informații plată:</h2>

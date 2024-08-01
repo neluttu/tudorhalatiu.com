@@ -21,8 +21,8 @@ if ($_POST['opensslResult']) {
                             ':response' => $_POST['opensslResult'],
                             ':order_id' => $order_id,
                             ':user_id' => $user_id,
-                        ])->find()) {
-            
+                        ])->find()) 
+        {
             if($db->query("INSERT INTO twispay_payments (order_id, response, transaction_status, transaction_id, twispay_order_id, transaction_method, transaction_type, twispay_customer_id, user_id, amount, currency, timestamp)
                                 VALUES (:order_id, :response, :transaction_status, :transaction_id, :twispay_order_id, :transaction_method, :transaction_type, :twispay_customer_id, :user_id, :amount, :currency, :timestamp)", 
                                     [

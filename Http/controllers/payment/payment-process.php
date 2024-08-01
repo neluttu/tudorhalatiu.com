@@ -29,7 +29,7 @@ if (is_array($data) && !empty($data)) {
             
             if ($data['transactionStatus'] === 'complete-ok') {
                 // Transaction successful, update order in db.
-                $db->query("UPDATE orders SET payed = 'Yes', twispay_orderId = :orderId, twispay_transactionId = :transactionId, twispay_customerId = :customerId, twispay_timestamp = :timestamp WHERE id = :externalOrderId", [
+                $db->query("UPDATE orders SET payed = 'Yes', twispay_orderId = :orderId, twispay_transactionId = :transactionId, twispay_customerId = :customerId, twispay_timestamp = :timestamp WHERE id = :externalOrderId AND payed = 'No'", [
                                     ':orderId' => $data['orderId'], // Twispay order ID
                                     ':transactionId' => $data['transactionId'], // Twispay transaction ID
                                     ':customerId' => $data['customerId'], // Twispay customer ID
