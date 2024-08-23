@@ -25,7 +25,7 @@ class Database
     {
         $this->statement = $this->connection->prepare($query);
 
-        $this->statement->execute($params);
+        $this->statement->execute(is_array($params) ? $params : []);
 
         return $this;
     }
@@ -44,7 +44,7 @@ class Database
         return $this->statement->fetch();
     }
 
-    public function totlaRows() {
+    public function totalRows() {
         return $this->statement->rowCount();
     }
 

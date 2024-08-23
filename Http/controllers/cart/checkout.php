@@ -330,7 +330,7 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
 
     $adminNotify = new EmailSender();
     $adminNotify->sendEmail(
-        'ionel.olariu@gmail.com',
+        'thalatiu@gmail.com',
         'Comandă nouă #' . $order_id . ' - ' . $amount . ' lei',
         'views/emails/NewOrderNotifyAdmin.html',
         [

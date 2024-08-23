@@ -3,7 +3,6 @@ use Core\Session;
 $order = Session::get('order');
 
 if(!$order) abort();
-
 $order_url = $order['token'] ? '/comanda-client/' . $order['token'] : '/account/order/' . $order['order_id'];
 
 view('payment/payment-successful',[

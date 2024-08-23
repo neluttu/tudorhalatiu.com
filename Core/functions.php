@@ -195,4 +195,46 @@ function decrypt($encrypted, $key = '7c952ebc1a6a529e0baadc6368d5ffec')
             return 0;
     }
 
+    function renderPagination($paginator)
+{
+    if ($paginator->hasPages()) {
+        
+        echo '<ul class="pagination">';
+
+        // Link pentru pagina anterioară
+        if ($paginator->onFirstPage()) {
+            echo '<li class="disabled"><span>&laquo;</span></li>';
+        } else {
+            echo '<li><a href="' . $paginator->previousPageUrl() . '" rel="prev">&laquo;</a></li>';
+        }
+
+        // Elemente de paginare
+        foreach ($paginator->elements() as $element) {
+            // Separator "Three Dots"
+            if (is_string($element)) {
+                echo '<li class="disabled"><span>' . $element . '</span></li>';
+            }
+
+            // Array de link-uri
+            if (is_array($element)) {
+                foreach ($element as $page => $url) {
+                    if ($page == $paginator->currentPage()) {
+                        echo '<li class="active"><span>' . $page . '</span></li>';
+                    } else {
+                        echo '<li><a href="' . $url . '">' . $page . '</a></li>';
+                    }
+                }
+            }
+        }
+
+        // Link pentru pagina următoare
+        if ($paginator->hasMorePages()) {
+            echo '<li><a href="' . $paginator->nextPageUrl() . '" rel="next">&raquo;</a></li>';
+        } else {
+            echo '<li class="disabled"><span>&raquo;</span></li>';
+        }
+
+        echo '</ul>';
+    }
+}
     

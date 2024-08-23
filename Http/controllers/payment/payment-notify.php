@@ -43,13 +43,13 @@ if ($_POST['opensslResult']) {
             echo 'OK';
         }
 
-        $adminNotify = new EmailSender();
-        $adminNotify->sendEmail(
-            'ionel.olariu@gmail.com',
-            $_POST['opensslResult'],
-            'views/emails/StatusChange.html',
-            []
-            );
+        // $adminNotify = new EmailSender();
+        // $adminNotify->sendEmail(
+        //     'ionel.olariu@gmail.com',
+        //     $_POST['opensslResult'],
+        //     'views/emails/StatusChange.html',
+        //     []
+        //     );
                                         
 
         // Begin transaction

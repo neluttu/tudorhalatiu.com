@@ -14,7 +14,7 @@ $products = $db->query('SELECT products.*, (SELECT count(views) AS views FROM pr
 
 view('admin/products', [
     'heading' => 'Produse magazin online',
-    'heading_info' => $db->totlaRows() . ' produse în total',
+    'heading_info' => $db->totalRows() . ' produse în total',
     'products' => $products,
     'title' => 'Admin: Produse magazin online',
     'currentCategory' => null

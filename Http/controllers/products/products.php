@@ -31,7 +31,7 @@ $schema = $schema->generateSchema(['category_name' => $products[0]['category_nam
 
 view('products/products', [
     'heading' => $products[0]['category_name'],
-    'heading_info' => $db->totlaRows() . ' produse în total',
+    'heading_info' => $db->totalRows() . ' produse în total',
     'products' => $products,
     'title' => $products[0]['category_name'] . ' by Tudor Halațiu - creator de modă',
     'description' => limitText($products[0]['text']),

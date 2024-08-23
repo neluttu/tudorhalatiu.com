@@ -10,7 +10,7 @@
         <? foreach ($settings as $setting) : ?>
                 <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1"><?= $setting['echo'] ?>:</span>
                 <label class="w-full mb-2 border rounded-md bg-slate-50 md:w-auto md:flex-1">
-                    <input type="text" name="<?= $setting['name'] ?>" value="<?= $setting['value'] ?>"><br>
+                    <input type="text" name="<?= $setting['name'] ?>" value="<?= $setting['value'] ?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
                 </label>
                 <span class="w-full"></span>
         <? endforeach ?>

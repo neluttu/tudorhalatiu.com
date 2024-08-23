@@ -4,11 +4,10 @@ use Core\App;
 use Core\Twispay;
 
 $data = json_decode(decrypt($_POST['opensslResult'], Twispay::getKey()), true);
-
+$errors = [];
 if (is_array($data) && !empty($data)) {
     // Set userID / no userID
     $user_id = is_numeric($data['identifier']) ? (int)$data['identifier'] : null;
-    
     // Get client order ID
     $order_id = explode('-', $data['externalOrderId'])[0];
     
@@ -17,15 +16,13 @@ if (is_array($data) && !empty($data)) {
     // Get token for no account orders
     if ($user_id === null) 
         $order = $db->query("SELECT token FROM orders WHERE id = :order_id", [':order_id' => $order_id])->find();
-
     $result_url = isset($order['token']) ? '/comanda-client/' . $order['token'] : '/account/order/' . $order_id;
 
     // Begin transaction
     $db->beginTransaction();
-
     try {
         // Check if the order is not yet marked as paid
-        if ($order = $db->query("SELECT payed FROM orders WHERE id = :order_id AND payed = 'No'", [':order_id' => $order_id])->find()) {
+        if ($checkOrder = $db->query("SELECT payed, token FROM orders WHERE id = :order_id AND payed = 'No'", [':order_id' => $order_id])->find()) {
             
             if ($data['transactionStatus'] === 'complete-ok') {
                 // Transaction successful, update order in db.
@@ -36,19 +33,20 @@ if (is_array($data) && !empty($data)) {
                                     ':externalOrderId' => $order_id, // Local db order ID,
                                     ':timestamp' => date('Y-m-d H:i:s', $data['timestamp']) // Twispay timestamp of transaction
                                 ]);
-                }
-            } else {
+                            } 
+            else {
                 $errors = [
                     'payment' => false,
                     'message' => Twispay::code($data['errors'][0]['code']),
                 ];
+                }
             }
     } catch (Exception $e) {
         // Rollback transaction
         $db->rollBack();
         //echo 'ERROR: ' . $e->getMessage();
     }
-
+    
     if (empty($errors)) {
         $db->commit();
         Session::flash('order', [
@@ -56,6 +54,7 @@ if (is_array($data) && !empty($data)) {
             'order_id' => (int) $order_id
         ]);
         redirect('/payment-successful');
+        die();
     }
 
     // Flash errors and redirect user to order page
