@@ -91,7 +91,7 @@
                     <small class="text-red-400"></small>
                 </div>
                 
-                <button class="text-base font-normal mt-4 p-3 px-6 text-white transition-all duration-150 ease-in rounded-lg bg-main-color hover:bg-[#67083e] hover:text-link-color">
+                <button disabled class="text-base font-normal mt-4 p-3 px-6 text-white transition-all duration-150 ease-in rounded-lg bg-main-color hover:bg-[#67083e] hover:text-link-color">
                     Trimite mesajul tău
                 </button>
             </form>

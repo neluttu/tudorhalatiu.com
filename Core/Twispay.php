@@ -15,11 +15,11 @@ class Twispay
     }
 
     public static function getKey() {
-        return 'f0b8b70eadc6d16a34ffeccbfc8f619b';
+        return '7c952ebc1a6a529e0baadc6368d5ffec';
     }
 
     public static function getSiteID() {
-        return 8117;
+        return 689;
     }
 
     public static function code($code) {

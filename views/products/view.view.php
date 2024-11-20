@@ -78,7 +78,7 @@ use Core\Lang;
                 </li>
                 <li class="flex items-center justify-center w-full border-b [&>span]:p-2 [&>span:first-child]:font-semibold">
                     <span class="flex-1 text-left text-main-color">BUST</span>
-                    <span class="flex-1 text-right">84 cm</span>
+                    <span class="flex-1 text-right">86 cm</span>
                     <span class="flex-1 text-right">88 cm</span>
                     <span class="flex-1 text-right">92 cm</span>
                     <span class="flex-1 text-right">96 cm</span>
@@ -86,7 +86,7 @@ use Core\Lang;
                 </li>
                 <li class="flex items-center justify-center w-full border-b [&>span]:p-2 [&>span:first-child]:font-semibold">
                     <span class="flex-1 text-left text-main-color">TALIE</span>
-                    <span class="flex-1 text-right">64 cm</span>
+                    <span class="flex-1 text-right">66 cm</span>
                     <span class="flex-1 text-right">68 cm</span>
                     <span class="flex-1 text-right">72 cm</span>
                     <span class="flex-1 text-right">76 cm</span>
@@ -94,7 +94,7 @@ use Core\Lang;
                 </li>
                 <li class="flex items-center justify-center w-full border-b [&>span]:p-2 [&>span:first-child]:font-semibold">
                     <span class="flex-1 text-left text-main-color">ȘOLD</span>
-                    <span class="flex-1 text-right">90 cm</span>
+                    <span class="flex-1 text-right">91 cm</span>
                     <span class="flex-1 text-right">94 cm</span>
                     <span class="flex-1 text-right">98 cm</span>
                     <span class="flex-1 text-right">102 cm</span>

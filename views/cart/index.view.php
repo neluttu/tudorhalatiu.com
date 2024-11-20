@@ -20,7 +20,7 @@
                             
                             <p class="flex flex-col items-start justify-start flex-1">
                                 <? 
-                                echo '<a href="shop/'. $slugs[$product['id']]['category_slug'] . '/' . $slugs[$product['id']]['product_slug'] .'" class="block text-sm md:text-base hover:underline" title="'.$product['name'].' by Tudor Halațiu">' . $product['name'] . '</a> ('.$product['weight'].' kg)';
+                                echo '<a href="shop/'. $slugs[$product['id']]['category_slug'] . '/' . $slugs[$product['id']]['product_slug'] .'" class="block text-sm md:text-base hover:underline" title="'.$product['name'].' by Tudor Halațiu">' . $product['name'] . '</a>';
                                 echo '<span class="block mt-2 text-xs md:text-sm text-slate-600">Mărime ' . implode(', ', $product['features']). '</span>';
                                 ?>
                             </p>

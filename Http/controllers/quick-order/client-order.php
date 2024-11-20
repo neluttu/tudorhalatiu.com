@@ -54,7 +54,7 @@ if($order['payed'] == 'No' and $order['status'] != 'Canceled') {
             //"items" => $orderProducts
         ],
         "cardTransactionMode" => "authAndCapture",
-        "invoiceEmail" => 'ionel.olariu@gmail.com', // edit with client email.
+        "invoiceEmail" => $billing['email'], // edit with client email.
         "backUrl" => 'https://' . $_SERVER['HTTP_HOST'] . "/payment-result"
     ];    
 
@@ -76,6 +76,6 @@ view('quick-order/client-order', [
     'orderData' => $orderData,
     'base64Checksum' => $base64Checksum,
     'base64JsonRequest' => $base64JsonRequest,
-    'twispayLive' => false,
+    'twispayLive' => true,
     'errors' => Session::get('errors'),
 ]);

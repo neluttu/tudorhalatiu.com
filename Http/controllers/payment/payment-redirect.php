@@ -14,7 +14,7 @@ if($orderData) {
         'orderData' => Core\Session::get('orderData'),
         'base64Checksum' => $base64Checksum,
         'base64JsonRequest' => $base64JsonRequest,
-        'twispayLive' => false
+        'twispayLive' => true
     ]);
 }
 else redirect();

@@ -295,14 +295,14 @@ if ($form->validate($email, $password, $firstname, $lastname, $phone, $county, $
         "order" => [
             "orderId" => $order_id . '-' . time(),
             "type" => "purchase",
-            //"amount" => number_format($amount + calculateShippingTax(), 2, '.', ''),
-            "amount" => number_format($amount, 2, '.', ''),
+            "amount" => number_format($amount + calculateShippingTax(), 2, '.', ''),
+            //"amount" => number_format($amount, 2, '.', ''),
             "currency" => "RON",
             "description" => "Comandă online",
             "items" => $orderProducts
         ],
         "cardTransactionMode" => "authAndCapture",
-        "invoiceEmail" => 'ionel.olariu@gmail.com', // edit with client email.
+        "invoiceEmail" => $email, // edit with client email.
         "backUrl" => 'https://' . $_SERVER['HTTP_HOST'] . "/payment-result"
     ];
     Session::flash('orderData', $orderData);

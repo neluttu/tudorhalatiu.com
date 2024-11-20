@@ -2,8 +2,7 @@
 <?php require base_path('views/partials/nav.php'); ?>
 <section class="px-6 flex w-full h-[calc(100dvh_-_200px)] mt-10 gap-6 flex-col md:flex-row 
                     [&>div]:bg-cover
-                    md:[&>div]:bg-top
-                    [&>div]:bg-center
+                    md:[&>div]:bg-[center_top]
                     [&>div]:rounded-lg
                     [&>div]:bg-no-repeat
                     [&>div]:bg-white
