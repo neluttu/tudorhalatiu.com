@@ -6,15 +6,19 @@
         <? require base_path('views/admin/menu.view.php') ?>        
     </div>
     <div>
-        <div class="flex flex-wrap items-start justify-center w-full mt-4 md:gap-3 md:gap-y-1 text-slate-700">
+        
         <? foreach ($settings as $setting) : ?>
+            <form method="post" class="flex flex-wrap items-start justify-center w-full mt-4 md:gap-3 md:gap-y-1 text-slate-700">
                 <span class="w-full py-2 text-sm font-normal md:w-auto md:flex-1"><?= $setting['echo'] ?>:</span>
                 <label class="w-full mb-2 border rounded-md bg-slate-50 md:w-auto md:flex-1">
                     <input type="text" name="<?= $setting['name'] ?>" value="<?= $setting['value'] ?>" class="w-full px-2 py-2 text-sm bg-transparent outline-none">
                 </label>
+                <button type="submit" class="px-3 py-2 text-sm text-white bg-green-700 rounded-md" id="submitBtn">
+                    x
+                </button>
                 <span class="w-full"></span>
+            </form>
         <? endforeach ?>
-        </div>
     </div>
 </main>
 <? require base_path('views/partials/footer.php'); ?>

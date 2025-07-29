@@ -39,7 +39,7 @@ class Twispay
 
     public static function getOrder($id = '') {
         $ch = curl_init();
-        $url = $id ? "https://api-stage.twispay.com/order/" . $id : "https://api-stage.twispay.com/order";
+        $url = $id ? "https://api-stage.xmoney.com/order/" . $id : "https://api-stage.xmoney.com/order";
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

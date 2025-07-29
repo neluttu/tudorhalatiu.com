@@ -33,7 +33,7 @@
                 <label for="phone" class="absolute top-0 left-0 text-sm text-gray-800 transition-all duration-100 ease-in-out origin-left transform -translate-y-1/2 opacity-75 pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Număr telefon</label>
             </div>
             <span class="text-sm text-red-500"><?= $errors['phone'] ?? '' ?></span>
-
+            <input type="text" name="Telephone" class="hidden" value="<?= old('Telephone'); ?>">
             <button type="submit" class="w-full px-3 py-4 my-4 mt-10 text-white bg-black rounded-md focus:bg-gray-600 focus:outline-none">Înregistrează contul</button>
         
             <p class="text-sm text-center text-gray-500">

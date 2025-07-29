@@ -8,13 +8,14 @@ $password = $_POST['password'];
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $phone = $_POST['phone'];
+$telephone = $_POST['Telephone'];
 
 $form = new RegisterForm();
 
 $db = App::resolve(Core\Database::class);
 $user = $db->query("SELECT * FROM users WHERE email = :email", [':email' => $email])->find();
 
-if(!$form->validate($email, $password, $firstname, $lastname, $phone) or $user) {
+if(!$form->validate($email, $password, $firstname, $lastname, $phone, $telephone) or $user) {
 
     if($user) $form->appendError('email', 'This email is already registered...');
 

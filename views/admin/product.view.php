@@ -47,8 +47,13 @@
                 <span class="w-full py-2 text-sm font-normal md:flex-1">Discount</span>
                 <select name="discount" class="flex items-center justify-center w-full p-2 mb-2 text-sm text-right border rounded-md bg-slate-50 md:flex-1">
                     <option value="0" <?= $product['discount'] == '0' ? 'selected' : '' ?>>0%</option>
+                    <option value="10" <?= $product['discount'] == '10' ? 'selected' : '' ?>>10%</option>
                     <option value="25" <?= $product['discount'] == '25' ? 'selected' : '' ?>>25%</option>
+                    <option value="30" <?= $product['discount'] == '30' ? 'selected' : '' ?>>30%</option>
+                    <option value="40" <?= $product['discount'] == '40' ? 'selected' : '' ?>>40%</option>
                     <option value="50" <?= $product['discount'] == '50' ? 'selected' : '' ?>>50%</option>
+                    <option value="60" <?= $product['discount'] == '60' ? 'selected' : '' ?>>60%</option>
+                    <option value="70" <?= $product['discount'] == '70' ? 'selected' : '' ?>>70%</option>
                     <option value="75" <?= $product['discount'] == '75' ? 'selected' : '' ?>>75%</option>
                 </select>
                 <span class="w-full"></span>

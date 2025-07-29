@@ -8,7 +8,9 @@ class RegisterForm {
     
     protected $errors = [];
 
-    public function validate($email, $password, $firstname, $lastname, $phone) {
+    public function validate($email, $password, $firstname, $lastname, $phone, $telephone) {
+        if($telephone != '') 
+            $this->errors['telephone'] = 'Gotcha.';
 
         if(!Validator::email($email))
             $this->errors['email'] = 'invalid_email';

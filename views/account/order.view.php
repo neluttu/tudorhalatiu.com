@@ -96,7 +96,7 @@
                 <p>Stare plată: <?= $order['payed'] === 'Yes' ? '<span class="font-semibold text-green-600">confirmată</span>' : '<span class="text-main-color">neachitată.</span>' ?></p>
                 <p>Plată online prin <span class="text-[#466afc] font-semibold">TwisPay</span></p>
                 <p><? if($order['payed'] === 'No' and $order['status'] != 'Canceled') : ?>
-                    <form id="twispay" action="https://<?= $twispayLive ? "secure.twispay.com" : "secure-stage.twispay.com" ?>" method="post" accept-charset="UTF-8" class="">
+                    <form id="twispay" action="https://<?= $twispayLive ? "secure.xmoney.com" : "secure-stage.xmoney.com" ?>" method="post" accept-charset="UTF-8" class="">
                         <input type="hidden" name="jsonRequest" value="<?= $base64JsonRequest ?>">
                         <input type="hidden" name="checksum" value="<?= $base64Checksum ?>">
                         <button type="submit" class="flex items-center justify-start w-full gap-2 px-2 py-1 text-sm font-normal text-white bg-green-600 rounded-md md:py-2">

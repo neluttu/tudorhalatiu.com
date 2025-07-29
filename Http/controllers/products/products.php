@@ -4,7 +4,7 @@ use Core\SchemaGenerator;
 
 $db = App::resolve('Core\Database');
 //dd($params['category']);
-$products = $db->query('SELECT products.*, categories.name AS category_name, categories.text AS category_description, categories.slug AS category_slug, categories.text FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE categories.slug = :slug AND status = "Online"', 
+$products = $db->query('SELECT products.*, categories.name AS category_name, categories.text AS category_description, categories.slug AS category_slug, categories.text FROM products LEFT JOIN categories ON categories.category_id = products.category WHERE categories.slug = :slug AND status = "Online" ORDER BY id DESC', 
                     [
                         'slug' => $params['category']
                     ])->findAllOrFail();
@@ -31,7 +31,7 @@ $schema = $schema->generateSchema(['category_name' => $products[0]['category_nam
 
 view('products/products', [
     'heading' => $products[0]['category_name'],
-    'heading_info' => $db->totalRows() . ' produse în total',
+    'heading_info' => count($products) . ' produse în total',
     'products' => $products,
     'title' => $products[0]['category_name'] . ' by Tudor Halațiu - creator de modă',
     'description' => limitText($products[0]['text']),
