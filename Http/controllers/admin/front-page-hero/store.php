@@ -7,13 +7,12 @@ use Core\Session;
 
 if (isset($_POST['title'], $_FILES['image'])) {
     $db = App::resolve(Database::class);
-
     // Validare date
     $title = trim($_POST['title']);
     $url = $_POST['url'] ? trim($_POST['url']) : '';
     $image = isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK ? $_FILES['image'] : null;
 
-    if (empty($title) || empty($url)) {
+    if (empty($title)) {
         Session::flash('message', 'Titlul este obligatoriu.');
         return redirect('/admin/front-page-hero');
     }
